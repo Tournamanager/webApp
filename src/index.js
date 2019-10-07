@@ -8,14 +8,14 @@ import * as firebase from 'firebase';
 
   // Your web app's Firebase configuration
   var firebaseConfig = {
-    apiKey: "AIzaSyDoGbEQEA4dFOZJ2Z8KLzcxKGn3OZAM2Jo",
-    authDomain: "tournamanager-6156a.firebaseapp.com",
-    databaseURL: "https://tournamanager-6156a.firebaseio.com",
-    projectId: "tournamanager-6156a",
-    storageBucket: "tournamanager-6156a.appspot.com",
-    messagingSenderId: "869774866440",
-    appId: "1:869774866440:web:537a832d84ed063e5b79bd",
-    measurementId: "G-FSK8V1XTSE"
+    apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
+    authDomain: "tournamanager-3a17a.firebaseapp.com",
+    databaseURL: "https://tournamanager-3a17a.firebaseio.com",
+    projectId: "tournamanager-3a17a",
+    storageBucket: "tournamanager-3a17a.appspot.com",
+    messagingSenderId: "578644609279",
+    appId: "1:578644609279:web:ff2c015800e7ce861ea4ca",
+    measurementId: "G-P266ND2WDH"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
