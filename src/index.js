@@ -8,7 +8,7 @@ import * as firebase from 'firebase';
 
   // Your web app's Firebase configuration
   var firebaseConfig = {
-    apiKey: "${{FIREBASE_API_KEY}}",
+    apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
     authDomain: "tournamanager-3a17a.firebaseapp.com",
     databaseURL: "https://tournamanager-3a17a.firebaseio.com",
     projectId: "tournamanager-3a17a",
