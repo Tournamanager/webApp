@@ -80,14 +80,7 @@ class MyProfile extends Component {
 
     checkAvailibility(username) {
         console.log(this.Usernames)
-        this.Usernames.forEach((un) => {
-            console.log(un)
-            if (un == username) {
-                console.log('is bezet')
-                return false;
-            }
-        })
-        return true;
+        return !this.Usernames.find(u => u === username);
     }
 
     handleChangeUsername(event) {
@@ -96,10 +89,10 @@ class MyProfile extends Component {
     }
 
     saveUsername() {
-        var newusername = "";
-
-        if (this.checkAvailibility(newusername) === true) {
-            newusername = this.state.NewUsername;
+        const newusername = this.state.NewUsername;
+        console.log(this.checkAvailibility(newusername))
+        if (this.checkAvailibility(newusername)) {
+          
             this.ref.set({ username: newusername });
             alert('Username opgeslagen ' + newusername);
             this.setState({ User: { username: newusername } })
