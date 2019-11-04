@@ -1,13 +1,7 @@
-import React, { Component} from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import Users from "./usersComponent"
-import Home from "./homeComponent"
-import Userdetail from "./userdetailComponent";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Users from "./usersComponent";
+import Home from "./homeComponent";
 
 export default function Navigator() {
   return (
@@ -30,9 +24,7 @@ export default function Navigator() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about">
-            
-          </Route>
+          <Route path="/about"></Route>
           <Route path="/users">
             <Users />
           </Route>
@@ -44,7 +36,3 @@ export default function Navigator() {
     </Router>
   );
 }
-
-
-
-
