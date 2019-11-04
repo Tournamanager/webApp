@@ -18,7 +18,7 @@ class Users extends Component {
     fetch("http://jsonplaceholder.typicode.com/users")
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        //console.log(data);
         this.setState({ users: data });
       })
       .catch(console.log);
