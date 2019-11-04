@@ -6,15 +6,15 @@ import Navigator from './components/routerComponent';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
-  authDomain: "tournamanager-3a17a.firebaseapp.com",
-  databaseURL: "https://tournamanager-3a17a.firebaseio.com",
-  projectId: "tournamanager-3a17a",
-  storageBucket: "tournamanager-3a17a.appspot.com",
-  messagingSenderId: "578644609279",
-  appId: "1:578644609279:web:ff2c015800e7ce861ea4ca",
-  measurementId: "G-P266ND2WDH"
-};
+    apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
+    authDomain: ${{FIREBASE_AUTH_DOMAIN}},
+    databaseURL: ${{FIREBASE_DATABASE_URL}},
+    projectId: "tournamanager-3a17a",
+    storageBucket: ${{FIREBASE_STORAGE_BUCKET}},
+    messagingSenderId: ${{FIREBASE_MESSAGING_SENDER}},
+    appId: "1:578644609279:web:ff2c015800e7ce861ea4ca",
+    measurementId: "G-P266ND2WDH"
+  };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
