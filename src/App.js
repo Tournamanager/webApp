@@ -6,12 +6,12 @@ import Navigator from './components/routerComponent';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: ${{secrets.FIREBASE_API_KEY}},
-    authDomain: ${{secrets.FIREBASE_AUTH_DOMAIN}},
-    databaseURL: ${{secrets.FIREBASE_DATABASE_URL}},
+    apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
+    authDomain: "tournamanager-3a17a.firebaseapp.com",
+    databaseURL: "https://tournamanager-3a17a.firebaseio.com",
     projectId: "tournamanager-3a17a",
-    storageBucket: ${{secrets.FIREBASE_STORAGE_BUCKET}},
-    messagingSenderId: ${{secrets.FIREBASE_MESSAGING_SENDER}},
+    storageBucket: "tournamanager-3a17a.appspot.com",
+    messagingSenderId: "578644609279",
     appId: "1:578644609279:web:ff2c015800e7ce861ea4ca",
     measurementId: "G-P266ND2WDH"
   };
