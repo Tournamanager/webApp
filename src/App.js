@@ -6,7 +6,7 @@ import Navigator from './components/routerComponent';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
+    apiKey: ${{FIREBASE_API_KEY}},
     authDomain: ${{FIREBASE_AUTH_DOMAIN}},
     databaseURL: ${{FIREBASE_DATABASE_URL}},
     projectId: "tournamanager-3a17a",
