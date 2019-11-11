@@ -2,9 +2,10 @@ import React, { Component } from "react"
 import "./App.css"
 import firebase from "firebase"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
+import Navigator from './components/routerComponent';
 
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
+// Your web app's Firebase configuration
+var firebaseConfig = {
     apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
     authDomain: "tournamanager-3a17a.firebaseapp.com",
     databaseURL: "https://tournamanager-3a17a.firebaseio.com",
@@ -14,11 +15,14 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
     appId: "1:578644609279:web:ff2c015800e7ce861ea4ca",
     measurementId: "G-P266ND2WDH"
   };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 
 class App extends Component {
+
   state = { isSignedIn: false }
+
   uiConfig = {
     signInFlow: "popup",
     signInOptions: [
@@ -33,7 +37,7 @@ class App extends Component {
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
-      console.log("user", user)
+   //   console.log("user", user)
     })
   }
 
@@ -45,17 +49,18 @@ class App extends Component {
             <div>Signed In!</div>
             <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
             <h1>Welcome {firebase.auth().currentUser.email}</h1>
-
+            <Navigator></Navigator>
           </span>
         ) : (
-          <StyledFirebaseAuth
-            uiConfig={this.uiConfig}
-            firebaseAuth={firebase.auth()}
-          />
-        )}
+            <StyledFirebaseAuth
+              uiConfig={this.uiConfig}
+              firebaseAuth={firebase.auth()}
+            />
+          )}
       </div>
     )
   }
+
 }
 
 export default App
