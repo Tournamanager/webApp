@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Users from "./usersComponent";
 import Home from "./homeComponent";
@@ -24,9 +24,6 @@ const Navigator = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-
-  var { isSingedIn } = props
-
 
   console.log(props.isSignedIn)
 
