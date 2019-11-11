@@ -29,6 +29,7 @@ class MyProfile extends Component {
 
     componentDidMount() {
 
+        console.log(firebase.auth().currentUser.uid)
         const Userdetails = {
             username: "User " + firebase.auth().currentUser.uid,
             // key: firebase.auth().currentUser.uid
@@ -104,7 +105,7 @@ class MyProfile extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <label>
                     Username: {this.state.User.username}
                     <br />
