@@ -3,9 +3,10 @@ import "./App.css"
 import firebase from "firebase"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import Navigator from './components/routerComponent';
+import ApiCommunication from "./components/apicommunication/ApiCommunication";
 
 // Your web app's Firebase configuration
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
   authDomain: "tournamanager-3a17a.firebaseapp.com",
   databaseURL: "https://tournamanager-3a17a.firebaseio.com",
@@ -18,10 +19,9 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+export default class App extends Component {
 
-class App extends Component {
-
-  state = { isSignedIn: false }
+  state = { isSignedIn: false };
 
   uiConfig = {
     signInFlow: "popup",
@@ -32,25 +32,27 @@ class App extends Component {
     callbacks: {
       signInSuccess: () => false
     }
-  }
+  };
 
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
-      this.setState({ isSignedIn: !!user })
-         console.log("user", user)
+      this.setState({ isSignedIn: !!user });
+      console.log(user);
+      ApiCommunication.graphQlCallPost("mutation m($uuid: String!) { createUser(uuid: $uuid) { id } }",`{"uuid": "${user.uid}"}`)
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
     })
-  }
+  };
 
   render() {
     return (
       <div className="App">
-        <Navigator isSignedIn={this.state.isSignedIn}></Navigator>
+        <Navigator isSignedIn={this.state.isSignedIn}/>
         <div className="container">
           {this.state.isSignedIn ? (
             <span>
               {/* <Navigator></Navigator> */}
               {/* <div>Signed In!</div> */}
-  
             </span>
           ) : (
               <StyledFirebaseAuth
@@ -62,7 +64,4 @@ class App extends Component {
       </div>
     )
   }
-
 }
-
-export default App
