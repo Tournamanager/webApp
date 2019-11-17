@@ -16,6 +16,11 @@ class ApiCommunication {
             })
             .catch(error => {console.log(error); console.log(error.response)});
     }
+
+    static graphQlCallPost(body, variables) {
+        console.log(`{"query": "${body}", "variables": ${variables}}`);
+        return axios.post(this.endpoint, `{"query": "${body}", "variables": ${variables}}`, {headers: {"Content-type": "application/json"}})
+    }
 }
 
 export default ApiCommunication
