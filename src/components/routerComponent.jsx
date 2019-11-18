@@ -77,6 +77,7 @@ const Navigator = props => {
             </Navbar>
           </div>
         ) : (
+<<<<<<< HEAD
           <div>
             <Navbar color="light" light expand="md">
               <NavbarBrand href="/">Tournamanager</NavbarBrand>
@@ -104,6 +105,43 @@ const Navigator = props => {
             <Home />
           </Route>
         </Switch>
+=======
+            <div>
+              <Navbar color="light" light expand="md">
+                <NavbarBrand href="/">Tournamanager</NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                  <Nav className="ml-auto" navbar>
+                    <NavItem>
+                      <NavLink href="/">Login</NavLink>
+                    </NavItem>
+                  </Nav>
+                </Collapse>
+              </Navbar>
+            </div>
+          )}
+        
+        {props.isSignedIn ? (
+          <Switch>
+            <Route path="/about">
+            </Route>
+            <Route path="/users">
+              <Users />
+            </Route>
+            <Route path="/myProfile">
+              <MyProfile />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        ) : (
+            <Switch>
+              <Route path="/"></Route>
+            </Switch>
+          )}
+
+>>>>>>> a210e850ef55600f84fa4dc5718e43f139c97b5b
       </div>
     </Router>
   );
