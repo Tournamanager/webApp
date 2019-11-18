@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import Userdetail from "./userdetailComponent";
 import firebase from "firebase";
 
 class Users extends Component {
