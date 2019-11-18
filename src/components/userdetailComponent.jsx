@@ -5,7 +5,6 @@ class Userdetails extends Component {
 
 
     render() {
-       
         return (
             <div>
                <h5>{console.log(this.props.data.id)}</h5>
