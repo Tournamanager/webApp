@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+<<<<<<< HEAD
 import * as firebase from 'firebase';
 
 
@@ -19,6 +20,9 @@ import * as firebase from 'firebase';
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+=======
+import 'bootstrap/dist/css/bootstrap.min.css';
+>>>>>>> master
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
