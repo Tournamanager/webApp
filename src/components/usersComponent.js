@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 
 import Userdetail from "./userdetailComponent";
+import firebase from "firebase";
 
 class Users extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -14,44 +16,44 @@ class Users extends Component {
     this.setUser = this.setUser.bind(this);
   }
 
+  getAllUsers() {
+    const users = [];
+
+    firebase.firestore().collection('users').get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            users.push(data.username);
+          });
+        })
+        .then(() => {
+          this.setState({ users: users });
+    })
+  }
+
   componentDidMount() {
-    fetch("http://jsonplaceholder.typicode.com/users")
-      .then(res => res.json())
-      .then(data => {
-        //console.log(data);
-        this.setState({ users: data });
-      })
-      .catch(console.log);
+    this.getAllUsers();
   }
 
   setUser(user) {
-    this.setState({
-      selectedUser: user
-    });
-    //console.log(this.user)
+    alert(user)
+    //this.setState({
+    //  selectedUser: user
+    //});
   }
 
   render() {
     return (
       <div>
-        <center>
-          <h1>User list</h1>
-        </center>
-        {this.state.users.map(user => (
-          <div className="card">
-            <div class="card-body">
-              <h5 className="card-title">{user.name}</h5>
-
-              {/* <h6 class="card-subtitle mb-2 text-muted">{user.email}</h6>
-                            <p class="card-text">beschrijving....</p> */}
-              <button onClick={() => this.setUser(user)}>Details</button>
+        <h1>All Users</h1>
+          {this.state.users.map(user => (
+            <div key={user + 'card'}className="card">
+              <div key={user + 'cardbody'} className="card-body">
+                <h5 className="card-title" key={user}>{user}</h5>
+                <button onClick={() => this.setUser(user)} key={user + 'button'}>Details</button>
+              </div>
             </div>
-          </div>
-        ))}
-        <Userdetail
-          data={this.state.selectedUser}
-          key={this.state.selectedUser}
-        ></Userdetail>
+          ), )}
       </div>
     );
   }
