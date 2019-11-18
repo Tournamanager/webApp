@@ -16,14 +16,12 @@ class CreateTeam extends Component {
   }
 
   handleNameChange(event) {
-    console.log(event.target.value);
     this.setState({
       selectedName: event.target.value
     });
   }
 
   submitTeam() {
-    //! Not Tested
     var body = "mutation m($name:String!){createTeam(name: $name){id}}";
     var vars = `{ name: ${selectedName} } `;
     ApiCommunication.graphQlCall(this, body, vars, "team");
