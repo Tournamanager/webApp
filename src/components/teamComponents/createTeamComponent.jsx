@@ -23,7 +23,6 @@ class CreateTeam extends Component {
   }
 
   submitTeam() {
-    //! Not Tested
     var body = "mutation m($name:String!){createTeam(name: $name){id}}";
     var vars = `{ name: ${selectedName} } `;
     ApiCommunication.graphQlCall(this, body, vars, "team");
