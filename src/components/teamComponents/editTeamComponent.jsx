@@ -1,24 +1,25 @@
 import React, { Component } from "react";
 import TeamEditCard from "./teamCardComponent";
-
-const teams = [
-  {
-    id: 1,
-    name: "Team A"
-  },
-  {
-    id: 2,
-    name: "Team B"
-  }
-];
+import ApiCommunication from "../apicommunication/ApiCommunication";
 
 //example component to show edit team
 class EditTeam extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamList: teams
+      teamList: []
     };
+  }
+
+  async componentDidMount() {
+    var body = "query {teams{name}}";
+    var vars = `{} `;
+    var test = await ApiCommunication.graphQlCallPost(body, vars);
+    this.setState({
+      teamList: test
+    });
+
+    console.log(test);
   }
 
   render() {

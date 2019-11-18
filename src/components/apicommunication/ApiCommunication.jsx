@@ -3,8 +3,6 @@ import axios from "axios";
 class ApiCommunication {
   static endpoint = "https://api-tournamanager.herokuapp.com/graphql";
 
-  static endpoint = "https://api-tournamanager.herokuapp.com/graphql";
-
   //body format: "query q(){users{id}}" or "mutation m($var1:String!, $var2:int){addThing(name: $var1, value: $var2){id}}
   //variables format: {} or {"var1": "value", "var2": 2}
   //target is under what name we want to save the requested data in the state of the view

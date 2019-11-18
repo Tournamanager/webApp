@@ -7,7 +7,8 @@ class TeamEditCard extends Component {
     super(props);
 
     this.state = {
-      newTeamName: ""
+      newTeamName: "",
+      teams: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,7 +18,7 @@ class TeamEditCard extends Component {
   handleSubmit(event) {
     var body = "mutation m($name:String!){createTeam(name: $name){id}}";
     var vars = `{ name: ${this.state.newTeamName} } `;
-    ApiCommunication.graphQlCall(this, body, vars, "team");
+    ApiCommunication.graphQlCall(this, body, vars, this.state.teams);
 
     event.preventDefault();
   }

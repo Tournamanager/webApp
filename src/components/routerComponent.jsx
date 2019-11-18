@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Users from "./usersComponent";
 import Home from "./homeComponent";
 import MyProfile from "./profileComponent";
-import firebase from "firebase"
+import firebase from "firebase";
 
 import {
   Collapse,
@@ -17,55 +17,55 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem
-} from 'reactstrap';
+} from "reactstrap";
 
-
-const Navigator = (props) => {
+const Navigator = props => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
-  console.log(props.isSignedIn)
+  console.log(props.isSignedIn);
 
   return (
     <Router>
-      <div>        
+      <div>
         {props.isSignedIn ? (
           <div>
             <Navbar color="light" light expand="md">
               <NavbarBrand href="/">Tournamanager</NavbarBrand>
-              <span className="welkomNav">Welcome {firebase.auth().currentUser.email}</span>
+              <span className="welkomNav">
+                Welcome {firebase.auth().currentUser.email}
+              </span>
               <NavbarToggler onClick={toggle} />
               <Collapse isOpen={isOpen} navbar>
                 <Nav className="ml-auto" navbar>
-
                   <NavItem>
-                    <Link className="link" to="/users">Users</Link>
+                    <Link className="link" to="/users">
+                      Users
+                    </Link>
                   </NavItem>
 
                   <NavItem>
-                    <Link className="link" to="/myProfile">my profile</Link>
+                    <Link className="link" to="/myProfile">
+                      my profile
+                    </Link>
                   </NavItem>
 
                   <NavItem>
-                    <NavLink href="/" onClick={() => firebase.auth().signOut()}>Logout</NavLink>
+                    <NavLink href="/" onClick={() => firebase.auth().signOut()}>
+                      Logout
+                    </NavLink>
                   </NavItem>
 
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                       Options
-              </DropdownToggle>
+                    </DropdownToggle>
                     <DropdownMenu right>
-                      <DropdownItem>
-                        Option 1
-                </DropdownItem>
-                      <DropdownItem>
-                        Option 2
-                </DropdownItem>
+                      <DropdownItem>Option 1</DropdownItem>
+                      <DropdownItem>Option 2</DropdownItem>
                       <DropdownItem divider />
-                      <DropdownItem>
-                        Reset
-                </DropdownItem>
+                      <DropdownItem>Reset</DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
 
@@ -77,26 +77,23 @@ const Navigator = (props) => {
             </Navbar>
           </div>
         ) : (
-            <div>
-              <Navbar color="light" light expand="md">
-                <NavbarBrand href="/">Tournamanager</NavbarBrand>
-                <NavbarToggler onClick={toggle} />
-                <Collapse isOpen={isOpen} navbar>
-                  <Nav className="ml-auto" navbar>
-                    <NavItem>
-                      <NavLink href="/">Login</NavLink>
-                    </NavItem>
-                  </Nav>
-                </Collapse>
-              </Navbar>
-            </div>
-          )}
-
-
+          <div>
+            <Navbar color="light" light expand="md">
+              <NavbarBrand href="/">Tournamanager</NavbarBrand>
+              <NavbarToggler onClick={toggle} />
+              <Collapse isOpen={isOpen} navbar>
+                <Nav className="ml-auto" navbar>
+                  <NavItem>
+                    <NavLink href="/">Login</NavLink>
+                  </NavItem>
+                </Nav>
+              </Collapse>
+            </Navbar>
+          </div>
+        )}
 
         <Switch>
-          <Route path="/about">
-          </Route>
+          <Route path="/about"></Route>
           <Route path="/users">
             <Users />
           </Route>
@@ -107,11 +104,9 @@ const Navigator = (props) => {
             <Home />
           </Route>
         </Switch>
-
       </div>
     </Router>
   );
-}
+};
 
 export default Navigator;
-
