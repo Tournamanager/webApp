@@ -29,7 +29,7 @@ const Navigator = (props) => {
 
   return (
     <Router>
-      <div>        
+      <div>
         {props.isSignedIn ? (
           <div>
             <Navbar color="light" light expand="md">
@@ -94,19 +94,27 @@ const Navigator = (props) => {
 
 
 
-        <Switch>
-          <Route path="/about">
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/myProfile">
-            <MyProfile />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+        {props.isSignedIn ? (
+          <Switch>
+            <Route path="/about">
+            </Route>
+            <Route path="/users">
+              <Users />
+            </Route>
+            <Route path="/myProfile">
+              <MyProfile />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        ) : (
+            <Switch>
+              <Route path="/"></Route>
+            </Switch>
+          )}
+
+
 
       </div>
     </Router>
