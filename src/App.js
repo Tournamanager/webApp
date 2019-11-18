@@ -6,6 +6,7 @@ import Navigator from './components/routerComponent';
 import ApiCommunication from "./components/apicommunication/ApiCommunication";
 
 // Your web app's Firebase configuration
+
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
   authDomain: "tournamanager-3a17a.firebaseapp.com",
