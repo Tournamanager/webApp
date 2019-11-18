@@ -1,6 +1,5 @@
 @import "../node_modules/firebaseui/dist/firebaseui.css";
 
-
 .App {
   text-align: center;
 }
@@ -22,4 +21,22 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.container {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.welkomNav {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: rgba(0,0,0,.5);
 }
