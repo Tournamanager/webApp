@@ -7,13 +7,15 @@ class ApiCommunication {
   //variables format: {} or {"var1": "value", "var2": 2}
   //target is under what name we want to save the requested data in the state of the view
   static graphQlCall(view, body, variables, target) {
-    console.log(`{"query": "${body}", "variables": ${variables}}`);
+    //console.log(`{"query": "${body}", "variables": ${variables}}`);
     axios
       .post(this.endpoint, `{"query": "${body}", "variables": ${variables}}`, {
         headers: { "Content-type": "application/json" }
       })
       .then(response => {
-        view.setState({ [target]: response }, () => console.log(response));
+        view.setState({ [target]: response.data.data }, () =>
+          console.log(response)
+        );
       })
       .catch(error => {
         console.log(error);

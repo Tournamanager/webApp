@@ -16,9 +16,10 @@ class TeamEditCard extends Component {
   }
 
   handleSubmit(event) {
-    var body = "mutation m($name:String!){createTeam(name: $name){id}}";
-    var vars = `{ name: ${this.state.newTeamName} } `;
-    ApiCommunication.graphQlCall(this, body, vars, this.state.teams);
+    var body =
+      "mutation m($name:String!, $id:Int!){updateTeam(name: $name, id: $id){id}}";
+    var vars = `{ "name": "${this.state.newTeamName}", "id":${this.props.data.id} } `;
+    ApiCommunication.graphQlCall(this, body, vars, "teams");
 
     event.preventDefault();
   }

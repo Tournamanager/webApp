@@ -7,25 +7,20 @@ class EditTeam extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teamList: []
+      teamList: { teams: [] }
     };
   }
 
-  async componentDidMount() {
-    var body = "query {teams{name}}";
+  componentDidMount() {
+    var body = "query {teams{name, id}}";
     var vars = `{} `;
-    var test = await ApiCommunication.graphQlCallPost(body, vars);
-    this.setState({
-      teamList: test
-    });
-
-    console.log(test);
+    ApiCommunication.graphQlCall(this, body, vars, "teamList");
   }
 
   render() {
     return (
       <div>
-        {this.state.teamList.map(team => {
+        {this.state.teamList.teams.map(team => {
           return <TeamEditCard data={team} />;
         })}
       </div>

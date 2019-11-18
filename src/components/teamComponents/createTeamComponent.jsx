@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { Button, Form, Col, Row, FormControl } from "react-bootstrap";
-import ApiCommunication from "./apicommunication/ApiCommunication";
+import ApiCommunication from "../apicommunication/ApiCommunication";
 
 class CreateTeam extends Component {
   constructor(props) {
