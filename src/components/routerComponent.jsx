@@ -77,33 +77,42 @@ const Navigator = props => {
             </Navbar>
           </div>
         ) : (
-          <div>
-            <Navbar color="light" light expand="md">
-              <NavbarBrand href="/">Tournamanager</NavbarBrand>
-              <NavbarToggler onClick={toggle} />
-              <Collapse isOpen={isOpen} navbar>
-                <Nav className="ml-auto" navbar>
-                  <NavItem>
-                    <NavLink href="/">Login</NavLink>
-                  </NavItem>
-                </Nav>
-              </Collapse>
-            </Navbar>
-          </div>
-        )}
 
-        <Switch>
-          <Route path="/about"></Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/myProfile">
-            <MyProfile />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+            <div>
+              <Navbar color="light" light expand="md">
+                <NavbarBrand href="/">Tournamanager</NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                  <Nav className="ml-auto" navbar>
+                    <NavItem>
+                      <NavLink href="/">Login</NavLink>
+                    </NavItem>
+                  </Nav>
+                </Collapse>
+              </Navbar>
+            </div>
+          )}
+        
+        {props.isSignedIn ? (
+          <Switch>
+            <Route path="/about">
+            </Route>
+            <Route path="/users">
+              <Users />
+            </Route>
+            <Route path="/myProfile">
+              <MyProfile />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        ) : (
+            <Switch>
+              <Route path="/"></Route>
+            </Switch>
+          )}
+
       </div>
     </Router>
   );
