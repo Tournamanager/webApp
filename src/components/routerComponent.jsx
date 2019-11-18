@@ -91,9 +91,7 @@ const Navigator = (props) => {
               </Navbar>
             </div>
           )}
-
-
-
+        
         {props.isSignedIn ? (
           <Switch>
             <Route path="/about">
@@ -113,8 +111,6 @@ const Navigator = (props) => {
               <Route path="/"></Route>
             </Switch>
           )}
-
-
 
       </div>
     </Router>
