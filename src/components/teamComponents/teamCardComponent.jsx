@@ -1,72 +1,54 @@
 import React, { Component } from "react";
 import { Card, Button, Form, FormControl, Col } from "react-bootstrap";
+import ApiCommunication from "../apicommunication/ApiCommunication";
 
-class TeamCard extends Component {
+class TeamEditCard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isEdit: false
+      newTeamName: ""
     };
 
-    this.enableEdit = this.enableEdit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  enableEdit(event) {
-    console.log("I Got Clicked B****");
-    this.setState({
-      isEdit: true
-    });
+    this.handleNameChange = this.handleNameChange.bind(this);
   }
 
   handleSubmit(event) {
-    console.log("I Got Clicked C***");
+    var body = "mutation m($name:String!){createTeam(name: $name){id}}";
+    var vars = `{ name: ${this.state.newTeamName} } `;
+    ApiCommunication.graphQlCall(this, body, vars, "team");
+
+    event.preventDefault();
+  }
+
+  handleNameChange(event) {
     this.setState({
-      isEdit: false
+      newTeamName: event.target.value
     });
   }
 
   render() {
-    switch (this.state.isEdit) {
-      case true:
-        return (
-          <div>
-            <Form>
+    return (
+      <div>
+        <Col md="4" style={{ marginTop: "10px" }}>
+          <Card Card style={{ width: "18rem" }}>
+            <Form style={{ padding: "10px" }} onSubmit={this.handleSubmit}>
               <FormControl
                 className="mr-sm-2"
                 type="text"
-                placeholder="Edit is Yes"
+                placeholder={this.props.data.name}
+                onChange={this.handleNameChange}
               ></FormControl>
-              <Button onClick={this.handleSubmit}>Submit</Button>
+              <Button style={{ marginTop: "10px" }} type="submit">
+                Submit
+              </Button>
             </Form>
-          </div>
-        );
-
-      case false:
-        return (
-          <div>
-            <Col>
-              <Card>
-                <Card.Title>{this.props.data.name}</Card.Title>
-                <Card.Body>
-                  <Button
-                    className="btn btn-primary"
-                    onClick={this.enableEdit}
-                    type="submit"
-                  >
-                    Edit
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          </div>
-        );
-
-      default:
-        break;
-    }
+          </Card>
+        </Col>
+      </div>
+    );
   }
 }
 
-export default TeamCard;
+export default TeamEditCard;

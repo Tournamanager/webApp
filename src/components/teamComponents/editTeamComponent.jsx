@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TeamCard from "./teamCardComponent";
+import TeamEditCard from "./teamCardComponent";
 
 const teams = [
   {
@@ -12,6 +12,7 @@ const teams = [
   }
 ];
 
+//example component to show edit team
 class EditTeam extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +25,7 @@ class EditTeam extends Component {
     return (
       <div>
         {this.state.teamList.map(team => {
-          return <TeamCard data={team}></TeamCard>;
+          return <TeamEditCard data={team} />;
         })}
       </div>
     );
