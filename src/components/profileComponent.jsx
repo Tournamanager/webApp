@@ -74,7 +74,6 @@ class MyProfile extends Component {
             }).then(() => {
                 this.Usernames = usernames  
                 console.log(this.Usernames)
-
             })
     }
 
@@ -96,7 +95,8 @@ class MyProfile extends Component {
             this.ref.set({ username: newusername });
             alert('Username opgeslagen ' + newusername);
             this.setState({ User: { username: newusername } })
-        }else{
+        }
+        else {
             alert('Username bezet');
         }
 
