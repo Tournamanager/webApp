@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import firebase from "firebase";
 
 import {
@@ -21,15 +21,13 @@ const Navigator = props => {
 
   const toggle = () => setIsOpen(!isOpen);
 
-  console.log(props.isSignedIn);
-
   return (
     <Router>
       <div>
         {props.isSignedIn ? (
           <div>
             <Navbar color="light" light expand="md">
-              <NavbarBrand href="/">Tournamanager</NavbarBrand>
+              <NavbarBrand to="/">Tournamanager</NavbarBrand>
               <span className="welkomNav">
                 Welcome {firebase.auth().currentUser.email}
               </span>
@@ -81,7 +79,7 @@ const Navigator = props => {
               <Collapse isOpen={isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem>
-                    <NavLink href="/">Login</NavLink>
+                    <NavLink href="/login">Login</NavLink>
                   </NavItem>
                 </Nav>
               </Collapse>

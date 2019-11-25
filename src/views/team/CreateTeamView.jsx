@@ -23,7 +23,7 @@ class CreateTeamView extends Component {
 
   submitTeam() {
     var body = "mutation m($name:String!){createTeam(name: $name){id}}";
-    var vars = `{ name: ${selectedName} } `;
+    var vars = `{ name: ${this.state.selectedName} } `;
     ApiCommunication.graphQlCall(this, body, vars, "team");
   }
 
@@ -39,7 +39,7 @@ class CreateTeamView extends Component {
                 type="text"
                 placeholder="Team name"
                 onChange={this.handleNameChange}
-              ></FormControl>
+              />
             </Row>
             <Button
               onClick={this.submitTeam}

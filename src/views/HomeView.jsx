@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class HomeView extends Component {
     render() {
         return (
-            <span>Hello</span>
+            <h1>Hello</h1>
         )
     }
 }
