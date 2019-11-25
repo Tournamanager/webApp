@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Users from "./usersComponent";
 import Home from "./homeComponent";
 import MyProfile from "./profileComponent";
+import Teams from './teamsComponent';
 import firebase from "firebase"
 
 import {
@@ -44,7 +45,11 @@ const Navigator = (props) => {
                   </NavItem>
 
                   <NavItem>
-                    <Link className="link" to="/myProfile">my profile</Link>
+                    <Link className="link" to="/teams">Teams</Link>
+                  </NavItem>
+
+                  <NavItem>
+                    <Link className="link" to="/myProfile">My profile</Link>
                   </NavItem>
 
                   <NavItem>
@@ -98,6 +103,9 @@ const Navigator = (props) => {
             </Route>
             <Route path="/users">
               <Users />
+            </Route>
+            <Route path="/teams">
+              <Teams />
             </Route>
             <Route path="/myProfile">
               <MyProfile />
