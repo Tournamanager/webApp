@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Users from "./usersComponent";
-import Home from "./homeComponent";
-import MyProfile from "./profileComponent";
 import firebase from "firebase";
 
 import {
@@ -52,7 +49,7 @@ const Navigator = props => {
                   </NavItem>
 
                   <NavItem>
-                    <NavLink href="/" onClick={() => firebase.auth().signOut()}>
+                    <NavLink to="/" onClick={() => firebase.auth().signOut()}>
                       Logout
                     </NavLink>
                   </NavItem>
@@ -90,25 +87,6 @@ const Navigator = props => {
               </Collapse>
             </Navbar>
           </div>
-        )}
-
-        {props.isSignedIn ? (
-          <Switch>
-            <Route path="/about"></Route>
-            <Route path="/users">
-              <Users />
-            </Route>
-            <Route path="/myProfile">
-              <MyProfile />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path="/"></Route>
-          </Switch>
         )}
       </div>
     </Router>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from "firebase"
 
-class MyProfile extends Component {
+class UserProfileView extends Component {
 
     ref;
     Usernames = [];
@@ -117,4 +117,4 @@ class MyProfile extends Component {
     }
 }
 
-export default MyProfile
+export default UserProfileView;

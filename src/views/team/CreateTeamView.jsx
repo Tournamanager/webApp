@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 import { Button, Form, Col, Row, FormControl } from "react-bootstrap";
-import ApiCommunication from "../apicommunication/ApiCommunication";
+import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
-class CreateTeam extends Component {
+class CreateTeamView extends Component {
   constructor(props) {
     super(props);
 
@@ -55,4 +55,4 @@ class CreateTeam extends Component {
   }
 }
 
-export default CreateTeam;
+export default CreateTeamView;

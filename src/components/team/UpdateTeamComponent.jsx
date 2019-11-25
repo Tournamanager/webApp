@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Card, Button, Form, FormControl, Col } from "react-bootstrap";
-import ApiCommunication from "../apicommunication/ApiCommunication";
+import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
-class TeamEditCard extends Component {
+class UpdateTeamComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -53,4 +53,4 @@ class TeamEditCard extends Component {
   }
 }
 
-export default TeamEditCard;
+export default UpdateTeamComponent;
