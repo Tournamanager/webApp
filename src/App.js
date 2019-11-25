@@ -2,11 +2,12 @@ import React, { Component } from "react"
 import "./App.css"
 import FirebaseAuthView from "./views/firebase/FirebaseAuthView";
 import AllUsersView from "./views/user/AllUsersView";
-import ProfileView from "./views/user/UserProfileView";
+import ProfileView from "./views/user/ProfileUserView";
 import HomeView from "./views/HomeView";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import firebase from "firebase";
 import NavigationComponent from "./components/NavigationComponent";
+import CreateTeamView from "./views/team/CreateTeamView";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
@@ -42,6 +43,7 @@ class App extends Component {
               <Route path="/login" component={FirebaseAuthView}/>
               <Route path="/users" component={AllUsersView}/>
               <Route path="/user/profile" component={ProfileView}/>
+              <Route path="/team/create" component={CreateTeamView}/>
               <Route />
             </Switch>
           </div>

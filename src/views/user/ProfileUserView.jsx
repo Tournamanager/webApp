@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import firebase from "firebase"
 
-class UserProfileView extends Component {
+class ProfileUserView extends Component {
 
     ref;
-    Usernames = [];
+    userNames = [];
 
     constructor(props) {
         super(props);
-        this.unsubscribe = null;
         this.state = {
             User: {
                 username: "",
                 //key: firebase.auth().currentUser.uid
             },
             NewUsername: "",
-        }
+        };
 
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
         this.saveUsername = this.saveUsername.bind(this);
@@ -28,11 +27,11 @@ class UserProfileView extends Component {
 
     componentDidMount() {
 
-        console.log(firebase.auth().currentUser.uid)
-        const Userdetails = {
+        console.log(firebase.auth().currentUser.uid);
+        const userDetails = {
             username: "User " + firebase.auth().currentUser.uid,
             // key: firebase.auth().currentUser.uid
-        }
+        };
 
         this.getAllUsers();
         //   this.unsubscribe = this.ref.onSnapshot(this.getAllUsers);
@@ -46,15 +45,15 @@ class UserProfileView extends Component {
             } else if (!doc.exists) {
 
                 this.setState({
-                    User: Userdetails
+                    User: userDetails
                 });
 
-                this.ref.set(Userdetails);
+                this.ref.set(userDetails);
 
                 console.log("No such document!");
             } else {
                 this.setState({
-                    User: Userdetails
+                    User: userDetails
                 });
             }
 
@@ -63,23 +62,23 @@ class UserProfileView extends Component {
     }
 
     getAllUsers() {
-        const usernames = [];
+        const userNames = [];
 
         firebase.firestore().collection('users').get()
             .then(snapshot => {
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    usernames.push(data.username)
+                    userNames.push(data.username)
                 });
             }).then(() => {
-                this.Usernames = usernames  
-                console.log(this.Usernames)
+                this.userNames = userNames;
+                console.log(this.userNames)
             })
     }
 
-    checkAvailibility(username) {
-        console.log(this.Usernames)
-        return !this.Usernames.find(u => u === username);
+    checkAvailability(username) {
+        console.log(this.userNames);
+        return !this.userNames.find(u => u === username);
     }
 
     handleChangeUsername(event) {
@@ -88,13 +87,13 @@ class UserProfileView extends Component {
     }
 
     saveUsername() {
-        const newusername = this.state.NewUsername;
-        console.log(this.checkAvailibility(newusername))
-        if (this.checkAvailibility(newusername)) {
+        const newUserName = this.state.NewUsername;
+        console.log(this.checkAvailability(newUserName));
+        if (this.checkAvailability(newUserName)) {
           
-            this.ref.set({ username: newusername });
-            alert('Username opgeslagen ' + newusername);
-            this.setState({ User: { username: newusername } })
+            this.ref.set({ username: newUserName });
+            alert('Username opgeslagen ' + newUserName);
+            this.setState({ User: { username: newUserName } })
         }
         else {
             alert('Username bezet');
@@ -117,4 +116,4 @@ class UserProfileView extends Component {
     }
 }
 
-export default UserProfileView;
+export default ProfileUserView;

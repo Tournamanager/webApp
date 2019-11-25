@@ -8,26 +8,28 @@ const NavigationComponent = props => {
 
   const toggle = () => setIsOpen(!isOpen);
 
-  function ifLoggedIn() {
-    if (props.isSignedIn) {
-      return (
-        <li className="nav-item">
-          <Link className="nav-link" to="/users">
-            Users
-          </Link>
-        </li>
-      )
-    }
-  }
-
   return (
       <div className="navbar navbar-expand-md navbar-dark bg-dark mb-5">
         <Link className="navbar-brand" to="/">Home</Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} className="navbar-collapse">
-          <ul className="navbar-nav mr-auto">
-            {ifLoggedIn()}
-          </ul>
+            {props.isSignedIn ? (
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/users">
+                    Users
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/team/create">
+                  CreateTeam
+                  </Link>
+                </li>
+              </ul>
+            ) : (
+              <ul className="navbar-nav mr-auto">
+              </ul>
+            )}
           <ul className="navbar-nav">
             {!props.isSignedIn ? (
               <li>
