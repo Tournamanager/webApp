@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import firebase from "firebase";
 import ApiCommunication from "./apicommunication/ApiCommunication";
 
-class Tournaments extends Component {
+class AllTournamentsView extends Component {
 
     constructor(props) {
         super(props);
@@ -58,4 +58,4 @@ class Tournaments extends Component {
     }
 }
 
-export default Tournaments;
+export default AllTournamentsView;
