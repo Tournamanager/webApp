@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import firebase from "firebase";
-import ApiCommunication from "./apicommunication/ApiCommunication";
+import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
 class AllTournamentsView extends Component {
 
