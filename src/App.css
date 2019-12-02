@@ -41,8 +41,6 @@
   color: rgba(0,0,0,.5);
 }
 
-
-/* Moet worden toegevoegd om material icons werkend te maken. */
 @font-face {
   font-family: "Material Icons";
   font-style: normal;
@@ -67,16 +65,8 @@
   white-space: nowrap;
   direction: ltr;
 
-  /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
-
-  /* Support for Safari and Chrome. */
   text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
   font-feature-settings: "liga";
 }
-/* Einde: Moet worden toegevoegd om material icons werkend te maken. */
