@@ -18,7 +18,6 @@ class AllTournamentsView extends Component {
         const vars = "{}";
         ApiCommunication.graphQlCallPost(body, vars)
             .then(response => this.setState({tournaments: response.data.data.tournaments}))
-            .catch(error => console.error(error));
     }
 
     componentDidMount() {
