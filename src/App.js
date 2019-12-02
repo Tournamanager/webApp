@@ -8,6 +8,7 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import firebase from "firebase";
 import NavigationComponent from "./components/NavigationComponent";
 import CreateTeamView from "./views/team/CreateTeamView";
+import AllTournamentsView from "./views/tournament/AllTournamentsView";
 import AllTeamsView from "./views/team/AllTeamsView";
 
 const firebaseConfig = {
@@ -43,6 +44,7 @@ class App extends Component {
               <Route path="/" component={HomeView} exact/>
               <Route path="/login" component={FirebaseAuthView}/>
               <Route path="/users" component={AllUsersView}/>
+              <Route path="/tournaments" component={AllTournamentsView}/>
               <Route path="/user/profile" component={ProfileView}/>
               <Route path="/team/create" component={CreateTeamView}/>
               <Route path="/teams" component={AllTeamsView}/>

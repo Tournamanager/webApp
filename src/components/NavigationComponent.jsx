@@ -21,6 +21,11 @@ const NavigationComponent = props => {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link" to="/tournaments">
+                      Tournaments
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to="/team/create">
                   CreateTeam
                   </Link>
