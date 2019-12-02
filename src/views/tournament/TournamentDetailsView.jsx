@@ -1,3 +1,8 @@
+import React, { Component } from "react";
+import TournamentTeamListComponent from "../../components/tournament/TournamentTeamListComponent";
+import TournamentMatchListComponent from "../../components/tournament/TournamentMatchListComponent";
+
+
 class TournamentDetailsView extends Component {
     constructor(props) {
         super(props);
@@ -20,3 +25,5 @@ class TournamentDetailsView extends Component {
         )
     }
 }
+
+export default TournamentDetailsView;
