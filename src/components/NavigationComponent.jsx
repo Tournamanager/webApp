@@ -9,7 +9,7 @@ const NavigationComponent = props => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-      <div className="navbar navbar-expand-md navbar-dark bg-dark mb-5">
+    <div className="navbar navbar-expand-md navbar-dark bg-dark mb-2">
         <Link className="navbar-brand" to="/">Home</Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} className="navbar-collapse">
