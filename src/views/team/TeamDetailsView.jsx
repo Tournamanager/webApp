@@ -17,9 +17,11 @@ class TeamDetailsView extends Component {
 
     render() {
         return (
-            <div> <TeamDetailHeaderComponent /> </div>
-            <div> <TeamTournamentsComponent /></div>
-            <div>  <TeamMembersComponent /></div>
+            <div>
+                <TeamDetailHeaderComponent />
+                <TeamTournamentsComponent />
+                <TeamMembersComponent />
+            </div>
           
     );
     }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import firebase from "firebase";
+import UserComponent from "../../components/user/UserComponent";
 
 class AllUsersView extends Component {
 
@@ -47,7 +48,7 @@ class AllUsersView extends Component {
         <h1>All Users</h1>
         <div>
           {this.state.users.map(user => (
-            <userComponent user={user} />
+            <UserComponent user={user} />
           ))}
         </div>
       </div>

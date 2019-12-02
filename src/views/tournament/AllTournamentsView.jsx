@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
+import TournamentListComponent from "../../components/tournament/TournamentListComponent";
 
 class AllTournamentsView extends Component {
 
@@ -32,10 +33,7 @@ class AllTournamentsView extends Component {
         return (
             <div>
                 <h1>All Active Tournaments</h1>
-
-                <TournamentList tournaments={this.state.tournaments}></TournamentList>
-
-
+                <TournamentListComponent tournaments={this.state.tournaments}></TournamentListComponent>
             </div>
         );
     }
