@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import firebase from "firebase";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
 class AllTournamentsView extends Component {
@@ -14,27 +13,14 @@ class AllTournamentsView extends Component {
         };
     }
 
-    getAllUsers() {
-        const tournaments = [];
-
-        var body = "query m($name:String!){createTeam(name: $name){id}}";
-        var vars = "";
-        ApiCommunication.graphQlCall(this, body, vars, "team");
-
-        firebase.firestore().collection('users').get()
-            .then(snapshot => {
-                snapshot.forEach(doc => {
-                    const data = doc.data();
-                    tournaments.push(data);
-                });
-            })
-            .then(() => {
-                this.setState({ tournaments: tournaments });
-            })
+    getAllTournaments() {
+        const body = "query q(){tournaments{name}}";
+        const vars = "{}";
+        ApiCommunication.graphQlCall(this, body, vars, "tournaments");
     }
 
     componentDidMount() {
-        this.getAllUsers();
+        this.getAllTournaments();
     }
 
     setActiveTournament(tournament) {
@@ -48,7 +34,7 @@ class AllTournamentsView extends Component {
                 {this.state.tournaments.map(tournament => (
                     <div key={tournament.toString() + 'card'}className="card">
                         <div key={tournament.toString() + 'cardbody'} className="card-body">
-                            <h5 className="card-title" key={tournament.toString() + ''}>{tournament.username}</h5>
+                            <h5 className="card-title" key={tournament.toString() + ''}>{tournament.name}</h5>
                             <button onClick={() => this.setActiveTournament(tournament)} key={tournament.toString() + 'button'}>Details</button>
                         </div>
                     </div>
