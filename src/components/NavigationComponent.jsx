@@ -30,6 +30,11 @@ const NavigationComponent = props => {
                   CreateTeam
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/teams">
+                  Teams
+                  </Link>
+                </li>
               </ul>
             ) : (
               <ul className="navbar-nav mr-auto">
