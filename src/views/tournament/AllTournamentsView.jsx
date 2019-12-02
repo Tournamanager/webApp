@@ -31,15 +31,11 @@ class AllTournamentsView extends Component {
     render() {
         return (
             <div>
-                <h1>All Tournaments</h1>
-                {this.state.tournaments.map(tournament => (
-                    <div key={tournament.toString() + 'card'}className="card">
-                        <div key={tournament.toString() + 'cardbody'} className="card-body">
-                            <h5 className="card-title" key={tournament.toString() + ''}>{tournament.name}</h5>
-                            <button onClick={() => this.setActiveTournament(tournament)} key={tournament.toString() + 'button'}>Details</button>
-                        </div>
-                    </div>
-                ), )}
+                <h1>All Active Tournaments</h1>
+
+                <TournamentList tournaments={this.state.tournaments}></TournamentList>
+
+
             </div>
         );
     }
