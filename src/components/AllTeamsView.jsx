@@ -3,32 +3,19 @@ import ApiCommunication from "./apicommunication/ApiCommunication";
 
 import MaterialTable from 'material-table';
 
-class Teams extends Component {
+class AllTeamsView extends Component {
     constructor(props) {
         super(props)
         this.state = {
             teamList: { teams: [] }
         }
-            [this.state, this.setState] = {
-            columns: [
-                { title: 'Team name', field: 'name' },
-                { title: 'Team captain', field: 'teamcaptain' },
-                { title: 'Created at', field: 'created_at', type: 'string' },
-                
-            ],
-            data: [
-                { name: 'Maatwerkboys', teamcaptain: 'Kees', created_at: '18-11-2019'},
-            ],
-        };
     }
 
     componentDidMount() {
         var body = "query {teams{name}}";
         var vars = `{} `;
 
-        ApiCommunication.graphQlCall(this, body, vars, "teamList")
-        // .then(res => console.log(res))
-        // .catch(err => console.log(err));  
+      ApiCommunication.graphQlCall(this, body, vars, "teamList")
     
     }
 
@@ -36,9 +23,9 @@ class Teams extends Component {
         return (
             <div style={{margin: '50px'}}>
                 <MaterialTable
-                    title="Teams"
-                    columns={this.state.columns}
-                    data={this.state.data}
+                    title= "Teams"
+                    columns={[{title: 'Name', field: 'name' }]}
+                    data={this.state.teamList.teams}
                     editable={{
                         onRowAdd: newData =>
                             new Promise(resolve => {
@@ -83,5 +70,5 @@ class Teams extends Component {
 
 }
 
-export default Teams
+export default AllTeamsView
 

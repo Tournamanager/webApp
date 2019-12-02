@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Users from "./usersComponent";
 import Home from "./homeComponent";
 import MyProfile from "./profileComponent";
-import Teams from './teamsComponent';
+import AllTeamsView from './AllTeamsView';
 import firebase from "firebase"
 
 import {
@@ -105,7 +105,7 @@ const Navigator = (props) => {
               <Users />
             </Route>
             <Route path="/teams">
-              <Teams />
+              <AllTeamsView />
             </Route>
             <Route path="/myProfile">
               <MyProfile />

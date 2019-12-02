@@ -39,16 +39,16 @@ export default class App extends Component {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user });
       console.log(user);
-      ApiCommunication.graphQlCallPost("mutation m($uuid: String!) { createUser(uuid: $uuid) { id } }",`{"uuid": "${user.uid}"}`)
-          .then(res => console.log(res))
-          .catch(err => console.log(err));
+      ApiCommunication.graphQlCallPost("mutation m($uuid: String!) { createUser(uuid: $uuid) { id } }", `{"uuid": "${user.uid}"}`)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
     })
   };
 
   render() {
     return (
       <div className="App">
-        <Navigator isSignedIn={this.state.isSignedIn}/>
+        <Navigator isSignedIn={this.state.isSignedIn} />
         <div className="container">
           {this.state.isSignedIn ? (
             <span>

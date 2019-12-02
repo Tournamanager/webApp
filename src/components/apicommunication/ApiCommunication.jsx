@@ -12,7 +12,7 @@ class ApiCommunication {
         axios
             .post(this.endpoint, `{"query": "${body}", "variables": ${variables}}`, {headers: {"Content-type": "application/json"}})
             .then(response => {
-                view.setState({[target]: response}, () => console.log(response));
+                view.setState({[target]: response.data.data}, () => console.log(response));
             })
             .catch(error => {console.log(error); console.log(error.response)});
     }
