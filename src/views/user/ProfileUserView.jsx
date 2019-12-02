@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import firebase from "firebase"
 
-class MyProfile extends Component {
+class ProfileUserView extends Component {
 
     ref;
-    Usernames = [];
+    userNames = [];
 
     constructor(props) {
         super(props);
-        this.unsubscribe = null;
         this.state = {
-            User: {
+            user: {
                 username: "",
                 //key: firebase.auth().currentUser.uid
             },
-            NewUsername: "",
-        }
+            newUsername: "",
+        };
 
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
         this.saveUsername = this.saveUsername.bind(this);
@@ -27,12 +26,10 @@ class MyProfile extends Component {
 
 
     componentDidMount() {
-
-        console.log(firebase.auth().currentUser.uid)
-        const Userdetails = {
+        const userDetails = {
             username: "User " + firebase.auth().currentUser.uid,
             // key: firebase.auth().currentUser.uid
-        }
+        };
 
         this.getAllUsers();
         //   this.unsubscribe = this.ref.onSnapshot(this.getAllUsers);
@@ -40,61 +37,53 @@ class MyProfile extends Component {
         this.ref.get().then((doc) => {
             if (doc.exists) {
                 this.setState({
-                    User: doc.data(),
+                    user: doc.data(),
                     key: doc.id,
                 });
             } else if (!doc.exists) {
 
                 this.setState({
-                    User: Userdetails
+                    user: userDetails
                 });
 
-                this.ref.set(Userdetails);
-
-                console.log("No such document!");
+                this.ref.set(userDetails);
             } else {
                 this.setState({
-                    User: Userdetails
+                    user: userDetails
                 });
             }
-
-            console.log(doc.data())
         });
     }
 
     getAllUsers() {
-        const usernames = [];
+        const userNames = [];
 
         firebase.firestore().collection('users').get()
             .then(snapshot => {
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    usernames.push(data.username)
+                    userNames.push(data.username)
                 });
             }).then(() => {
-                this.Usernames = usernames  
-                console.log(this.Usernames)
+                this.userNames = userNames;
             })
     }
 
-    checkAvailibility(username) {
-        console.log(this.Usernames)
-        return !this.Usernames.find(u => u === username);
+    checkAvailability(username) {
+        return !this.userNames.find(u => u === username);
     }
 
     handleChangeUsername(event) {
-        this.setState({ NewUsername: event.target.value });
-        // console.log(this.state.newUsername)
+        this.setState({ newUsername: event.target.value });
     }
 
     saveUsername() {
-        const newusername = this.state.NewUsername;
-        console.log(this.checkAvailibility(newusername))
-        if (this.checkAvailibility(newusername)) {
+        const newUserName = this.state.newUsername;
+        if (this.checkAvailability(newUserName)) {
           
-            this.ref.set({ username: newusername });
-            alert('Username opgeslagen ' + newusername);
-            this.setState({ User: { username: newusername } })
+            this.ref.set({ username: newUserName });
+            alert('Username opgeslagen ' + newUserName);
+            this.setState({ user: { username: newUserName } })
         }
         else {
             alert('Username bezet');
@@ -106,7 +95,7 @@ class MyProfile extends Component {
         return (
             <div className="container">
                 <label>
-                    Username: {this.state.User.username}
+                    Username: {this.state.user.username}
                     <br />
                     <input onChange={this.handleChangeUsername} placeholder="New username..." type="text" name="name" />
                 </label>
@@ -117,4 +106,4 @@ class MyProfile extends Component {
     }
 }
 
-export default MyProfile
+export default ProfileUserView;

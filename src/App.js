@@ -1,11 +1,13 @@
 import React, { Component } from "react"
 import "./App.css"
-import firebase from "firebase"
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
-import Navigator from './components/routerComponent';
-import ApiCommunication from "./components/apicommunication/ApiCommunication";
-
-// Your web app's Firebase configuration
+import FirebaseAuthView from "./views/firebase/FirebaseAuthView";
+import AllUsersView from "./views/user/AllUsersView";
+import ProfileView from "./views/user/ProfileUserView";
+import HomeView from "./views/HomeView";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
+import firebase from "firebase";
+import NavigationComponent from "./components/NavigationComponent";
+import CreateTeamView from "./views/team/CreateTeamView";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
@@ -17,52 +19,38 @@ const firebaseConfig = {
   appId: "1:578644609279:web:ff2c015800e7ce861ea4ca",
   measurementId: "G-P266ND2WDH"
 };
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-export default class App extends Component {
-
-  state = { isSignedIn: false };
-
-  uiConfig = {
-    signInFlow: "popup",
-    signInOptions: [
-      firebase.auth.EmailAuthProvider.PROVIDER_ID
-    ],
-    credentialHelper: 'none',
-    callbacks: {
-      signInSuccess: () => false
-    }
+class App extends Component {
+  state = {
+    isSignedIn: false
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      this.setState({ isSignedIn: !!user });
-      console.log(user);
-      ApiCommunication.graphQlCallPost("mutation m($uuid: String!) { createUser(uuid: $uuid) { id } }",`{"uuid": "${user.uid}"}`)
-          .then(res => console.log(res))
-          .catch(err => console.log(err));
-    })
-  };
+        this.setState({ isSignedIn: !!user });
+    });
+  }
 
   render() {
     return (
-      <div className="App">
-        <Navigator isSignedIn={this.state.isSignedIn}/>
-        <div className="container">
-          {this.state.isSignedIn ? (
-            <span>
-              {/* <Navigator></Navigator> */}
-              {/* <div>Signed In!</div> */}
-            </span>
-          ) : (
-              <StyledFirebaseAuth
-                uiConfig={this.uiConfig}
-                firebaseAuth={firebase.auth()}
-              />
-            )}
-        </div>
+      <div>
+        <BrowserRouter>
+          <div>
+            <NavigationComponent isSignedIn={this.state.isSignedIn}/>
+            <Switch>
+              <Route path="/" component={HomeView} exact/>
+              <Route path="/login" component={FirebaseAuthView}/>
+              <Route path="/users" component={AllUsersView}/>
+              <Route path="/user/profile" component={ProfileView}/>
+              <Route path="/team/create" component={CreateTeamView}/>
+              <Route />
+            </Switch>
+          </div>
+        </BrowserRouter>
       </div>
     )
   }
 }
+
+export default App;

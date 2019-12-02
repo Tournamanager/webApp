@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Card, Button, Form, FormControl, Col } from "react-bootstrap";
-import ApiCommunication from "../apicommunication/ApiCommunication";
+import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
-class TeamEditCard extends Component {
+class UpdateTeamComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -16,9 +16,9 @@ class TeamEditCard extends Component {
   }
 
   handleSubmit(event) {
-    var body =
+    const body =
       "mutation m($name:String!, $id:Int!){updateTeam(name: $name, id: $id){id}}";
-    var vars = `{ "name": "${this.state.newTeamName}", "id":${this.props.data.id} } `;
+    const vars = `{ "name": "${this.state.newTeamName}", "id":${this.props.data.id} } `;
     ApiCommunication.graphQlCall(this, body, vars, "teams");
 
     event.preventDefault();
@@ -41,7 +41,7 @@ class TeamEditCard extends Component {
                 type="text"
                 placeholder={this.props.data.name}
                 onChange={this.handleNameChange}
-              ></FormControl>
+              />
               <Button style={{ marginTop: "10px" }} type="submit">
                 Submit
               </Button>
@@ -53,4 +53,4 @@ class TeamEditCard extends Component {
   }
 }
 
-export default TeamEditCard;
+export default UpdateTeamComponent;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import firebase from "firebase";
 
-class Users extends Component {
+class AllUsersView extends Component {
 
   constructor(props) {
     super(props);
@@ -58,4 +58,4 @@ class Users extends Component {
   }
 }
 
-export default Users;
+export default AllUsersView;
