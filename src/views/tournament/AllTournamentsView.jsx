@@ -17,7 +17,7 @@ class AllTournamentsView extends Component {
         const body = "query {tournaments{name}}";
         const vars = "{}";
         ApiCommunication.graphQlCallPost(body, vars)
-            .then(response => this.state.tournaments = response.data.data.tournaments)
+            .then(response => this.setState({tournaments: response.data.data.tournaments}))
             .catch(error => console.log(error));
     }
 
