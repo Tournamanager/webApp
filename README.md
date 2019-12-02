@@ -1,3 +1,32 @@
+#Code Conventions
+A list of react code conventions to live by.
+
+##Folder structure
+All files that belong to the same category should be placed in such folder.<br>
+
+_Component <br>
+-> User <br>
+--> CreateUserComponent_
+
+##Naming
+###Class names
+Starting with capital letter, always the same as file name.
+
+Components: {function} + {classname} + Component<br>
+_E.G. UpdateUserComponent_
+
+Views: {function} + {classname} + View<br>
+_E.G. ProfileUserView_
+
+Service: {classname} + Service<br>
+_E.G. UserService_
+
+###Variable names
+Starting lowercase, capital letter for every new word added to the name.<br>
+_E.G. userDetails_
+
+#React
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
