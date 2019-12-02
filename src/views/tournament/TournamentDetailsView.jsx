@@ -7,14 +7,16 @@ class TournamentDetailsView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tournament: []
+            tournament: {
+                name: "TournamentName"
+            }
         }
     }
 
     render() {
         return (
             <div>
-                <h1>Tournament Name</h1>
+                <h1>{this.state.tournament.name}</h1>
                 <h5>Teams</h5>
                 <TournamentTeamListComponent />
                 <h5>Matches</h5>
