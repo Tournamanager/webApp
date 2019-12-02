@@ -8,7 +8,7 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import firebase from "firebase";
 import NavigationComponent from "./components/NavigationComponent";
 import CreateTeamView from "./views/team/CreateTeamView";
-import AllTeamsView from "./views/AllTeamsView";
+import AllTeamsView from "./views/team/AllTeamsView";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
