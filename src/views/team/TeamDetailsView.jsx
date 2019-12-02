@@ -1,27 +1,28 @@
 import React, { Component } from "react";
-
-import { Button, Form, Col, Row, FormControl } from "react-bootstrap";
-import ApiCommunication from "../../services/apicommunication/ApiCommunication";
+import TeamDetailHeaderComponent from "../../components/team/TeamDetailHeaderComponent"
+import TeamTournamentsComponent from "../../components/team/TeamTournamentsComponent"
+import TeamMembersComponent from "../../components/team/TeamMembersComponent"
 
 class TeamDetailsView extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-     
-    };
+        this.state = {
 
-
-  }
+        };
 
 
-  render() {
-    return (
-      <div>
+    }
 
-      </div>
+
+    render() {
+        return (
+            <div> <TeamDetailHeaderComponent /> </div>
+            <div> <TeamTournamentsComponent /></div>
+            <div>  <TeamMembersComponent /></div>
+          
     );
-  }
+    }
 
 }
 
