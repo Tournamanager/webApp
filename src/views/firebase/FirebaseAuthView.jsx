@@ -18,9 +18,7 @@ class FirebaseAuthView extends Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user != null) {
-                ApiCommunication.graphQlCallPost("mutation m($uuid: String!) { createUser(uuid: $uuid) { id } }",`{"uuid": "${user.uid}"}`)
-                  .then(res => console.log(res))
-                  .catch(err => console.log(err));
+                ApiCommunication.graphQlCallPost("mutation m($uuid: String!) { createUser(uuid: $uuid) { id } }",`{"uuid": "${user.uid}"}`).then();
             }
         })
     };

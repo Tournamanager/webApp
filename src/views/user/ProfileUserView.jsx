@@ -9,11 +9,11 @@ class ProfileUserView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            User: {
+            user: {
                 username: "",
                 //key: firebase.auth().currentUser.uid
             },
-            NewUsername: "",
+            newUsername: "",
         };
 
         this.handleChangeUsername = this.handleChangeUsername.bind(this);
@@ -26,8 +26,6 @@ class ProfileUserView extends Component {
 
 
     componentDidMount() {
-
-        console.log(firebase.auth().currentUser.uid);
         const userDetails = {
             username: "User " + firebase.auth().currentUser.uid,
             // key: firebase.auth().currentUser.uid
@@ -39,25 +37,21 @@ class ProfileUserView extends Component {
         this.ref.get().then((doc) => {
             if (doc.exists) {
                 this.setState({
-                    User: doc.data(),
+                    user: doc.data(),
                     key: doc.id,
                 });
             } else if (!doc.exists) {
 
                 this.setState({
-                    User: userDetails
+                    user: userDetails
                 });
 
                 this.ref.set(userDetails);
-
-                console.log("No such document!");
             } else {
                 this.setState({
-                    User: userDetails
+                    user: userDetails
                 });
             }
-
-            console.log(doc.data())
         });
     }
 
@@ -72,28 +66,24 @@ class ProfileUserView extends Component {
                 });
             }).then(() => {
                 this.userNames = userNames;
-                console.log(this.userNames)
             })
     }
 
     checkAvailability(username) {
-        console.log(this.userNames);
         return !this.userNames.find(u => u === username);
     }
 
     handleChangeUsername(event) {
-        this.setState({ NewUsername: event.target.value });
-        // console.log(this.state.newUsername)
+        this.setState({ newUsername: event.target.value });
     }
 
     saveUsername() {
-        const newUserName = this.state.NewUsername;
-        console.log(this.checkAvailability(newUserName));
+        const newUserName = this.state.newUsername;
         if (this.checkAvailability(newUserName)) {
           
             this.ref.set({ username: newUserName });
             alert('Username opgeslagen ' + newUserName);
-            this.setState({ User: { username: newUserName } })
+            this.setState({ user: { username: newUserName } })
         }
         else {
             alert('Username bezet');
@@ -105,7 +95,7 @@ class ProfileUserView extends Component {
         return (
             <div className="container">
                 <label>
-                    Username: {this.state.User.username}
+                    Username: {this.state.user.username}
                     <br />
                     <input onChange={this.handleChangeUsername} placeholder="New username..." type="text" name="name" />
                 </label>
