@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ApiCommunication from "./apicommunication/ApiCommunication";
+import ApiCommunication from "../services/apicommunication/ApiCommunication";
 
 import MaterialTable from 'material-table';
 
