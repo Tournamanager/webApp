@@ -14,9 +14,11 @@ class AllTournamentsView extends Component {
     }
 
     getAllTournaments() {
-        const body = "query q(){tournaments{name}}";
+        const body = "query {tournaments{name}}";
         const vars = "{}";
-        ApiCommunication.graphQlCall(this, body, vars, "tournaments");
+        ApiCommunication.graphQlCallPost(body, vars)
+            .then(response => this.state.tournaments = response.data.data.tournaments)
+            .catch(error => console.log(error));
     }
 
     componentDidMount() {
@@ -24,7 +26,7 @@ class AllTournamentsView extends Component {
     }
 
     setActiveTournament(tournament) {
-        alert(tournament)
+        alert(tournament.name)
     }
 
     render() {
