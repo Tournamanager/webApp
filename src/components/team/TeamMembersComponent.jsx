@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 class TeamMembersComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     listItems = () => (
         this.props.members.map((item) => {

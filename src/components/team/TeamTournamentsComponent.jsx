@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
 class TeamTournamentsComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
+
 
     listItems = () => (
         this.props.tournaments.map((item) => {
