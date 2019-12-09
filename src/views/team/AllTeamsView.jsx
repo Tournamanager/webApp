@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
+import SearchList from "../../components/list/SearchList";
 
-import TeamRowComponent from "../../components/team/TeamRowComponent";
 
 class AllTeamsView extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            teams: []
+            teams:[]
         }
     }
 
@@ -21,12 +21,8 @@ class AllTeamsView extends Component {
     render() {   
         return (
             <div>
-                <h1 className="jumbotron text-center">All Teams</h1>
-                <div className="flex-column">
-                {this.state.teams.map(team => (
-                    <TeamRowComponent data={{team}}/>
-                ), )}
-                </div>
+                <h1>All Teams</h1>
+                <SearchList objects={this.state.teams} src="teams"/>
             </div>
         );
     }
