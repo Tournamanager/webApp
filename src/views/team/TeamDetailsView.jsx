@@ -8,6 +8,8 @@ class TeamDetailsView extends Component {
     constructor(props) {
         super(props);
         this.id = this.props.match.params.id;
+
+        //Geen teams aanwezig dus mock data gebruikt
         this.state = {
             team: {
                 id: 0,
