@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-class MyMathcesList extends Component {
+class MyMatchesList extends Component {
   state = {};
   render() {
-    return <div>MyMathcesList</div>;
+    return <div>MyMatchesList</div>;
   }
 }
 
-export default MyMathcesList;
+export default MyMatchesList;
