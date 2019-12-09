@@ -9,7 +9,7 @@ const NavigationComponent = props => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-      <div className="navbar navbar-expand-md navbar-dark bg-dark mb-5">
+    <div className="navbar navbar-expand-md navbar-dark bg-dark mb-2">
         <Link className="navbar-brand" to="/">Home</Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} className="navbar-collapse">
@@ -25,16 +25,11 @@ const NavigationComponent = props => {
                       Tournaments
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/team/create">
-                  CreateTeam
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/teams">
-                  Teams
-                  </Link>
-                </li>
+                  <li className="nav-item">
+                      <Link className="nav-link" to="/teams">
+                          Teams
+                      </Link>
+                  </li>
               </ul>
             ) : (
               <ul className="navbar-nav mr-auto">
