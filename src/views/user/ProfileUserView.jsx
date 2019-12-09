@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Row, Col } from "react-bootstrap";
-import MyTournamentsList from "../../components/user/MyTournamentsListComponent";
-import MyTeamsList from "../../components/user/MyTeamsListComponent";
-import MyMatchesList from "../../components/user/MyMatchesListComponent";
+import TournamentsList from "../../components/user/TournamentsListComponent";
+import TeamsList from "../../components/user/TeamsListComponent";
+import MatchesList from "../../components/user/MatchesListComponent";
 
 class ProfileUserView extends Component {
   ref;
@@ -24,15 +24,15 @@ class ProfileUserView extends Component {
       <div>
         <Row>
           <Col id="teamsCol" md="2">
-            <MyTeamsList></MyTeamsList>
+            <TeamsList></TeamsList>
           </Col>
           <Col>
             {/*page should be split horizontally in 2 even parts*/}
             <Row>
-              <MyMatchesList></MyMatchesList>
+              <MatchesList></MatchesList>
             </Row>
             <Row>
-              <MyTournamentsList></MyTournamentsList>
+              <TournamentsList></TournamentsList>
             </Row>
           </Col>
         </Row>
