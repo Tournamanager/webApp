@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import { Row, Col } from "react-bootstrap";
+import MyTournamentsList from "../../components/user/MyTournamentsListComponent";
+import MyTeamsList from "../../components/user/MyTeamsListComponent";
+import MyMatchesList from "../../components/user/MyTeamsListComponent";
 
 class ProfileUserView extends Component {
   ref;
@@ -22,7 +25,7 @@ class ProfileUserView extends Component {
       <div>
         <Row>
           <Col id="teamsCol" md="2">
-            <MyTeamList></MyTeamList>
+            <MyTeamsList></MyTeamsList>
           </Col>
           <Col>
             {/*page should be split horizontally in 2 even parts*/}
