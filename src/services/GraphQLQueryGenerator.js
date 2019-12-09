@@ -4,7 +4,7 @@ class GraphQLRG {
         if (_variables != null) {
             response += "("
             _variables.map(variable => {
-                response += `${variable.name}:${variable.type}!,`
+                return response += `${variable.name}:${variable.type}!,`
             })
             response = response.substring(0, response.length - 1) + ")"
         }
@@ -12,7 +12,7 @@ class GraphQLRG {
         if (_variables != null) {
             response += "("
             _variables.map(variable => {
-                response += `${variable.name}: ${'$'}${variable.name},`
+                return response += `${variable.name}: ${'$'}${variable.name},`
             })
             response = response.substring(0, response.length - 1)
             response += ")"
@@ -23,7 +23,7 @@ class GraphQLRG {
         if (_variables != null) {
             _variables.map(variable => {
                 response += ` "${variable.name}":`
-                if (variable.type == "Int") {
+                if (variable.type === "Int") {
                     response += `${variable.value},`
                 } else {
                     if (variable.value == null) {
@@ -31,6 +31,7 @@ class GraphQLRG {
                     } else
                         response += `"${variable.value}",`
                 }
+                return response
             })
             response = response.substring(0, response.length - 1)
         }
