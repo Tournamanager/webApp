@@ -4,7 +4,11 @@ export default class UserComponent extends Component{
 
     render(){
         return (
-            <div>User Component</div>
+            <div>
+                <div>
+                    <h5>{this.props.user.username}</h5>
+                </div>
+            </div>
         )
     }
 }
