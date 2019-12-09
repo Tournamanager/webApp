@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 
 
 class TeamDetailHeaderComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
 
     render() {
         return (
