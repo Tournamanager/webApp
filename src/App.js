@@ -1,10 +1,10 @@
-import React, { Component } from "react"
-import "./App.css"
+import React, { Component } from "react";
+import "./App.css";
 import FirebaseAuthView from "./views/firebase/FirebaseAuthView";
 import AllUsersView from "./views/user/AllUsersView";
 import ProfileView from "./views/user/ProfileUserView";
 import HomeView from "./views/HomeView";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import firebase from "firebase";
 import NavigationComponent from "./components/NavigationComponent";
 import CreateTeamView from "./views/team/CreateTeamView";
@@ -13,6 +13,7 @@ import AllTeamsView from "./views/team/AllTeamsView";
 import MatchView from "./views/match/MatchView";
 import TeamDetailsView from "./views/team/TeamDetailsView";
 import TournamentDetailsView from "./views/tournament/TournamentDetailsView";
+import AccountUser from "./views/user/AccountUserView";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
@@ -33,30 +34,29 @@ class App extends Component {
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-        this.setState({ isSignedIn: !!user });
+      this.setState({ isSignedIn: !!user });
     });
   }
 
   render() {
     return (
-        <BrowserRouter>
-            <NavigationComponent isSignedIn={this.state.isSignedIn}/>
-            <Switch>
-              <Route path="/" component={HomeView} exact/>
-              <Route path="/login" component={FirebaseAuthView}/>
-              <Route path="/users" component={AllUsersView}/>
-              <Route path="/tournaments" component={AllTournamentsView}/>
-              <Route path="/user/profile" component={ProfileView}/>
-              <Route path="/team/create" component={CreateTeamView}/>
-              <Route path="/teams" component={AllTeamsView}/>
-              <Route path="/match" component={MatchView}/>
-              <Route path="/team" component={TeamDetailsView}/>
-              <Route path="/tournament" component={TournamentDetailsView}/>
-
-              <Route />
-            </Switch>
-        </BrowserRouter>
-    )
+      <BrowserRouter>
+        <NavigationComponent isSignedIn={this.state.isSignedIn} />
+        <Switch>
+          <Route path="/" component={HomeView} exact />
+          <Route path="/login" component={FirebaseAuthView} />
+          <Route path="/users" component={AllUsersView} />
+          <Route path="/tournaments" component={AllTournamentsView} />
+          <Route path="/user/profile" component={ProfileView} />
+          <Route path="/team/create" component={CreateTeamView} />
+          <Route path="/teams" component={AllTeamsView} />
+          <Route path="/match" component={MatchView} />
+          <Route path="/team" component={TeamDetailsView} />
+          <Route path="/tournament" component={TournamentDetailsView} />
+          <Route path="/user/account" component={AccountUser} />
+        </Switch>
+      </BrowserRouter>
+    );
   }
 }
 
