@@ -10,8 +10,8 @@ class AccountUser extends Component {
       <div>
         This in an account
         <div>
-          <ChangeUserName></ChangeUserName>
-          <DeleteUser></DeleteUser>
+          <ChangeUserName />
+          <DeleteUser />
         </div>
       </div>
     );
