@@ -1,5 +1,5 @@
 import axios from "axios";
-import GraphQLRG from "../GraphQLQueryGenerator";
+import GraphQLRG from "../GraphQLQueryGenerator.js";
 
 class ApiCommunication {
   static endpoint = "https://api-tournamanager.herokuapp.com/graphql";
