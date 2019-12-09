@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+import ChangeUserName from "../../components/account/ChangeUserNameComponent";
+import DeleteUser from "../../components/account/DeleteUserComponent";
+
 class AccountUser extends Component {
   state = {};
   render() {
