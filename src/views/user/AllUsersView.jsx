@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import firebase from "firebase";
+import UserComponent from "../../components/user/UserComponent";
 
 class AllUsersView extends Component {
 
@@ -19,15 +20,15 @@ class AllUsersView extends Component {
     const users = [];
 
     firebase.firestore().collection('users').get()
-        .then(snapshot => {
-          snapshot.forEach(doc => {
-            const data = doc.data();
-            users.push(data.username);
-          });
-        })
-        .then(() => {
-          this.setState({ users: users });
-    })
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          users.push(data.username);
+        });
+      })
+      .then(() => {
+        this.setState({ users: users });
+      })
   }
 
   componentDidMount() {
@@ -45,14 +46,11 @@ class AllUsersView extends Component {
     return (
       <div>
         <h1>All Users</h1>
+        <div>
           {this.state.users.map(user => (
-            <div key={user + 'card'}className="card">
-              <div key={user + 'cardbody'} className="card-body">
-                <h5 className="card-title" key={user}>{user}</h5>
-                <button onClick={() => this.setUser(user)} key={user + 'button'}>Details</button>
-              </div>
-            </div>
-          ), )}
+            <UserComponent user={user} />
+          ))}
+        </div>
       </div>
     );
   }
