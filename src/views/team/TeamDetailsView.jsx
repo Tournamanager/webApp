@@ -40,7 +40,6 @@ class TeamDetailsView extends Component {
             </div>
         );
     }
-
 }
 
 export default TeamDetailsView;
