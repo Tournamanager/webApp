@@ -10,6 +10,9 @@ import NavigationComponent from "./components/NavigationComponent";
 import CreateTeamView from "./views/team/CreateTeamView";
 import AllTournamentsView from "./views/tournament/AllTournamentsView";
 import AllTeamsView from "./views/team/AllTeamsView";
+import MatchView from "./views/match/MatchView";
+import TeamDetailsView from "./views/team/TeamDetailsView";
+import TournamentDetailsView from "./views/tournament/TournamentDetailsView";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
@@ -36,9 +39,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
         <BrowserRouter>
-          <div>
             <NavigationComponent isSignedIn={this.state.isSignedIn}/>
             <Switch>
               <Route path="/" component={HomeView} exact/>
@@ -48,11 +49,13 @@ class App extends Component {
               <Route path="/user/profile" component={ProfileView}/>
               <Route path="/team/create" component={CreateTeamView}/>
               <Route path="/teams" component={AllTeamsView}/>
+              <Route path="/match" component={MatchView}/>
+              <Route path="/team" component={TeamDetailsView}/>
+              <Route path="/tournament" component={TournamentDetailsView}/>
+
               <Route />
             </Switch>
-          </div>
         </BrowserRouter>
-      </div>
     )
   }
 }
