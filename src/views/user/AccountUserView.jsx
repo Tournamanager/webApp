@@ -11,7 +11,7 @@ class AccountUser extends Component {
         This in an account
         <div>
           <ChangeUserName />
-          <DeleteUser />
+          <DeleteUser {...this.props} />
         </div>
       </div>
     );
