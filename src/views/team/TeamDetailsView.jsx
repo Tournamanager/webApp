@@ -15,7 +15,7 @@ class TeamDetailsView extends Component {
                 id: 0,
                 name: 'A',
                 tournaments: ['a', 'b', 'c'],
-                teamMembers: ['Jelle', 'Michiel', 'Geert', 'Tim', 'Lars', 'LLoyd'],
+                teamMembers: ['Jelle', 'Michiel', 'Geert', 'Tim', 'Lars', 'LLoyd', 'Luuk'],
                 teamCaptain: 'Jelle',
             }
         };
