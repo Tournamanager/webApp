@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TournamentTeamListComponent from "../../components/tournament/TournamentTeamListComponent";
 import TournamentMatchListComponent from "../../components/tournament/TournamentMatchListComponent";
+import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
 
 class TournamentDetailsView extends Component {
@@ -8,9 +9,23 @@ class TournamentDetailsView extends Component {
         super(props);
         this.state = {
             tournament: {
-                name: "TournamentName"
+                name: "TournamentName",
+                teams: [],
+                matches: []
             }
         }
+    }
+
+    getTournament() {
+        const body = "query{ tournament(id: 1) {name, teams{name}, matches{teamHome {name}, teamAway {name}, date}}}";
+        const vars = "{}";
+        ApiCommunication.graphQlCallPost(body, vars)
+            .then(response => this.setState({tournaments: response.data.data.tournament}))
+    }
+
+    componentDidMount()
+    {
+        this.getTournament()
     }
 
     render() {
@@ -18,11 +33,11 @@ class TournamentDetailsView extends Component {
             <div>
                 <h1>{this.state.tournament.name}</h1>
                 <h5>Teams</h5>
-                <TournamentTeamListComponent />
+                <TournamentTeamListComponent teams={this.state.tournament.teams} />
                 <h5>Matches</h5>
-                <TournamentMatchListComponent />
+                <TournamentMatchListComponent matches={this.state.tournament.matches} />
                 <h5>Match History</h5>
-                <TournamentMatchListComponent />
+                <TournamentMatchListComponent matches={this.state.tournament.matches} />
             </div>
         )
     }

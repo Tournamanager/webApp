@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class TournamentListComponent extends Component {
+class TeamListComponent extends Component {
 
     render() {
         return (
@@ -9,11 +9,11 @@ class TournamentListComponent extends Component {
                     {this.props.object.name}
                 </td>
                 <td width="50%">
-                    Teams: {this.props.object.teams.length}/{this.props.object.numberOfTeams}
+                    Users: {this.props.object.users.length}
                 </td>
             </tr>
         )
     }
 }
 
-export default TournamentListComponent;
+export default TeamListComponent;
