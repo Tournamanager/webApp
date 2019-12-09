@@ -1,31 +1,24 @@
 import React, { Component } from "react";
-import TeamDetailHeaderComponent from "../../components/team/TeamDetailHeaderComponent"
-import TeamTournamentsComponent from "../../components/team/TeamTournamentsComponent"
-import TeamMembersComponent from "../../components/team/TeamMembersComponent"
+import TeamDetailHeaderComponent from "../../components/team/TeamDetailHeaderComponent";
+import TeamTournamentsComponent from "../../components/team/TeamTournamentsComponent";
+import TeamMembersComponent from "../../components/team/TeamMembersComponent";
 
 class TeamDetailsView extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
+    this.state = {};
+  }
 
-        };
-
-
-    }
-
-
-    render() {
-        return (
-            <div>
-                <TeamDetailHeaderComponent />
-                <TeamTournamentsComponent />
-                <TeamMembersComponent />
-            </div>
-          
+  render() {
+    return (
+      <div>
+        <TeamDetailHeaderComponent />
+        <TeamTournamentsComponent />
+        <TeamMembersComponent />
+      </div>
     );
-    }
-
+  }
 }
 
 export default TeamDetailsView;
