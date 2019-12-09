@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Col } from "react-bootstrap";
 import MyTournamentsList from "../../components/user/MyTournamentsListComponent";
 import MyTeamsList from "../../components/user/MyTeamsListComponent";
-import MyMatchesList from "../../components/user/MyTeamsListComponent";
+import MyMatchesList from "../../components/user/MyMatchesListComponent";
 
 class ProfileUserView extends Component {
   ref;
