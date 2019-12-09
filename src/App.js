@@ -13,7 +13,6 @@ import AllTeamsView from "./views/team/AllTeamsView";
 import MatchView from "./views/match/MatchView";
 import TeamDetailsView from "./views/team/TeamDetailsView";
 import TournamentDetailsView from "./views/tournament/TournamentDetailsView";
-import { FirebaseAuth } from "react-firebaseui";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
