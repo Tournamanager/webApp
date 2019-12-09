@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import firebase from "firebase";
 import UserComponent from "../../components/user/UserComponent";
+import Jumbotron from "react-bootstrap/Jumbotron";
+import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
 class AllUsersView extends Component {
 
@@ -23,14 +25,19 @@ class AllUsersView extends Component {
       .then(snapshot => {
         snapshot.forEach(doc => {
           const data = doc.data();
-          users.push(data.username);
+          users.push({uuid: doc.id, username: data.username});
         });
       })
       .then(() => {
         this.setState({ users: users });
       })
-  }
-
+    this.state.users.forEach(user => {
+      const body = "query {user{id}}";
+      const vars = `{"uuid": "${user.uuid}"}`;
+      ApiCommunication.graphQlCallPost(body, vars)
+          .then(response => console.log(response));
+        })
+    }
   componentDidMount() {
     this.getAllUsers();
   }
@@ -45,10 +52,10 @@ class AllUsersView extends Component {
   render() {
     return (
       <div>
-        <h1>All Users</h1>
+        <Jumbotron><h1 className="text-center">All Users</h1></Jumbotron>
         <div>
           {this.state.users.map(user => (
-            <UserComponent user={user} />
+              <UserComponent key={user} user={user} />
           ))}
         </div>
       </div>
