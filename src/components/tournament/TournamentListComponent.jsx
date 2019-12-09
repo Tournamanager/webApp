@@ -1,19 +1,9 @@
 import React, { Component } from "react";
 
-class TournamentListComponent extends Component {
-
+class TournamentMatchListComponent extends Component {
     render() {
-        return (
-            <tr>
-                <td width="50%">
-                    {this.props.object.name}
-                </td>
-                <td width="50%">
-                    Teams: {this.props.object.teams.length}/{this.props.object.numberOfTeams}
-                </td>
-            </tr>
-        )
+        return <div>Tournament List Component</div>
     }
 }
 
-export default TournamentListComponent;
+export default TournamentMatchListComponent;

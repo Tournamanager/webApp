@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
-import SearchList from "../../components/list/SearchList";
+import TournamentListComponent from "../../components/tournament/TournamentListComponent";
 
 class AllTournamentsView extends Component {
 
@@ -9,8 +9,8 @@ class AllTournamentsView extends Component {
         super(props);
         this.state = {
             id: "",
-            tournaments:[],
-            selectedTournament:{}
+            tournaments: [],
+            selectedTournament: {}
         };
     }
 
@@ -33,7 +33,7 @@ class AllTournamentsView extends Component {
         return (
             <div>
                 <h1>All Active Tournaments</h1>
-                <SearchList objects={this.state.tournaments} src="tournaments"/>
+                <TournamentListComponent tournaments={this.state.tournaments}></TournamentListComponent>
             </div>
         );
     }
