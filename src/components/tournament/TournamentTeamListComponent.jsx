@@ -4,7 +4,7 @@ class TournamentTeamListComponent extends Component {
 
     render() {
         return (
-            this.props.teams.length > 1 ?
+            this.props.teams.length >= 1 ?
                 <div>
                     <div className={"row"}>
                         <div className={"col-sm-10"}>
