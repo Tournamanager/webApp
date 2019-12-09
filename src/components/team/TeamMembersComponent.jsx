@@ -4,24 +4,24 @@ class TeamMembersComponent extends Component {
 
     listItems = () => (
         this.props.members.map((item) => {
-           return  <li class="list-group-item">{item}</li>
+            return <li key={item.id} className="list-group-item">{item.name}</li>
         })
     )
 
     render() {
         return (
-            <div class="col-md-5" style={{margin: '0 auto'}}>
-                    <div>
-                    <h2 style={{display: 'inline-block'}}>Members</h2>
-                    <button style={{verticalAlign: 'super', float: 'right'}} type="button" class="btn btn-dark"><i style={{verticalAlign: 'middle', fontSize: '28px'}} class="material-icons">add_circle</i>
+            <div className="col-md-5" style={{ margin: '0 auto' }}>
+                <div>
+                    <h2 style={{ display: 'inline-block' }}>Members</h2>
+                    <button style={{ verticalAlign: 'super', float: 'right' }} type="button" className="btn btn-dark"><i style={{ verticalAlign: 'middle', fontSize: '28px' }} className="material-icons">add_circle</i>
                     </button>
                 </div>
-                <ul class="list-group">
+                <ul className="list-group">
                     {
                         this.listItems()
                     }
                 </ul>
-            </div>      
+            </div>
         )
     }
 }
