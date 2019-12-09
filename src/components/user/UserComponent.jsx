@@ -11,7 +11,7 @@ export default class UserComponent extends Component{
             <Row className="justify-content-md-center">
                 <Col md={4}>
                     <Card>
-                        <Card.Body>{this.props.user.username}</Card.Body>
+                        <Card.Body>{this.props.user.name}</Card.Body>
                     </Card>
                 </Col>
                 <Col md={2}>
