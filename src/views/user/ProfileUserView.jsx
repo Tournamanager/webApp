@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import firebase from "firebase";
 import { Row, Col } from "react-bootstrap";
 import MyTournamentsList from "../../components/user/MyTournamentsListComponent";
 import MyTeamsList from "../../components/user/MyTeamsListComponent";
