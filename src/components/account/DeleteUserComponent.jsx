@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import firebase from "firebase";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 class DeleteUser extends Component {
   constructor(props) {
@@ -9,9 +11,9 @@ class DeleteUser extends Component {
 
     this.state = {};
 
-    this.handleDeleteUserGraphQL = this.handleDeleteUserGraphQL.bind(this);
-    this.handleDeleteUserFirebase = this.handleDeleteUserFirebase.bind(this);
+    this.handleDeleteUser = this.handleDeleteUser.bind(this);
     this.redirectToTarget = this.redirectToTarget.bind(this);
+    this.submit = this.submit.bind(this);
 
     this.ref = firebase
       .firestore()
@@ -23,36 +25,45 @@ class DeleteUser extends Component {
     this.props.history.push({ pathname: "/" });
   };
 
-  handleDeleteUserGraphQL() {
-    //the graphQL call will be made here
-    ApiCommunication.graphQLRequest("mutation", "updateUser", null, [
-      { uuid: /*deleted user id*/ "UUID" }
-    ]);
-  }
-
-  handleDeleteUserFirebase() {
-    //the firebase call will be made here
+  handleDeleteUser() {
     var user = firebase.auth().currentUser;
 
     user
       .delete()
       .then(function() {
-        //user deleted
-        console.log("User deleted");
-        this.handleDeleteUserGraphQL();
+        ApiCommunication.graphQLRequest("mutation", "updateUser", null, [
+          { uuid: user.uid }
+        ]);
       })
       .catch(function(error) {
-        //An error happend
-        console.log(error);
+        console.error(error);
       });
 
     this.redirectToTarget();
   }
 
+  submit() {
+    confirmAlert({
+      title: "Confirm delete",
+      message:
+        "Are you sure you want to delete your account? This can not be undone",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => this.handleDeleteUser()
+        },
+        {
+          label: "No",
+          onClick: () => {}
+        }
+      ]
+    });
+  }
+
   render() {
     return (
       <div>
-        <button class="btn btn-danger" onClick={this.handleDeleteUserFirebase}>
+        <button className="btn btn-danger" onClick={this.submit}>
           Delete
         </button>
       </div>
