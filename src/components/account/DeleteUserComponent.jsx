@@ -25,6 +25,9 @@ class DeleteUser extends Component {
 
   handleDeleteUserGraphQL() {
     //the graphQL call will be made here
+    ApiCommunication.graphQLRequest("mutation", "updateUser", null, [
+      { uuid: /*deleted user id*/ "UUID" }
+    ]);
   }
 
   handleDeleteUserFirebase() {
