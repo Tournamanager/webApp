@@ -31,6 +31,7 @@ class AllTournamentsView extends Component {
     this.props.history.push({ pathname: "/createTournament" });
   };
 
+
   render() {
     return (
       <div>
@@ -45,6 +46,7 @@ class AllTournamentsView extends Component {
       </div>
     );
   }
+
 }
 
 export default AllTournamentsView;
