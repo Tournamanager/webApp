@@ -15,6 +15,7 @@ import TeamDetailsView from "./views/team/TeamDetailsView";
 import TournamentDetailsView from "./views/tournament/TournamentDetailsView";
 import AccountUser from "./views/user/AccountUserView";
 import TournamentCreate from "./components/tournament/TournamentCreateComponent";
+import MatchView from "./views/match/MatchView";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
