@@ -7,7 +7,7 @@ class TournamentCreate extends Component {
     super(props);
 
     this.state = {
-      number: 0,
+      number: 2,
       name: "",
       description: ""
     };
@@ -36,7 +36,7 @@ class TournamentCreate extends Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
 
     var tourName = this.state.name;
@@ -44,7 +44,7 @@ class TournamentCreate extends Component {
     var tourNum = this.state.number;
     var user = firebase.auth().currentUser.uid;
 
-    var userId = ApiCommunication.graphQLRequest("query", "user", "id", [
+    var userId = await ApiCommunication.graphQLRequest("query", "user", "id", [
       {
         name: "uuid",
         type: "String",
