@@ -25,7 +25,7 @@ class SearchList extends Component {
     
     componentDidUpdate(prevProps) {
         if (prevProps.isSet !== this.props.isSet) {
-            this.setState(this.setState({filteredObjects: this.props.objects}))
+            this.setState({filteredObjects: this.props.objects})
         }
     }
 
