@@ -8,21 +8,20 @@ class AllTournamentsView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: "",
             tournaments:[],
-            selectedTournament:{}
+            isSet: false
         };
     }
 
+    componentDidMount() {
+        this.getAllTournaments()
+    }
+
     getAllTournaments() {
-        const body = "query {tournaments{name}}";
+        const body = "query {tournaments{id name teams {id} numberOfTeams}}";
         const vars = "{}";
         ApiCommunication.graphQlCallPost(body, vars)
             .then(response => this.setState({tournaments: response.data.data.tournaments}))
-    }
-
-    componentDidMount() {
-        this.getAllTournaments();
     }
 
     setActiveTournament(tournament) {
@@ -33,7 +32,7 @@ class AllTournamentsView extends Component {
         return (
             <div>
                 <h1>All Active Tournaments</h1>
-                <SearchList objects={this.state.tournaments} src="tournaments"/>
+                <SearchList objects={this.state.tournaments} isSet={this.state.isSet} src="tournaments"/>
             </div>
         );
     }
