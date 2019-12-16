@@ -10,7 +10,6 @@ import NavigationComponent from "./components/NavigationComponent";
 import CreateTeamView from "./views/team/CreateTeamView";
 import AllTournamentsView from "./views/tournament/AllTournamentsView";
 import AllTeamsView from "./views/team/AllTeamsView";
-import MatchView from "./views/Match/MatchView";
 import TeamDetailsView from "./views/team/TeamDetailsView";
 import TournamentDetailsView from "./views/tournament/TournamentDetailsView";
 import AccountUser from "./views/user/AccountUserView";
