@@ -18,10 +18,10 @@ class AllTournamentsView extends Component {
     }
 
     getAllTournaments() {
-        const body = "query {tournaments{id name teams {id} numberOfTeams}}";
-        const vars = "{}";
-        ApiCommunication.graphQlCallPost(body, vars)
-            .then(response => this.setState({tournaments: response.data.data.tournaments}))
+        //ApiCommunication.graphQLRequest("query","tournaments","id name numberOfTeams teams {name}")
+        ApiCommunication
+        .graphQlCallPost("query{tournaments{id name numberOfTeams teams {name}}}","{}")
+        .then(response => this.setState({tournaments: response.data.data.tournaments, isSet: true}))
     }
 
     setActiveTournament(tournament) {
