@@ -64,11 +64,11 @@ class SearchList extends Component {
                             this.state.filteredObjects.length !== 0 ? (
                                 this.props.src==='tournaments' ? (
                                     this.state.filteredObjects.map(object => (
-                                        <TournamentListComponent key={object.id} object={object} onClick={() => onClick(object.id)}/>
+                                        <TournamentListComponent key={object.id} object={object} onClick={() => this.onClick(object.id)}/>
                                     ))
                                 ) : this.props.src==='teams' ? (
                                     this.state.filteredObjects.map(object => (
-                                        <TeamsListComponent key={object.id} object={object} onClick={() => onClick(object.id)}/>
+                                        <TeamsListComponent key={object.id} object={object} onClick={() => this.onClick(object.id)}/>
                                     ))
                                 ) : (
                                     <tr><td>No data to display</td></tr>
