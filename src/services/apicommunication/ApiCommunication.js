@@ -39,13 +39,6 @@ class ApiCommunication {
       { headers: { "Content-type": "application/json" } }
     );
   }
-  static graphQlCallPost(body, variables) {
-    return axios.post(
-      this.endpoint,
-      `{"query": "${body}", "variables": ${variables}}`,
-      { headers: { "Content-type": "application/json" } }
-    );
-  }
 }
 
 export default ApiCommunication;
