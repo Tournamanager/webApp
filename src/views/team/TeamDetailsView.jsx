@@ -13,11 +13,11 @@ class TeamDetailsView extends Component {
             team: {
                 id: 0,
                 name: 'A',
-                tournaments: [
-                    {id:'weewewe', name: 'a'},
-                    {id:'weewewe1', name: 'b'},
-                    {id:'weewewe2', name: 'c'}
-                ],
+                // tournaments: [
+                //     { id: 'weewewe', name: 'a' },
+                //     { id: 'weewewe1', name: 'b' },
+                //     { id: 'weewewe2', name: 'c' }
+                // ],
                 users: [
                     { id: 'wer500c', uuid: 'Jelle' },
                     { id: 'wer501c', uuid: 'Michiel' },
@@ -27,17 +27,21 @@ class TeamDetailsView extends Component {
                     { id: 'wer555c', uuid: 'LLoyd' },
                     { id: 'wer506c', uuid: 'Luuk' }],
 
-                teamCaptain: 'Jelle',
+               // teamCaptain: 'Jelle',
             }
         };
     }
 
     componentDidMount() {
         ApiCommunication.graphQLRequest(
-            "query", 
-            "team", 
+            "query",
+            "team",
             "id name users{id uuid}")
-            .then(response => this.setState({team: response.data.data.team}))
+            .then(response => {
+                if (response != null) {
+                    this.setState({ team: response.data.data.team })
+                }
+            })
     }
 
 
@@ -47,7 +51,7 @@ class TeamDetailsView extends Component {
                 <TeamDetailHeaderComponent name={this.state.team.name} />
                 <div className="row">
                     <TeamTournamentsComponent tournaments={this.state.team.tournaments} />
-                    <TeamMembersComponent members={this.state.team.teamMembers} />
+                    <TeamMembersComponent members={this.state.team.users} />
                 </div>
             </div>
         );
