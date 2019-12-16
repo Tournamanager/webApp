@@ -12,10 +12,8 @@ class AllTeamsView extends Component {
     }
 
     componentDidMount() {
-        const body = "query {teams{name}}";
-        const vars = "{}";
-        ApiCommunication.graphQlCallPost(body, vars)
-            .then(response => this.setState({teams: response.data.data.teams}))
+        ApiCommunication.graphQLRequest("query", "teams", "name", null)
+        .then(response => this.setState({teams: response.data.data.teams}))
     }
 
     render() {   
