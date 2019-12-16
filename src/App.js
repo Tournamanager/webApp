@@ -14,6 +14,7 @@ import MatchView from "./views/match/MatchView";
 import TeamDetailsView from "./views/team/TeamDetailsView";
 import TournamentDetailsView from "./views/tournament/TournamentDetailsView";
 import AccountUser from "./views/user/AccountUserView";
+import AddUserToTeamView from "./views/team/AddUserToTeamView";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
@@ -52,6 +53,7 @@ class App extends Component {
           <Route path="/teams" component={AllTeamsView} />
           <Route path="/match" component={MatchView} />
           <Route path="/team" component={TeamDetailsView} />
+          <Route path="/team/addUser" component={AddUserToTeamView} />
           <Route path="/tournament" component={TournamentDetailsView} />
           <Route path="/user/account" component={AccountUser} />
         </Switch>

@@ -7,7 +7,8 @@ class AllTeamsView extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            teams:[]
+            teams:[],
+            isSet: false
         }
     }
 
@@ -15,14 +16,14 @@ class AllTeamsView extends Component {
         const body = "query {teams{name}}";
         const vars = "{}";
         ApiCommunication.graphQlCallPost(body, vars)
-            .then(response => this.setState({teams: response.data.data.teams}))
+            .then(response => { console.log(response) ;this.setState({teams: response.data.data.teams, isSet: true})} )
     }
 
     render() {   
         return (
             <div>
                 <h1>All Teams</h1>
-                <SearchList objects={this.state.teams} src="teams"/>
+                <SearchList objects={this.state.teams} isSet={this.state.isSet} src="teams"/>
             </div>
         );
     }
