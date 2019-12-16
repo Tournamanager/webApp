@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import SearchList from "../../components/list/SearchList";
 
@@ -8,19 +7,17 @@ class AllTournamentsView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: "",
             tournaments:[],
-            selectedTournament:{}
+            isSet: false
         };
     }
 
-    getAllTournaments() {
-        ApiCommunication.graphQLRequest("query", "tournaments", "name", null)
-            .then(response => this.setState({tournaments: response.data.data.tournaments}))
+    componentDidMount() {
+        this.getAllTournaments()
     }
 
-    componentDidMount() {
-        this.getAllTournaments();
+    getAllTournaments() {
+        ApiCommunication.graphQLRequest("query","tournaments","id name numberOfTeams teams {name}")
     }
 
     setActiveTournament(tournament) {
@@ -31,7 +28,7 @@ class AllTournamentsView extends Component {
         return (
             <div>
                 <h1>All Active Tournaments</h1>
-                <SearchList objects={this.state.tournaments} src="tournaments"/>
+                <SearchList objects={this.state.tournaments} isSet={this.state.isSet} src="tournaments"/>
             </div>
         );
     }
