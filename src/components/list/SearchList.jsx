@@ -22,6 +22,23 @@ class SearchList extends Component {
         })
         this.setState({filteredObjects: filtered})
     }
+
+    onClick(id) {
+        let pathname = "/";
+        if (this.props.src==='tournaments'){
+            pathname+="tournament";
+        } else if (this.props.src==='teams'){
+            pathname+="team";
+        } else if (this.props.src==='users'){
+            pathname+="user/profile";
+        } else if (this.props.src==='matches'){
+            pathname+="match";
+        }
+        this.props.history.push({
+            pathname: pathname,
+            id: id
+        });
+    }
     
     componentDidUpdate(prevProps) {
         if (prevProps.isSet !== this.props.isSet) {
@@ -47,11 +64,11 @@ class SearchList extends Component {
                             this.state.filteredObjects.length !== 0 ? (
                                 this.props.src==='tournaments' ? (
                                     this.state.filteredObjects.map(object => (
-                                        <TournamentListComponent key={object.id} object={object} />
+                                        <TournamentListComponent key={object.id} object={object} onClick={() => onClick(object.id)}/>
                                     ))
                                 ) : this.props.src==='teams' ? (
                                     this.state.filteredObjects.map(object => (
-                                        <TeamsListComponent key={object.id} object={object} />
+                                        <TeamsListComponent key={object.id} object={object} onClick={() => onClick(object.id)}/>
                                     ))
                                 ) : (
                                     <tr><td>No data to display</td></tr>
