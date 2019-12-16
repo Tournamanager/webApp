@@ -37,7 +37,7 @@ class ApiCommunication {
       this.endpoint,
       GraphQLRG.generateBody(_method, _function, _queryData, _variables),
       { headers: { "Content-type": "application/json" } }
-    );
+    )
   }
 }
 
