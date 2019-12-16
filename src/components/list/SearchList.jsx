@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TournamentListComponent from "../tournament/TournamentListComponent";
 import TeamsListComponent from "../team/TeamListComponent";
+import UserListComponent from "../user/UsersListComponent";
 
 class SearchList extends Component {
     constructor(props) {
@@ -52,6 +53,10 @@ class SearchList extends Component {
                                 ) : this.props.src==='teams' ? (
                                     this.state.filteredObjects.map(object => (
                                         <TeamsListComponent key={object.id} object={object} />
+                                    ))
+                                ) : this.props.src==='users' ? (
+                                    this.state.filteredObjects.map(object => (
+                                        <UserListComponent key={object.id} object={object} />
                                     ))
                                 ) : (
                                     <tr><td>No data to display</td></tr>

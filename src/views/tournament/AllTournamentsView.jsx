@@ -18,6 +18,7 @@ class AllTournamentsView extends Component {
 
     getAllTournaments() {
         ApiCommunication.graphQLRequest("query","tournaments","id name numberOfTeams teams {name}")
+        .then(response => this.setState({tournaments: response.data.data.tournaments, isSet: true}))
     }
 
     setActiveTournament(tournament) {

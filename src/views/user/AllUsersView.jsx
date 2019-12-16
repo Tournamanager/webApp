@@ -3,40 +3,40 @@ import React, { Component } from "react";
 import firebase from "firebase";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import SearchList from "../../components/list/SearchList";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import UserComponent from "../../components/user/UserComponent";
 
 class AllUsersView extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      id: "",
       users: [],
-      selectedUser: {}
+      isSet: false
     };
 
     this.setUser = this.setUser.bind(this);
   }
 
   getAllUsers() {
-    const users = [];
+    let users = []
 
-    firebase.firestore().collection('users').get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          users.push({id: doc.id, name: data.username});
-          this.setState({ users: users });
-        });
-      })
-    this.state.users.forEach(user => {
-      const body = "query {user{id}}";
-      const vars = `{"uuid": "${user.id}"}`;
-      ApiCommunication.graphQlCallPost(body, vars)
-          .then(response => console.log(response));
+    ApiCommunication.graphQLRequest("query", "users", "id uuid").then(
+      response => {
+        response.data.data.users.forEach(user => {
+          if (user.uuid !== "") {
+            firebase.firestore().collection('users').doc(user.uuid)
+            .get().then(doc => {
+              if (doc.exists) {
+                users.push({id: user.id, name: doc.data().username})
+                this.setState({users: users, isSet: true})
+              }
+            })
+          } else {
+            users.push({id: user.id, name: "account deleted"})
+            this.setState({users: users, isSet: true})
+          }
         })
-    }
+    })
+  }
 
   componentDidMount() {
     this.getAllUsers();
@@ -53,14 +53,7 @@ class AllUsersView extends Component {
     return (
       <div>
         <h1>All Users</h1>
-        <SearchList objects={this.state.users} src="users"/>
-
-        <Jumbotron><h1 className="text-center">All Users</h1></Jumbotron>
-        <div>
-          {this.state.users.map(user => (
-              <UserComponent key={user} user={user} />
-          ))}
-        </div>
+        <SearchList objects={this.state.users} isSet={this.state.isSet} src="users"/>
       </div>
     );
   }
