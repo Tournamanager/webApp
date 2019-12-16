@@ -25,13 +25,9 @@ class MatchView extends Component {
             {
                 name: "id",
                 type: "Int",
-                value: id
+                value: this.props.id
             }
-    ).then(response => this.setState({match: response.data.data.match}));
-
-        const body = 'query q($id:ID!) {match{id,teamHome,teamAway,winner,date}}';
-        const vars = '$id:' + this.id;
-        ApiCommunication.graphQlCall(this, body, vars, "match")
+        ).then(response => this.setState({match: response.data.data.match}));
     }
 
     render() {
