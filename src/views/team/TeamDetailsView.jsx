@@ -18,14 +18,14 @@ class TeamDetailsView extends Component {
                     {id:'weewewe1', name: 'b'},
                     {id:'weewewe2', name: 'c'}
                 ],
-                teamMembers: [
-                    { id: 'wer500c', name: 'Jelle' },
-                    { id: 'wer501c', name: 'Michiel' },
-                    { id: 'wer502c', name: 'Geert' },
-                    { id: 'wer503c', name: 'Tim' },
-                    { id: 'wer504c', name: 'Lars' },
-                    { id: 'wer555c', name: 'LLoyd' },
-                    { id: 'wer506c', name: 'Luuk' }],
+                users: [
+                    { id: 'wer500c', uuid: 'Jelle' },
+                    { id: 'wer501c', uuid: 'Michiel' },
+                    { id: 'wer502c', uuid: 'Geert' },
+                    { id: 'wer503c', uuid: 'Tim' },
+                    { id: 'wer504c', uuid: 'Lars' },
+                    { id: 'wer555c', uuid: 'LLoyd' },
+                    { id: 'wer506c', uuid: 'Luuk' }],
 
                 teamCaptain: 'Jelle',
             }
@@ -33,9 +33,11 @@ class TeamDetailsView extends Component {
     }
 
     componentDidMount() {
-        const body = "query q($id:ID!) {team{id, name}}";
-        const vars = "$id:' + this.id";
-        ApiCommunication.graphQlCallPost(this, body, vars, "team")
+        ApiCommunication.graphQLRequest(
+            "query", 
+            "team", 
+            "id name users{id uuid}")
+            .then(response => this.setState({team: response.data.data.team}))
     }
 
 
