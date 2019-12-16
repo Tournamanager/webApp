@@ -7,20 +7,43 @@ class SearchList extends Component {
         super(props);
 
         this.state = {
-            filteredObjects:props.objects
+            filteredObjects: []
         }
 
         this.onChange = this.onChange.bind(this);
     }
 
     onChange(event) {
-        this.filtered=[];
+        let filtered=[];
         this.props.objects.forEach(o => {
-            if (o.name.includes(event.target.value)) {
-                this.filtered.push(o);
+            if (o.name.toLowerCase().includes(event.target.value.toLowerCase())) {
+                filtered.push(o);
             }
         })
-        this.setState({filteredObjects: this.filtered})
+        this.setState({filteredObjects: filtered})
+    }
+
+    onClick(id) {
+        let pathname = "/";
+        if (this.props.src==='tournaments'){
+            pathname+="tournament";
+        } else if (this.props.src==='teams'){
+            pathname+="team";
+        } else if (this.props.src==='users'){
+            pathname+="user/profile";
+        } else if (this.props.src==='matches'){
+            pathname+="match";
+        }
+        this.props.history.push({
+            pathname: pathname,
+            id: id
+        });
+    }
+    
+    componentDidUpdate(prevProps) {
+        if (prevProps.isSet !== this.props.isSet) {
+            this.setState({filteredObjects: this.props.objects})
+        }
     }
 
     render() {
@@ -34,18 +57,28 @@ class SearchList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.props.src==='tournaments' ? (
-                        this.state.filteredObjects.map(object => (
-                            <TournamentListComponent key={object.id} object={object} />
-                        ))
-                    ) : this.props.src==='teams' ? (
-                        this.state.filteredObjects.map(object => (
-                            <TeamsListComponent key={object.id} object={object} />
-                        ))
-                    ) : (
-                        <div>No data to display</div>
-                    )
-                }
+                    {
+                        !this.props.isSet ? (
+                            <tr><td>No data to display</td></tr>
+                        ) : (
+                            this.state.filteredObjects.length !== 0 ? (
+                                this.props.src==='tournaments' ? (
+                                    this.state.filteredObjects.map(object => (
+                                        <TournamentListComponent key={object.id} object={object} onClick={() => this.onClick(object.id)}/>
+                                    ))
+                                ) : this.props.src==='teams' ? (
+                                    this.state.filteredObjects.map(object => (
+                                        <TeamsListComponent key={object.id} object={object} onClick={() => this.onClick(object.id)}/>
+                                    ))
+                                ) : (
+                                    <tr><td>No data to display</td></tr>
+                                )
+                            ) : (
+                                <tr><td>No data to display</td></tr>
+                            )
+                            
+                        )
+                    }
                 </tbody>
             </table>
         );
