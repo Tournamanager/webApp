@@ -28,7 +28,7 @@ class AllTournamentsView extends Component {
         return (
             <div>
                 <h1>All Active Tournaments</h1>
-                <SearchList objects={this.state.tournaments} isSet={this.state.isSet} src="tournaments"/>
+                <SearchList objects={this.state.tournaments} isSet={this.state.isSet} src="tournaments" {...this.props}/>
             </div>
         );
     }

@@ -2,9 +2,16 @@ import React, { Component } from "react";
 
 class TournamentListComponent extends Component {
 
+    onClick() {
+        this.props.history.push({
+            pathname: "/tournament",
+            id: this.props.object.id
+        });
+    }
+
     render() {
         return (
-            <tr>
+            <tr onClick={() => this.onClick()}>
                 <td width="50%">
                     {this.props.object.name}
                 </td>
