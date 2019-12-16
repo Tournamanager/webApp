@@ -16,10 +16,16 @@ class TournamentDetailsView extends Component {
         }
     }
 
-    getTournament() {
-        const body = "query{ tournament(id: 1) {name, teams{name}, matches{teamHome {name}, teamAway {name}, date}}}";
-        const vars = "{}";
-        ApiCommunication.graphQlCallPost(body, vars)
+    getTournament(id) {
+        ApiCommunication.graphQLRequest(
+            "query", 
+            "tournament", 
+            "name teams{name} matches{teamHome {name} teamAway {name} date}",
+                {
+                name: "id", 
+                type: "Int", 
+                value: id
+            })
             .then(response => this.setState({tournaments: response.data.data.tournament}))
     }
 
