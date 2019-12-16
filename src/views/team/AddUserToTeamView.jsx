@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class TeamDetailHeaderComponent extends Component {
+class AddUserToTeamView extends Component {
 
     render() {
         return (
@@ -13,4 +13,4 @@ class TeamDetailHeaderComponent extends Component {
     }
 }
 
-export default TeamDetailHeaderComponent;
+export default AddUserToTeamView;
