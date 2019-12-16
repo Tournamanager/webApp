@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import TeamDetailHeaderComponent from "../../components/team/TeamDetailHeaderComponent";
 import TeamTournamentsComponent from "../../components/team/TeamTournamentsComponent";
 import TeamMembersComponent from "../../components/team/TeamMembersComponent";
-import Temp from "../../components/team/TeamMembersComponent";
 
 class TeamDetailsView extends Component {
   constructor(props) {
