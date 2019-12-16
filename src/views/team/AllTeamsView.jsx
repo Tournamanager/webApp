@@ -21,7 +21,7 @@ class AllTeamsView extends Component {
         return (
             <div>
                 <h1>All Teams</h1>
-                <SearchList objects={this.state.teams} isSet={this.state.isSet} src="teams"/>
+                <SearchList objects={this.state.teams} isSet={this.state.isSet} src="teams" {...this.props}/>
             </div>
         );
     }

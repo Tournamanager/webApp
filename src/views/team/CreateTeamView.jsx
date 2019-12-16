@@ -22,9 +22,12 @@ class CreateTeamView extends Component {
   }
 
   submitTeam() {
-    var body = "mutation m($name:String!){createTeam(name: $name){id}}";
-    var vars = `{ name: ${this.state.selectedName} } `;
-    ApiCommunication.graphQlCall(this, body, vars, "team");
+    ApiCommunication.graphQLRequest("mutation", "createTeam", "id", [{
+      name: "name",
+      type: "String",
+      value: this.state.selectedName
+    }])
+    .then(response => this.setState({team: response.data.data.team}))
   }
 
   render() {
