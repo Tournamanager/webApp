@@ -1,33 +1,26 @@
 import React, { Component } from "react";
-
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import SearchList from "../../components/list/SearchList";
 
 class AllTournamentsView extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      id: "",
       tournaments: [],
-      selectedTournament: {}
+      isSet: false
     };
-
-    this.redirectToCreateTournament = this.redirectToCreateTournament.bind(
-      this
-    );
-  }
-
-  getAllTournaments() {
-    const body = "query {tournaments{name}}";
-    const vars = "{}";
-    ApiCommunication.graphQlCallPost(body, vars).then(response =>
-      this.setState({ tournaments: response.data.data.tournaments })
-    );
   }
 
   componentDidMount() {
     this.getAllTournaments();
+  }
+
+  getAllTournaments() {
+    ApiCommunication.graphQLRequest(
+      "query",
+      "tournaments",
+      "id name numberOfTeams teams {name}"
+    );
   }
 
   setActiveTournament(tournament) {
