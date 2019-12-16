@@ -39,9 +39,14 @@ class TournamentDetailsView extends Component {
     }
 
     getTournament() {
-        const body = "query q($id:ID!){tournament(id: $id){id, name, teams{id, name}, matches{id, teamHome {id, name}, teamAway {id, name}, date}, numberOfTeams}}";
-        const vars = `{ id: ${this.state.tournamentId} }`;
-        ApiCommunication.graphQlCallPost(body, vars)
+        const method = "query";
+        const request_function = "tournament";
+        const query_data = "id, name, teams{id, name}, matches{id, teamHome {id, name}, teamAway {id, name}, date}, numberOfTeams}";
+        const variables = [{name: "id", type: "int", value: this.props.id}];
+        // const body = "query q($id:ID!){tournament(id: $id){id, name, teams{id, name}, matches{id, teamHome {id, name}, teamAway {id, name}, date}, numberOfTeams}}";
+        // const vars = `{ id: ${this.state.tournamentId} }`;
+        // ApiCommunication.graphQlCallPost(body, vars)
+        ApiCommunication.graphQLRequest(method, request_function, query_data, variables)
             .then(response => this.setState({tournaments: response.data.data.tournament}))
     }
 
