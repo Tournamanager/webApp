@@ -16,7 +16,7 @@ class SearchList extends Component {
     onChange(event) {
         let filtered=[];
         this.props.objects.forEach(o => {
-            if (o.name.includes(event.target.value)) {
+            if (o.name.toLowerCase().includes(event.target.value.toLowerCase())) {
                 filtered.push(o);
             }
         })

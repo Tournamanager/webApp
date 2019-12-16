@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import SearchList from "../../components/list/SearchList";
 
@@ -18,10 +17,7 @@ class AllTournamentsView extends Component {
     }
 
     getAllTournaments() {
-        //ApiCommunication.graphQLRequest("query","tournaments","id name numberOfTeams teams {name}")
-        ApiCommunication
-        .graphQlCallPost("query{tournaments{id name numberOfTeams teams {name}}}","{}")
-        .then(response => this.setState({tournaments: response.data.data.tournaments, isSet: true}))
+        ApiCommunication.graphQLRequest("query","tournaments","id name numberOfTeams teams {name}")
     }
 
     setActiveTournament(tournament) {
