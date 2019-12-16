@@ -1,6 +1,6 @@
 export default class GraphQLRG {
     static generateBody(_method, _function, _queryData, _variables) {
-      var response = `"query":"${_method}`;
+      var response = `{"query":"${_method}`;
       if (_variables != null) {
         response += "(";
         _variables.map(variable => {
@@ -33,7 +33,7 @@ export default class GraphQLRG {
         });
         response = response.substring(0, response.length - 1);
       }
-      response += "}";
+      response += "}}";
       return response;
     }
   }
