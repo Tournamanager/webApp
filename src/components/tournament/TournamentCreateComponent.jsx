@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
+import firebase from "firebase";
 
 class TournamentCreate extends Component {
   constructor(props) {
@@ -41,10 +42,37 @@ class TournamentCreate extends Component {
     var tourName = this.state.name;
     var tourDesc = this.state.description;
     var tourNum = this.state.number;
-    var user = this.props.userId;
+    var user = firebase.auth().currentUser.uid;
+
+    var userId = ApiCommunication.graphQLRequest("query", "user", "id", [
+      {
+        name: "uuid",
+        type: "String",
+        value: firebase.auth().currentUser.uid
+      }
+    ]);
 
     ApiCommunication.graphQLRequest("mutation", "createTournament", "id", [
-      { tourName, tourDesc, user, tourNum }
+      {
+        name: "name",
+        type: "String",
+        value: tourName
+      },
+      {
+        name: "description",
+        type: "String",
+        value: tourDesc
+      },
+      {
+        name: "owner",
+        type: "Int",
+        value: userId
+      },
+      {
+        name: "numberOfTeams",
+        type: "Int",
+        value: tourNum
+      }
     ]);
   }
 

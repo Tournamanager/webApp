@@ -6,11 +6,16 @@ import SearchList from "../../components/list/SearchList";
 class AllTournamentsView extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       id: "",
       tournaments: [],
       selectedTournament: {}
     };
+
+    this.redirectToCreateTournament = this.redirectToCreateTournament.bind(
+      this
+    );
   }
 
   getAllTournaments() {
@@ -29,11 +34,21 @@ class AllTournamentsView extends Component {
     alert(tournament.name);
   }
 
+  redirectToCreateTournament = () => {
+    this.props.history.push({ pathname: "/createTournament" });
+  };
+
   render() {
     return (
       <div>
         <h1>All Active Tournaments</h1>
         <SearchList objects={this.state.tournaments} src="tournaments" />
+        <button
+          className="btn btn-primary"
+          onClick={this.redirectToCreateTournament}
+        >
+          Create Tournament
+        </button>
       </div>
     );
   }
