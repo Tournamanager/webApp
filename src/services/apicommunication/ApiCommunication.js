@@ -37,14 +37,7 @@ class ApiCommunication {
       this.endpoint,
       GraphQLRG.generateBody(_method, _function, _queryData, _variables),
       { headers: { "Content-type": "application/json" } }
-    );
-  }
-  static graphQlCallPost(body, variables) {
-    return axios.post(
-      this.endpoint,
-      `{"query": "${body}", "variables": ${variables}}`,
-      { headers: { "Content-type": "application/json" } }
-    );
+    )
   }
 }
 

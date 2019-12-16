@@ -4,7 +4,7 @@ export default class GraphQLRG {
     if (_variables != null) {
       response += "(";
       _variables.map(variable => {
-        return (response += `$${variable.name}:${variable.type}!,`);
+        return (response += `${"$"}${variable.name}:${variable.type}!,`);
       });
       response = response.substring(0, response.length - 1) + ")";
     }

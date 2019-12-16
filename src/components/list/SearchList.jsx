@@ -48,11 +48,11 @@ class SearchList extends Component {
                             this.state.filteredObjects.length !== 0 ? (
                                 this.props.src==='tournaments' ? (
                                     this.state.filteredObjects.map(object => (
-                                        <TournamentListComponent key={object.id} object={object} />
+                                        <TournamentListComponent key={object.id} object={object} {...this.props}/>
                                     ))
                                 ) : this.props.src==='teams' ? (
                                     this.state.filteredObjects.map(object => (
-                                        <TeamsListComponent key={object.id} object={object} />
+                                        <TeamsListComponent key={object.id} object={object} {...this.props}/>
                                     ))
                                 ) : this.props.src==='users' ? (
                                     this.state.filteredObjects.map(object => (
