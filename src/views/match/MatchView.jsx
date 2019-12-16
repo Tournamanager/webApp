@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
+
+import React, { Component } from "react";
+
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
-import {Card, Col, Row} from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 
 class MatchView extends Component {
     constructor(props) {
@@ -51,6 +53,7 @@ class MatchView extends Component {
             </div>
         )
     }
+
 }
 
 export default MatchView;
