@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
 class TournamentEdit extends Component {
@@ -9,11 +9,18 @@ class TournamentEdit extends Component {
     this.state = {
       tourId: 0,
       tempTourId: 0,
-      tournament: {}
+      tournament: {},
+      changedName: "",
+      changedDesc: "",
+      changedNumberOfTeams: 0
     };
 
     this.handleIdChange = this.handleIdChange.bind(this);
     this.handleIdSubmit = this.handleIdSubmit.bind(this);
+    this.handleDescChange = this.handleDescChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleNumberTeamsChange = this.handleNumberTeamsChange.bind(this);
   }
 
   handleIdChange(event) {
@@ -30,7 +37,7 @@ class TournamentEdit extends Component {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
-      "name teams{name} matches{teamHome {name} teamAway {name} date}",
+      "name numberOfTeams description owner{id}",
       [
         {
           name: "id",
@@ -43,19 +50,107 @@ class TournamentEdit extends Component {
     );
   }
 
+  handleFormSubmit(event) {
+    var id = this.state.tempTourId;
+    var owner = this.state.tournament.owner.id;
+    ApiCommunication.graphQLRequest("mutation", "updateTournament", "name", [
+      {
+        name: "id",
+        type: "Int",
+        value: id
+      },
+      {
+        name: "ownerId",
+        type: "Int",
+        value: owner
+      },
+      {
+        name: "name",
+        type: "String",
+        value: this.state.changedName
+      },
+      {
+        name: "description",
+        type: "String",
+        value: this.state.changedDesc
+      },
+      {
+        name: "numberOfTeams",
+        type: "Int",
+        value: this.state.changedNumberOfTeams
+      }
+    ]);
+    event.preventDefault();
+  }
+
+  handleNameChange(event) {
+    this.setState({
+      changedName: event.target.value
+    });
+  }
+
+  handleDescChange(event) {
+    this.setState({
+      changedDesc: event.target.value
+    });
+  }
+
+  handleNumberTeamsChange(event) {
+    this.setState({
+      changedNumberOfTeams: event.target.value
+    });
+  }
+
   render() {
-    if (this.state.tourId != 0) {
-      return <div>yes tour id</div>;
+    if (this.state.tourId !== 0) {
+      return (
+        <div>
+          <Row>
+            <Col md={3}>
+              <Form
+                style={{ marginLeft: "10px" }}
+                onSubmit={this.handleFormSubmit}
+              >
+                <span>Name:</span>
+                <Form.Control
+                  type="text"
+                  placeholder={this.state.tournament.name}
+                  onChange={this.handleNameChange}
+                />
+                <span style={{ marginTop: "10px" }}>Description:</span>
+                <Form.Control
+                  type="text"
+                  placeholder={this.state.tournament.description}
+                  onChange={this.handleDescChange}
+                />
+                <span style={{ marginTop: "10px" }}>Number of teams:</span>
+                <Form.Control
+                  type="number"
+                  placeholder={this.state.tournament.numberOfTeams}
+                  onChange={this.handleNumberTeamsChange}
+                />
+                <Button
+                  variant="primary"
+                  type="submit"
+                  style={{ marginTop: "10px" }}
+                >
+                  Submit
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </div>
+      );
     } else {
       return (
         <div>
           <Row style={{ marginLeft: "10px" }}>
             <Col md={3}>
               <h6>What Tournament would you like to edit?</h6>
-              <div class="input-group mb-3">
+              <div className="input-group mb-3">
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   placeholder="Tournament Id"
                   aria-label="Tournament Id"
                   aria-describedby="basic-addon1"
