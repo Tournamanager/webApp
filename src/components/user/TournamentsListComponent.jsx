@@ -1,9 +1,26 @@
 import React, { Component } from "react";
 
 class MyTournamentsList extends Component {
-  state = {};
+
+  onClick() {
+    this.props.history.push({
+      pathname: "/tournament",
+      id: this.props.object.id
+    });
+  }
+
   render() {
-    return <div>MyTournamentsList</div>;
+    let start = "";
+    if (this.props.object.matches !== undefined
+        && this.props.object.matches !== null
+        && this.props.object.matches.length !== 0){
+      start = ", Tournament started!"
+    }
+    return (
+        <tr onClick={() => this.onClick()}>
+          {this.props.object.name}, {this.props.object.teams.length}/{this.props.object.numberOfTeams}{start}
+        </tr>
+    )
   }
 }
 
