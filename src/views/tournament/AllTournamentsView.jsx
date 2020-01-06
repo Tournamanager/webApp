@@ -20,13 +20,13 @@ class AllTournamentsView extends Component {
     ApiCommunication.graphQLRequest(
       "query",
       "tournaments",
-      "id name numberOfTeams teams {name}"
-    ).then(response =>
+      "id name numberOfTeams description teams {name}"
+    ).then(response => {
       this.setState({
         tournaments: response.data.data.tournaments,
         isSet: true
       })
-    );
+    });
   }
 
   setActiveTournament(tournament) {
@@ -40,11 +40,11 @@ class AllTournamentsView extends Component {
   render() {
     return (
       <div>
-        <h1 className="ml-3">
-            All Active Tournaments
-            <button className="btn btn-dark float-right mr-3 mt-1" onClick={this.redirectToTarget}>
-              <i style={{ verticalAlign: 'middle', fontSize: '28px' }} className="material-icons">add_circle</i>
-            </button>
+        <h1 className="ml-3 text-center">
+          All Active Tournaments
+          <button className="btn btn-dark ml-3 mb-1" onClick={this.redirectToTarget}>
+            <i style={{ verticalAlign: 'middle', fontSize: '28px' }} className="material-icons">add_circle</i>
+          </button>
         </h1>
         <SearchList
           objects={this.state.tournaments}
