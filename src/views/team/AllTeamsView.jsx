@@ -27,7 +27,9 @@ class AllTeamsView extends Component {
             <div>
                 <h1 className="ml-3">
                     All Teams
-                    <button className="btn btn-primary float-right mr-3 mt-1" onClick={this.redirectToTarget}>+</button>
+                    <button className="btn btn-dark float-right mr-3 mt-1" onClick={this.redirectToTarget}>
+                        <i style={{ verticalAlign: 'middle', fontSize: '28px' }} className="material-icons">add_circle</i>
+                    </button>
                 </h1>
                 <SearchList objects={this.state.teams} isSet={this.state.isSet} src="teams" {...this.props} />
             </div>
