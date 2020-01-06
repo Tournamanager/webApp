@@ -7,28 +7,8 @@ import ApiCommunication from "../../services/apicommunication/ApiCommunication"
 class TeamDetailsView extends Component {
     constructor(props) {
         super(props);
-        this.id = this.props.match.params.id;
-        //Geen teams aanwezig dus mock data gebruikt
         this.state = {
-            team: {
-                id: 0,
-                name: 'A',
-                // tournaments: [
-                //     { id: 'weewewe', name: 'a' },
-                //     { id: 'weewewe1', name: 'b' },
-                //     { id: 'weewewe2', name: 'c' }
-                // ],
-                users: [
-                    { id: 'wer500c', uuid: 'Jelle' },
-                    { id: 'wer501c', uuid: 'Michiel' },
-                    { id: 'wer502c', uuid: 'Geert' },
-                    { id: 'wer503c', uuid: 'Tim' },
-                    { id: 'wer504c', uuid: 'Lars' },
-                    { id: 'wer555c', uuid: 'LLoyd' },
-                    { id: 'wer506c', uuid: 'Luuk' }],
-
-               // teamCaptain: 'Jelle',
-            }
+            id: this.props.location.id
         };
     }
 
@@ -36,7 +16,8 @@ class TeamDetailsView extends Component {
         ApiCommunication.graphQLRequest(
             "query",
             "team",
-            "id name users{id uuid}")
+            "name users{id uuid} tournaments {id name}",
+            [{name:"id", type:"ID", value: this.state.id}])
             .then(response => {
                 if (response != null) {
                     this.setState({ team: response.data.data.team })
@@ -46,7 +27,11 @@ class TeamDetailsView extends Component {
 
 
     render() {
-        return (
+        return this.state.team == null ? (
+            <div className={"alert-warning"}>
+                <p> Team not found. Try a different team! </p>
+            </div>
+            ) : (
             <div>
                 <TeamDetailHeaderComponent name={this.state.team.name} />
                 <div className="row">
