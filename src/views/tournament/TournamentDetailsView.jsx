@@ -36,6 +36,7 @@ class TournamentDetailsView extends Component {
     };
 
     this.redirectEdit = this.redirectEdit.bind(this);
+    this.startTournament = this.startTournament.bind(this);
   }
 
   getTournament(id) {
@@ -79,6 +80,12 @@ class TournamentDetailsView extends Component {
     return passedMatches;
   }
 
+  startTournament() {
+    ApiCommunication.graphQLRequest("mutation", "startTournament", null, [
+      { name: "id", type: "Int", value: this.state.tournamentId }
+    ]);
+  }
+
   redirectEdit() {
     this.props.history.push({
       pathname: "/editTournament"
@@ -117,6 +124,7 @@ class TournamentDetailsView extends Component {
             </div>
           </div>
         </div>
+        <button onClick={this.startTournament}>Start Tournament</button>
       </div>
     );
   }
