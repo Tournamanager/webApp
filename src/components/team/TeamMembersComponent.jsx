@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
 class TeamMembersComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      id: this.props.teamId
+    };
+  }
   listItems = () =>
     this.props.members.map(item => {
       return (
@@ -12,7 +19,10 @@ class TeamMembersComponent extends Component {
     });
 
   routeTo() {
-    this.props.history.push({ pathname: "/addUserToTeam", id: "aaa" });
+    this.props.history.push({
+      pathname: "/addUserToTeam",
+      id: this.state.id
+    });
   }
 
   render() {

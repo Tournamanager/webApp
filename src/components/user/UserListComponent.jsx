@@ -7,14 +7,17 @@ class UserListComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedUser: "test",
-      users: []
+      selectedUser: [],
+      users: [],
+      teamId: this.props.teamId
     };
 
     //  this.changeSelectedUser = this.changeSelectedUser.bind(this)
+    this.submitUser = this.submitUser.bind(this);
   }
 
   componentDidMount() {
+    console.log(this.props.teamId);
     this.getAllUsers();
   }
 
@@ -28,7 +31,7 @@ class UserListComponent extends Component {
       .then(snapshot => {
         snapshot.forEach(doc => {
           const data = doc.data();
-          users.push(data.username);
+          users.push([data.username, data.uuid]);
         });
       })
       .then(() => {
@@ -41,22 +44,30 @@ class UserListComponent extends Component {
   }
 
   submitUser() {
-    //TODO fix this
-    var teamId = 1;
-    var userId = 1;
-
-    ApiCommunication.graphQLRequest("mutation", "addUserToTeam", null, [
+    ApiCommunication.graphQLRequest("query", "user", "id", [
       {
-        name: "teamId",
-        type: "Int",
-        value: teamId
-      },
-      {
-        name: "userId",
-        type: "Int",
-        value: userId
+        name: "uuid",
+        type: "String",
+        value: this.state.selectedUser[1]
       }
-    ]);
+    ])
+      .then(response =>
+        this.setState({ foundUserId: response.data.data.user.id })
+      )
+      .then(
+        ApiCommunication.graphQLRequest("mutation", "addUserToTeam", null, [
+          {
+            name: "teamId",
+            type: "Int",
+            value: this.state.teamId
+          },
+          {
+            name: "userId",
+            type: "Int",
+            value: this.state.foundUserId
+          }
+        ])
+      );
   }
 
   render() {
@@ -70,7 +81,7 @@ class UserListComponent extends Component {
               class="list-group-item"
               onClick={() => this.changeSelectedUser(user)}
             >
-              {user}
+              {user[0]}
             </a>
           ))}
         </div>
@@ -79,12 +90,12 @@ class UserListComponent extends Component {
             style={{ verticalAlign: "super", float: "right" }}
             type="button"
             className="btn btn-dark"
+            onClick={this.submitUser}
           >
-            Add user {this.state.selectedUser}
+            Add user {this.state.selectedUser[0]}
             <i
               style={{ verticalAlign: "middle", fontSize: "28px" }}
               className="material-icons"
-              onClick={this.submitUser}
             >
               add_circle
             </i>

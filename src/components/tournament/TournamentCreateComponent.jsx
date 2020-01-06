@@ -42,7 +42,6 @@ class TournamentCreate extends Component {
     var tourName = this.state.name;
     var tourDesc = this.state.description;
     var tourNum = this.state.number;
-    var user = firebase.auth().currentUser.uid;
 
     var userId = await ApiCommunication.graphQLRequest("query", "user", "id", [
       {
@@ -66,19 +65,25 @@ class TournamentCreate extends Component {
       {
         name: "owner",
         type: "Int",
-        value: userId
+        value: userId.data.data.user.id
       },
       {
         name: "numberOfTeams",
         type: "Int",
         value: tourNum
       }
-    ]);
+    ])
+      .then(response => {
+        this.props.history.push({ pathname: "/tournaments" });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   render() {
     return (
-      <div style={{ width: "400px", allign: "center" }}>
+      <div style={{ width: "400px", allign: "center" }} className="col-md-2">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Tournament name:</label>
