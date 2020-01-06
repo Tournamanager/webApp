@@ -1,17 +1,15 @@
-
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import firebase from "firebase";
 
-
 class TeamMembersComponent extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       users: [],
       id: this.props.teamId
-    }
+    };
     this.getAllUsers();
   }
   getAllUsers() {
@@ -19,20 +17,23 @@ class TeamMembersComponent extends Component {
 
     this.props.members.forEach(user => {
       if (user.uuid !== "") {
-        firebase.firestore().collection('users').doc(user.uuid)
-          .get().then(doc => {
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(user.uuid)
+          .get()
+          .then(doc => {
             if (doc.exists) {
-              users.push({ id: user.id, name: doc.data().username })
-              this.setState({ users: users })
+              users.push({ id: user.id, name: doc.data().username });
+              this.setState({ users: users });
             }
-          })
+          });
       } else {
-        users.push({ id: user.id, name: "account deleted" })
-        this.setState({ users: users })
+        users.push({ id: user.id, name: "account deleted" });
+        this.setState({ users: users });
       }
     });
   }
-
 
   listItems = () =>
     this.props.members.map(item => {
@@ -44,14 +45,15 @@ class TeamMembersComponent extends Component {
     });
 
   unjoin(id) {
-    ApiCommunication.graphQLRequest(
-      "mutation",
-      "removeUserFromTeam",
-      null,
-      [{ name: "userId", type: "Int", value: id }, { name: "teamId", type: "Int", value: this.props.id }]
-    ).then(() => {
-      this.setState({ users: this.state.users.filter(user => user.id !== id) }, () => console.log(this.state.users));
-    })
+    ApiCommunication.graphQLRequest("mutation", "removeUserFromTeam", null, [
+      { name: "userId", type: "Int", value: id },
+      { name: "teamId", type: "Int", value: this.state.id }
+    ]).then(() => {
+      this.setState(
+        { users: this.state.users.filter(user => user.id !== id) },
+        () => console.log(this.state.users)
+      );
+    });
   }
 
   routeTo() {
@@ -82,15 +84,20 @@ class TeamMembersComponent extends Component {
         </div>
         <ul className="list-group">
           {this.state.users.map(item => (
-            <li key={item.id} className="list-group-item">{item.name}
-              <button className="btn-danger" onClick={() => this.unjoin(item.id)}>x</button>
-            </li>))
-          }
+            <li key={item.id} className="list-group-item">
+              {item.name}
+              <button
+                className="btn-danger"
+                onClick={() => this.unjoin(item.id)}
+              >
+                x
+              </button>
+            </li>
+          ))}
         </ul>
       </div>
     );
   }
-
 }
 
 export default withRouter(TeamMembersComponent);
