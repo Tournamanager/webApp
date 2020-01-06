@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import SearchList from "../../components/list/SearchList";
+import { Row } from "react-bootstrap"
 
 class AllTournamentsView extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class AllTournamentsView extends Component {
       tournaments: [],
       isSet: false
     };
+    this.redirectToTarget = this.redirectToTarget.bind(this)
   }
 
   componentDidMount() {
@@ -20,6 +22,11 @@ class AllTournamentsView extends Component {
       "query",
       "tournaments",
       "id name numberOfTeams teams {name}"
+    ).then(response =>
+      this.setState({
+        tournaments: response.data.data.tournaments,
+        isSet: true
+      })
     );
   }
 
@@ -27,26 +34,26 @@ class AllTournamentsView extends Component {
     alert(tournament.name);
   }
 
-  redirectToCreateTournament = () => {
-    this.props.history.push({ pathname: "/createTournament" });
-  };
-
+  redirectToTarget() {
+    this.props.history.push({ pathname: "/createTournament" })
+  }
 
   render() {
     return (
       <div>
-        <h1>All Active Tournaments</h1>
-        <SearchList objects={this.state.tournaments} src="tournaments" />
-        <button
-          className="btn btn-primary"
-          onClick={this.redirectToCreateTournament}
-        >
-          Create Tournament
-        </button>
+        <Row style={{marginLeft: "10px"}}>
+          <h1>All Active Tournaments</h1>
+          <button onClick={this.redirectToTarget}>+</button>
+        </Row>
+        <SearchList
+          objects={this.state.tournaments}
+          isSet={this.state.isSet}
+          {...this.props}
+          src="tournaments"
+        />
       </div>
     );
   }
-
 }
 
 export default AllTournamentsView;

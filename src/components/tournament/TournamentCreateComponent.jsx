@@ -66,14 +66,20 @@ class TournamentCreate extends Component {
       {
         name: "owner",
         type: "Int",
-        value: userId
+        value: userId.data.data.user.id
       },
       {
         name: "numberOfTeams",
         type: "Int",
         value: tourNum
       }
-    ]);
+    ])
+      .then(response => {
+        this.props.history.push({ pathname: "/tournaments" });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   render() {
