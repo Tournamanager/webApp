@@ -16,7 +16,7 @@ class TournamentDetailsView extends Component {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
-      "name numberOfTeams description teams{name} matches{teamHome {name} teamAway {name} date}",
+      "id name numberOfTeams description teams{name} matches{teamHome {name} teamAway {name} date}",
       [
         {
           name: "id",
@@ -61,7 +61,8 @@ class TournamentDetailsView extends Component {
 
   redirectEdit() {
     this.props.history.push({
-      pathname: "/editTournament"
+      pathname: "/editTournament",
+      id: this.state.tournament.id
     });
   }
 
