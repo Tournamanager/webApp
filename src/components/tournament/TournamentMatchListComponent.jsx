@@ -2,6 +2,18 @@ import React, { Component } from "react";
 
 class TournamentMatchListComponent extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.redirectMatch = this.redirectMatch.bind(this);
+    }
+
+    redirectMatch(id) {
+        this.props.history.push({
+            pathname: "/match",
+            id: id
+        });
+    }
 
     render() {
         return (
@@ -9,8 +21,12 @@ class TournamentMatchListComponent extends Component {
                 <div>
                     <div className={"border"}>
                         {
-                            this.props.matches.map(match => <div className={"border-bottom  align-self-center"}><p
-                                className={"text-center"}>{match.teamHome.name} VS {match.teamAway.name} {match.date}</p></div>)
+                            this.props.matches.map(
+                                match =>
+                                    <div className={"border-bottom  align-self-center"} onClick={() => this.redirectMatch(match.id)}>
+                                        <p className={"text-center"}>{match.teamHome.name} VS {match.teamAway.name} {match.date}</p>
+                                    </div>
+                            )
                         }
                     </div>
                 </div> :

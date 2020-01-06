@@ -41,33 +41,31 @@ class UserListComponent extends Component {
 
   changeSelectedUser(name) {
     this.setState({ selectedUser: name });
-  }
 
-  submitUser() {
     ApiCommunication.graphQLRequest("query", "user", "id", [
       {
         name: "uuid",
         type: "String",
-        value: this.state.selectedUser[1]
+        value: name[1]
       }
-    ])
-      .then(response =>
-        this.setState({ foundUserId: response.data.data.user.id })
-      )
-      .then(
-        ApiCommunication.graphQLRequest("mutation", "addUserToTeam", null, [
-          {
-            name: "teamId",
-            type: "Int",
-            value: this.state.teamId
-          },
-          {
-            name: "userId",
-            type: "Int",
-            value: this.state.foundUserId
-          }
-        ])
-      );
+    ]).then(response =>
+      this.setState({ foundUserId: response.data.data.user.id })
+    );
+  }
+
+  submitUser() {
+    ApiCommunication.graphQLRequest("mutation", "addUserToTeam", null, [
+      {
+        name: "teamId",
+        type: "Int",
+        value: this.state.teamId
+      },
+      {
+        name: "userId",
+        type: "Int",
+        value: this.state.foundUserId
+      }
+    ]).then(/*redirect here*/);
   }
 
   render() {
