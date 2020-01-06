@@ -4,6 +4,9 @@ import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import { StyledFirebaseAuth } from "react-firebaseui";
 
 class FirebaseAuthView extends Component {
+    state = {
+        user: null
+    }
     uiConfig = {
         signInFlow: "popup",
         signInOptions: [
@@ -11,7 +14,7 @@ class FirebaseAuthView extends Component {
         ],
         credentialHelper: 'none',
         callbacks: {
-            signInSuccessWithAuthResult : () => false
+            signInSuccessWithAuthResult: () => false
         }
     };
 
@@ -20,7 +23,7 @@ class FirebaseAuthView extends Component {
         ref.get().then(
             doc => {
                 if (!doc.exists) {
-                    ref.set({uuid: user.uid,username: user.email})
+                    ref.set({ uuid: user.uid, username: user.email })
                 }
             }
         )
@@ -29,20 +32,29 @@ class FirebaseAuthView extends Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user != null) {
-                ApiCommunication.graphQLRequest("mutation", "createUser", "id", [{name:"uuid", type:"String", value: user.uid}]);
+                ApiCommunication.graphQLRequest("mutation", "createUser", "id", [{ name: "uuid", type: "String", value: user.uid }]);
                 this.saveUserInfo(user)
+                this.setState({ user: user })
             }
         })
+
     };
 
     render() {
+        if (this.state.user != null) {
+            this.props.history.push({ pathname: "/" })
+            return (<div></div>)
+        }
         return (
-            <StyledFirebaseAuth
-                uiConfig={this.uiConfig}
-                firebaseAuth={firebase.auth()}
-            />
+            <div>
+                <StyledFirebaseAuth
+                    uiConfig={this.uiConfig}
+                    firebaseAuth={firebase.auth()}
+                />
+            </div>
         )
     }
 }
+
 
 export default FirebaseAuthView;
