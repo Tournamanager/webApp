@@ -11,6 +11,7 @@ class SearchList extends Component {
       filteredObjects: []
     };
 
+    this.className='';
     this.onChange = this.onChange.bind(this);
   }
 
@@ -31,6 +32,12 @@ class SearchList extends Component {
   }
 
   render() {
+    if (this.state.filteredObjects.length > 0) {
+      this.className = 'pointer'
+    } else {
+      this.className = ''
+    }
+
     return (
       <table className="table">
         <thead className="thead-light">
@@ -47,12 +54,12 @@ class SearchList extends Component {
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={this.className}>
           {!this.props.isSet ? (
             <tr>
               <td>No data to display</td>
             </tr>
-          ) : this.state.filteredObjects.length !== 0 ? (
+          ) : this.state.filteredObjects.length > 0 ? (
             this.props.src === "tournaments" ? (
               this.state.filteredObjects.map(object => (
                 <TournamentListComponent

@@ -41,10 +41,10 @@ class AllTournamentsView extends Component {
   render() {
     return (
       <div>
-        <Row style={{marginLeft: "10px"}}>
-          <h1>All Active Tournaments</h1>
-          <button onClick={this.redirectToTarget}>+</button>
-        </Row>
+        <h1 className="ml-3">
+            All Active Tournaments
+            <button className="btn btn-primary float-right mr-3 mt-1" onClick={this.redirectToTarget}>+</button>
+        </h1>
         <SearchList
           objects={this.state.tournaments}
           isSet={this.state.isSet}

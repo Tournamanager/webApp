@@ -25,8 +25,10 @@ class AllTeamsView extends Component {
     render() {
         return (
             <div>
-                <h1>All Teams</h1>
-                <button onClick={this.redirectToTarget}>+</button>
+                <h1 className="ml-3">
+                    All Teams
+                    <button className="btn btn-primary float-right mr-3 mt-1" onClick={this.redirectToTarget}>+</button>
+                </h1>
                 <SearchList objects={this.state.teams} isSet={this.state.isSet} src="teams" {...this.props} />
             </div>
         );
