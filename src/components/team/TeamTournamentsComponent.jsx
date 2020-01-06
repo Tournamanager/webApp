@@ -9,11 +9,11 @@ class TeamTournamentsComponent extends Component {
         });
     }
 
-    listItems = () => (
+    listItems = () => {
         this.props.tournaments.map((item) => {
             return <li key={item.id} className="list-group-item" onClick={() => this.onClick(item.id)}>{item.name}</li>
         })
-    )
+    }
 
     render() {
         return (
