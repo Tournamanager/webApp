@@ -12,6 +12,7 @@ class TeamDetailsView extends Component {
     };
   }
 
+
   componentDidMount() {
     ApiCommunication.graphQLRequest(
       "query",
@@ -40,9 +41,18 @@ class TeamDetailsView extends Component {
             teamId={this.state.id}
           />
         </div>
+        <div className="text-center">
+                        <button
+                            className="btn-danger"
+                            style={{ width: "60%" }}
+                            onClick={() => this.deleteThis(this.state.id)}>
+                            <h2>delete team</h2>
+                        </button>
+         </div>
       </div>
     );
   }
+
 }
 
 export default TeamDetailsView;
