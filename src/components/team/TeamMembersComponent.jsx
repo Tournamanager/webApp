@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
 class TeamMembersComponent extends Component {
 
     listItems = () => (
         this.props.members.map((item) => {
-            return <li key={item.id} className="list-group-item">{item.name}</li>
+            return <li key={item.id} className="list-group-item">{item.name} <button className="btn-danger" onClick={() => this.unjoin(item.id)}>x</button></li>
         })
-    )    
-    
-    routeTo(){
-        this.props.history.push({pathname: "/team/addUser", id: 'aaa' } )
+    )
+
+    unjoin(id) {
+        ApiCommunication.graphQLRequest(
+            "mutation",
+            "removeUserFromTeam",
+            null,
+            [{ name: "userId", type: "Int", value: id }, { name: "teamId", type: "Int", value: this.props.id }]
+        )
+    }
+
+    routeTo() {
+        this.props.history.push({ pathname: "/team/addUser", id: 'aaa' })
     }
 
     render() {
