@@ -42,7 +42,6 @@ class TournamentCreate extends Component {
     var tourName = this.state.name;
     var tourDesc = this.state.description;
     var tourNum = this.state.number;
-    var user = firebase.auth().currentUser.uid;
 
     var userId = await ApiCommunication.graphQLRequest("query", "user", "id", [
       {
