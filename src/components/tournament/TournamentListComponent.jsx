@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 
 class TournamentListComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   redirectToTarget = () => {
     this.props.history.push({
       pathname: "/tournament",
