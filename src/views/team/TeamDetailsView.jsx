@@ -35,7 +35,7 @@ class TeamDetailsView extends Component {
       <div>
         <TeamDetailHeaderComponent name={this.state.team.name} />
         <div className="row">
-          <TeamTournamentsComponent tournaments={this.state.team.tournaments} />
+          <TeamTournamentsComponent teamId={this.state.id} />
           <TeamMembersComponent
             members={this.state.team.users}
             teamId={this.state.id}

@@ -29,10 +29,6 @@ class AllTournamentsView extends Component {
     );
   }
 
-  setActiveTournament(tournament) {
-    alert(tournament.name);
-  }
-
   redirectToTarget() {
     this.props.history.push({ pathname: "/createTournament" })
   }
