@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import SearchList from "../../components/list/SearchList";
+import { Row } from "react-bootstrap"
 
 class AllTournamentsView extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class AllTournamentsView extends Component {
       tournaments: [],
       isSet: false
     };
+    this.redirectToTarget = this.redirectToTarget.bind(this)
   }
 
   componentDidMount() {
@@ -32,10 +34,17 @@ class AllTournamentsView extends Component {
     alert(tournament.name);
   }
 
+  redirectToTarget() {
+    this.props.history.push({ pathname: "/createTournament" })
+  }
+
   render() {
     return (
       <div>
-        <h1>All Active Tournaments</h1>
+        <Row style={{marginLeft: "10px"}}>
+          <h1>All Active Tournaments</h1>
+          <button onClick={this.redirectToTarget}>+</button>
+        </Row>
         <SearchList
           objects={this.state.tournaments}
           isSet={this.state.isSet}

@@ -7,21 +7,27 @@ class AllTeamsView extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            teams:[],
+            teams: [],
             isSet: false
         }
+        this.redirectToTarget = this.redirectToTarget.bind(this)
     }
 
     componentDidMount() {
-        ApiCommunication.graphQLRequest("query","teams","id name users {id}")
-            .then(response => this.setState({teams: response.data.data.teams, isSet: true}))
+        ApiCommunication.graphQLRequest("query", "teams", "id name users {id}")
+            .then(response => this.setState({ teams: response.data.data.teams, isSet: true }))
     }
 
-    render() {   
+    redirectToTarget() {
+        this.props.history.push({ pathname: "/team/create" })
+    }
+
+    render() {
         return (
             <div>
                 <h1>All Teams</h1>
-                <SearchList objects={this.state.teams} isSet={this.state.isSet} src="teams" {...this.props}/>
+                <button onClick={this.redirectToTarget}>+</button>
+                <SearchList objects={this.state.teams} isSet={this.state.isSet} src="teams" {...this.props} />
             </div>
         );
     }
