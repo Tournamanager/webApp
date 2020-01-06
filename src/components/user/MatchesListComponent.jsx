@@ -1,9 +1,20 @@
 import React, { Component } from "react";
 
 class MyMatchesList extends Component {
-  state = {};
+
+  onClick() {
+    this.props.history.push({
+      pathname: "/match",
+      id: this.props.object.id
+    });
+  }
+
   render() {
-    return <div>MyMatchesList</div>;
+    return (
+        <tr onClick={() => this.onClick()}>
+          {this.props.object.teamHome.name} - {this.props.object.teamAway.name}, {this.props.object.date}
+        </tr>
+    )
   }
 }
 
