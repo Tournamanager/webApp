@@ -16,6 +16,7 @@ import AccountUser from "./views/user/AccountUserView";
 import TournamentCreate from "./components/tournament/TournamentCreateComponent";
 import MatchView from "./views/match/MatchView";
 import TournamentDelete from "./components/tournament/TournamentDeleteComponent";
+import TournamentEdit from "./components/tournament/TournamentEditComponent";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
@@ -58,6 +59,7 @@ class App extends Component {
           <Route path="/user/account" component={AccountUser} />
           <Route path="/createTournament" component={TournamentCreate} />
           <Route path="/deleteTournament" component={TournamentDelete}/>
+          <Route path="/editTournament" component={TournamentEdit}/>
         </Switch>
       </BrowserRouter>
     );
