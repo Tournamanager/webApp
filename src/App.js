@@ -14,6 +14,7 @@ import TeamDetailsView from "./views/team/TeamDetailsView";
 import TournamentDetailsView from "./views/tournament/TournamentDetailsView";
 import AccountUser from "./views/user/AccountUserView";
 import TournamentCreate from "./components/tournament/TournamentCreateComponent";
+import AddUserToTeamView from "./views/team/AddUserToTeamView";
 import MatchView from "./views/match/MatchView";
 import TournamentDelete from "./components/tournament/TournamentDeleteComponent";
 import TournamentEdit from "./components/tournament/TournamentEditComponent";
@@ -55,6 +56,7 @@ class App extends Component {
           <Route path="/teams" component={AllTeamsView} />
           <Route path="/match" component={MatchView} />
           <Route path="/team" component={TeamDetailsView} />
+          <Route path="/addUserToTeam" component={AddUserToTeamView} />
           <Route path="/tournament" component={TournamentDetailsView} />
           <Route path="/user/account" component={AccountUser} />
           <Route path="/createTournament" component={TournamentCreate} />
