@@ -83,7 +83,7 @@ class TournamentCreate extends Component {
 
   render() {
     return (
-      <div style={{ width: "400px", allign: "center" }}>
+      <div style={{ width: "400px", allign: "center" }} className="col-md-2">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Tournament name:</label>

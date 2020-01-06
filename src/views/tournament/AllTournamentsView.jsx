@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import SearchList from "../../components/list/SearchList";
-import { Row } from "react-bootstrap"
 
 class AllTournamentsView extends Component {
   constructor(props) {
@@ -41,10 +40,12 @@ class AllTournamentsView extends Component {
   render() {
     return (
       <div>
-        <Row style={{marginLeft: "10px"}}>
-          <h1>All Active Tournaments</h1>
-          <button onClick={this.redirectToTarget}>+</button>
-        </Row>
+        <h1 className="ml-3">
+            All Active Tournaments
+            <button className="btn btn-dark float-right mr-3 mt-1" onClick={this.redirectToTarget}>
+              <i style={{ verticalAlign: 'middle', fontSize: '28px' }} className="material-icons">add_circle</i>
+            </button>
+        </h1>
         <SearchList
           objects={this.state.tournaments}
           isSet={this.state.isSet}

@@ -52,7 +52,7 @@ class AllUsersView extends Component {
   render() {
     return (
       <div>
-        <h1>All Users</h1>
+        <h1 className="ml-3">All Users</h1>
         <SearchList objects={this.state.users} isSet={this.state.isSet} src="users"/>
       </div>
     );
