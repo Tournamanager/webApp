@@ -25,21 +25,37 @@ class TeamDetailsView extends Component {
             })
     }
 
+    deleteThis() {
+        ApiCommunication.graphQLRequest(
+            "mutation",
+            "deleteTeam",
+            null,
+            [{ name: "id", type: "Int", value: this.state.id }])
+            .then(this.props.history.push({ pathname: "/teams" }))
+    }
 
     render() {
         return this.state.team == null ? (
             <div className={"alert-warning"}>
                 <p> Team not found. Try a different team! </p>
             </div>
-            ) : (
-            <div>
-                <TeamDetailHeaderComponent name={this.state.team.name} />
-                <div className="row">
-                    <TeamTournamentsComponent tournaments={this.state.team.tournaments} />
-                    <TeamMembersComponent members={this.state.team.users} />
+        ) : (
+                <div>
+                    <TeamDetailHeaderComponent name={this.state.team.name} />
+                    <div className="row">
+                        <TeamTournamentsComponent tournaments={this.state.team.tournaments} />
+                        <TeamMembersComponent members={this.state.team.users} />
+                    </div>
+                    <div className="text-center">
+                        <button
+                            className="btn-danger"
+                            style={{ width: "60%" }}
+                            onClick={() => this.deleteThis(this.state.id)}>
+                            <h2>delete team</h2>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        );
+            );
     }
 }
 
