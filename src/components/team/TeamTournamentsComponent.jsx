@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 class TeamTournamentsComponent extends Component {
 
 
-    listItems = () => (
+    listItems = () => {
         this.props.tournaments.map((item) => {
             return <li key={item.id} className="list-group-item">{item.name}</li>
         })
-    )
+    }
 
     render() {
         return (

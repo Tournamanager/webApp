@@ -13,11 +13,11 @@ class TeamDetailsView extends Component {
             team: {
                 id: 0,
                 name: 'A',
-                // tournaments: [
-                //     { id: 'weewewe', name: 'a' },
-                //     { id: 'weewewe1', name: 'b' },
-                //     { id: 'weewewe2', name: 'c' }
-                // ],
+                tournaments: [
+                    { id: 'weewewe', name: 'a' },
+                    { id: 'weewewe1', name: 'b' },
+                    { id: 'weewewe2', name: 'c' }
+                ],
                 users: [
                     { id: 'wer500c', uuid: 'Jelle' },
                     { id: 'wer501c', uuid: 'Michiel' },
@@ -33,15 +33,16 @@ class TeamDetailsView extends Component {
     }
 
     componentDidMount() {
-        ApiCommunication.graphQLRequest(
-            "query",
-            "team",
-            "id name users{id uuid}")
-            .then(response => {
-                if (response != null) {
-                    this.setState({ team: response.data.data.team })
-                }
-            })
+        // ApiCommunication.graphQLRequest(
+        //     "query",
+        //     "team",
+        //     "id name users{id uuid}")
+        //     .then(response => {
+        //         console.log(response)
+        //         if (response != undefined) {
+        //             this.setState({ team: response.data.data.team })
+        //         }
+        //     })
     }
 
 
