@@ -6,9 +6,7 @@ import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 class TournamentDetailsView extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-
-    };
+    this.state = {};
 
     this.redirectEdit = this.redirectEdit.bind(this);
     this.startTournament = this.startTournament.bind(this);
@@ -56,9 +54,10 @@ class TournamentDetailsView extends Component {
   }
 
   startTournament() {
-    ApiCommunication.graphQLRequest("mutation", "startTournament", null, [
-      { name: "id", type: "Int", value: this.state.tournamentId }
-    ]);
+    ApiCommunication.graphQLRequest("mutation", "generateMatches", "id", [
+      { name: "id", type: "Int", value: this.state.tournament.id },
+      { name: "method", type: "String", value: "competition"}
+    ])
   }
 
   redirectEdit() {
@@ -92,6 +91,7 @@ class TournamentDetailsView extends Component {
               <h5>Matches</h5>
               <TournamentMatchListComponent
                 matches={this.getUpcomingMatches()}
+                {...this.props}
               />
             </div>
             <div>
