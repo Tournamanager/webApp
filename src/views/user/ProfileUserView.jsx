@@ -23,16 +23,24 @@ class ProfileUserView extends Component {
   componentDidMount() {
     ApiCommunication.graphQLRequest("query","teams","id name users {uuid}")
         .then(response => {
-          this.setState({teams: response.data.data.teams.filter(team => team.users.contains(this.state.uuid))})
-        })
+          this.setState({teams: response.data.data.teams.filter(team => team.users.includes(this.state.uuid))})
+        });
     ApiCommunication.graphQLRequest("query","matches","id teamHome {name users {uuid}} teamAway {name users {uuid}} date")
         .then(response => {
-          this.setState({matches: response.data.data.matches.filter(match => match.teamHome.users.contains(this.state.uuid) || match.teamAway.users.contains(this.state.uuid))})
-        })
+          this.setState({matches: response.data.data.matches.filter(match => match.teamHome.users.includes(this.state.uuid) || match.teamAway.users.includes(this.state.uuid))})
+        });
     ApiCommunication.graphQLRequest("query","tournaments","id name teams {id users {uuid}} numberOfTeams matches {id}")
         .then(response => {
-          this.setState({tournaments: response.data.data.tournaments.filter(tournament => tournament.teams.users.contains(this.state.uuid))})
-        })
+          this.setState({tournaments: response.data.data.tournaments.filter(tournament => {
+              if (tournament.teams.length > 0)
+                {
+                    return tournament.teams.users.includes(this.state.uuid);
+                }
+              else {
+                  return false;
+              }
+          })})
+        });
   }
 
   render() {
