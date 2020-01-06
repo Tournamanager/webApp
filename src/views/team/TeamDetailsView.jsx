@@ -7,9 +7,7 @@ import ApiCommunication from "../../services/apicommunication/ApiCommunication"
 class TeamDetailsView extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            id: this.props.location.id
-        };
+        this.state = {};
     }
 
     componentDidMount() {
@@ -17,8 +15,9 @@ class TeamDetailsView extends Component {
             "query",
             "team",
             "name users{id uuid} tournaments {id name}",
-            [{name:"id", type:"ID", value: this.state.id}])
+            [{name:"id", type:"ID", value: this.props.match.params.id}])
             .then(response => {
+                console.log(response)
                 if (response != null) {
                     this.setState({ team: response.data.data.team })
                 }

@@ -9,7 +9,6 @@ class AllTournamentsView extends Component {
       tournaments: [],
       isSet: false
     };
-    this.redirectToTarget = this.redirectToTarget.bind(this)
   }
 
   componentDidMount() {
@@ -33,16 +32,12 @@ class AllTournamentsView extends Component {
     alert(tournament.name);
   }
 
-  redirectToTarget() {
-    this.props.history.push({ pathname: "/createTournament" })
-  }
-
   render() {
     return (
       <div>
         <h1 className="ml-3">
             All Active Tournaments
-            <button className="btn btn-dark float-right mr-3 mt-1" onClick={this.redirectToTarget}>
+            <button className="btn btn-dark float-right mr-3 mt-1" onClick={() => this.props.history.push("/createTournament")}>
               <i style={{ verticalAlign: 'middle', fontSize: '28px' }} className="material-icons">add_circle</i>
             </button>
         </h1>

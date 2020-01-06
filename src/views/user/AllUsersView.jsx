@@ -12,8 +12,6 @@ class AllUsersView extends Component {
       users: [],
       isSet: false
     };
-
-    this.setUser = this.setUser.bind(this);
   }
 
   getAllUsers() {
@@ -40,13 +38,6 @@ class AllUsersView extends Component {
 
   componentDidMount() {
     this.getAllUsers();
-  }
-
-  setUser(user) {
-    alert(user)
-    //this.setState({
-    //  selectedUser: user
-    //});
   }
 
   render() {
