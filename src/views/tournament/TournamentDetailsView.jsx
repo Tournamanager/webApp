@@ -7,32 +7,7 @@ class TournamentDetailsView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tournamentId: 1,
-      tournament: {
-        name: "TournamentName",
-        teams: [
-          {
-            name: "The A Team"
-          },
-          {
-            key: "2",
-            name: "The B Team"
-          }
-        ],
-        matches: [
-          {
-            teamHome: { name: "The A Team" },
-            teamAway: { name: "The B Team" },
-            date: "2020-01-01"
-          },
-          {
-            teamHome: { name: "The A Team" },
-            teamAway: { name: "The B Team" },
-            date: "2019-12-01"
-          }
-        ],
-        numberOfTeams: 8
-      }
+
     };
 
     this.redirectEdit = this.redirectEdit.bind(this);
@@ -42,7 +17,7 @@ class TournamentDetailsView extends Component {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
-      "name teams{name} matches{teamHome {name} teamAway {name} date}",
+      "name numberOfTeams description teams{name} matches{teamHome {name} teamAway {name} date}",
       [
         {
           name: "id",
@@ -51,12 +26,12 @@ class TournamentDetailsView extends Component {
         }
       ]
     ).then(response =>
-      this.setState({ tournaments: response.data.data.tournament })
+      this.setState({ tournament: response.data.data.tournament })
     );
   }
 
   componentDidMount() {
-    this.getTournament(this.props.id);
+    this.getTournament(this.props.location.id);
   }
 
   getUpcomingMatches() {
