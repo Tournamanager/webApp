@@ -42,7 +42,7 @@ class AllTournamentsView extends Component {
       <div>
         <h1 className="ml-3 text-center">
           All Active Tournaments
-          <button className="btn btn-dark ml-3 mb-1" onClick={this.redirectToTarget}>
+          <button className="btn btn-primary ml-3 mb-1" onClick={this.redirectToTarget}>
             <i style={{ verticalAlign: 'middle', fontSize: '28px' }} className="material-icons">add_circle</i>
           </button>
         </h1>
