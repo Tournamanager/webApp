@@ -7,12 +7,12 @@ class TournamentEdit extends Component {
     super(props);
 
     this.state = {
-        tourId: 0,
-        tempTourId: 0,
-        tournament: {},
-        changedName: "",
-        changedDesc: "",
-        changedNumberOfTeams: 0
+      tourId: 0,
+      tempTourId: 0,
+      tournament: {},
+      changedName: "",
+      changedDesc: "",
+      changedNumberOfTeams: 0
     };
 
     this.handleIdChange = this.handleIdChange.bind(this);
@@ -20,11 +20,12 @@ class TournamentEdit extends Component {
     this.handleDescChange = this.handleDescChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleNumberTeamsChange = this.handleNumberTeamsChange.bind(this);
   }
 
   componentDidMount() {
-    if(this.props.location.id !== undefined) {
+    if (this.props.location.id !== undefined) {
       this.handleIdSubmit();
     }
   }
@@ -38,7 +39,7 @@ class TournamentEdit extends Component {
       tourId: this.state.tempTourId
     });
     var id;
-    if(this.props.location.id !== undefined) {
+    if (this.props.location.id !== undefined) {
       this.setState({
         tourId: this.props.location.id
       });
@@ -120,6 +121,18 @@ class TournamentEdit extends Component {
     });
   }
 
+  handleDelete() {
+    var tourId = this.state.tourId
+    ApiCommunication.graphQLRequest(
+      "mutation",
+      "deleteTournament",
+      null,
+      [{ name: "id", type: "Int", value: tourId }]
+    ).then(
+      this.props.history.push({ pathname: "/tournaments" })
+    )
+  }
+
   render() {
     if (this.state.tourId !== 0) {
       return (
@@ -154,6 +167,13 @@ class TournamentEdit extends Component {
                   style={{ marginTop: "10px" }}
                 >
                   Submit
+                </Button>
+                <Button
+                  className="btn-danger"
+                  style={{ marginTop: "10px" }}
+                  onClick={this.handleDelete}
+                >
+                  delete Tournament
                 </Button>
               </Form>
             </Col>
