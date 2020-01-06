@@ -17,7 +17,7 @@ class TeamDetailsView extends Component {
             "query",
             "team",
             "name users{id uuid} tournaments {id name}",
-            [{name:"id", type:"ID", value: this.state.id}])
+            [{ name: "id", type: "ID", value: this.state.id }])
             .then(response => {
                 if (response != null) {
                     this.setState({ team: response.data.data.team })
@@ -41,10 +41,12 @@ class TeamDetailsView extends Component {
             </div>
         ) : (
                 <div>
-                    <TeamDetailHeaderComponent name={this.state.team.name} />
-                    <div className="row">
-                        <TeamTournamentsComponent tournaments={this.state.team.tournaments} />
-                        <TeamMembersComponent members={this.state.team.users} />
+                    <div>
+                        <TeamDetailHeaderComponent name={this.state.team.name} />
+                        <div className="row">
+                            <TeamTournamentsComponent tournaments={this.state.team.tournaments} />
+                            <TeamMembersComponent members={this.state.team.users} id={this.state.id} {...this.props} />
+                        </div>
                     </div>
                     <div className="text-center">
                         <button

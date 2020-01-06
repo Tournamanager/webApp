@@ -17,25 +17,25 @@ class AllUsersView extends Component {
   }
 
   getAllUsers() {
-    let users = []
+      let users = []
 
-    ApiCommunication.graphQLRequest("query", "users", "id uuid").then(
-      response => {
-        response.data.data.users.forEach(user => {
-          if (user.uuid !== "") {
-            firebase.firestore().collection('users').doc(user.uuid)
-            .get().then(doc => {
-              if (doc.exists) {
-                users.push({id: user.id, name: doc.data().username})
+      ApiCommunication.graphQLRequest("query", "users", "id uuid").then(
+          response => {
+            response.data.data.users.forEach(user => {
+              if (user.uuid !== "") {
+                firebase.firestore().collection('users').doc(user.uuid)
+                    .get().then(doc => {
+                  if (doc.exists) {
+                    users.push({id: user.id, name: doc.data().username})
+                    this.setState({users: users, isSet: true})
+                  }
+                })
+              } else {
+                users.push({id: user.id, name: "account deleted"})
                 this.setState({users: users, isSet: true})
               }
             })
-          } else {
-            users.push({id: user.id, name: "account deleted"})
-            this.setState({users: users, isSet: true})
-          }
-        })
-    })
+          })
   }
 
   componentDidMount() {

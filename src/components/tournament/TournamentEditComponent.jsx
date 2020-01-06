@@ -7,12 +7,12 @@ class TournamentEdit extends Component {
     super(props);
 
     this.state = {
-      tourId: 0,
-      tempTourId: 0,
-      tournament: {},
-      changedName: "",
-      changedDesc: "",
-      changedNumberOfTeams: 0
+        tourId: 0,
+        tempTourId: 0,
+        tournament: {},
+        changedName: "",
+        changedDesc: "",
+        changedNumberOfTeams: 0
     };
 
     this.handleIdChange = this.handleIdChange.bind(this);
@@ -23,6 +23,12 @@ class TournamentEdit extends Component {
     this.handleNumberTeamsChange = this.handleNumberTeamsChange.bind(this);
   }
 
+  componentDidMount() {
+    if(this.props.location.id !== undefined) {
+      this.handleIdSubmit();
+    }
+  }
+
   handleIdChange(event) {
     this.setState({ tempTourId: event.target.value });
   }
@@ -31,8 +37,20 @@ class TournamentEdit extends Component {
     this.setState({
       tourId: this.state.tempTourId
     });
+    var id;
+    if(this.props.location.id !== undefined) {
+      this.setState({
+        tourId: this.props.location.id
+      });
+      id = this.props.location.id;
+    }
+    else {
+      this.setState({
+        tourId: this.state.tempTourId
+      });
+      id = this.state.tourId;
+    }
 
-    var id = this.state.tempTourId;
 
     ApiCommunication.graphQLRequest(
       "query",
@@ -46,8 +64,9 @@ class TournamentEdit extends Component {
         }
       ]
     ).then(response =>
-      this.setState({ tournament: response.data.data.tournament })
+      this.setState({ tournament: response.data.data.tournament }),
     );
+
   }
 
   handleFormSubmit(event) {
