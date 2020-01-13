@@ -14,7 +14,7 @@ class TeamDetailsView extends Component {
     ApiCommunication.graphQLRequest(
       "query",
       "team",
-      "name users{id uuid} tournaments {id name}",
+      "id name users{id uuid} tournaments {id name}",
       [{name:"id", type:"ID", value: this.props.match.params.id}])
       .then(response => {
         if (response != null) {
@@ -35,7 +35,7 @@ class TeamDetailsView extends Component {
           <TeamTournamentsComponent tournaments={this.state.team.tournaments} />
           <TeamMembersComponent
             members={this.state.team.users}
-            teamId={this.state.id}
+            teamId={this.state.team.id}
           />
         </div>
         <div className="text-center">

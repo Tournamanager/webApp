@@ -56,7 +56,7 @@ class App extends Component {
           <Route path="/teams" component={AllTeamsView} />
           <Route path="/match/:id" component={MatchView} />
           <Route path="/team/:id" component={TeamDetailsView} />
-          <Route path="/addUserToTeam" component={AddUserToTeamView} />
+          <Route path="/addUserToTeam/:id" component={AddUserToTeamView} />
           <Route path="/tournament/:id" component={TournamentDetailsView} />
           <Route path="/user/account" component={AccountUser} />
           <Route path="/createTournament" component={TournamentCreate} />
