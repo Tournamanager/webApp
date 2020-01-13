@@ -51,9 +51,10 @@ class TournamentDetailsView extends Component {
   }
 
   startTournament() {
-    ApiCommunication.graphQLRequest("mutation", "startTournament", null, [
-      { name: "id", type: "Int", value: this.state.tournamentId }
-    ]);
+    ApiCommunication.graphQLRequest("mutation", "generateMatches", "id", [
+      { name: "id", type: "Int", value: this.state.tournament.id },
+      { name: "method", type: "String", value: "competition"}
+    ])
   }
 
   render() {
