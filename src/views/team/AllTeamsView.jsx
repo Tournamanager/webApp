@@ -10,7 +10,6 @@ class AllTeamsView extends Component {
             teams: [],
             isSet: false
         }
-        this.redirectToTarget = this.redirectToTarget.bind(this)
     }
 
     componentDidMount() {
@@ -18,16 +17,12 @@ class AllTeamsView extends Component {
             .then(response => this.setState({ teams: response.data.data.teams, isSet: true }))
     }
 
-    redirectToTarget() {
-        this.props.history.push({ pathname: "/team/create" })
-    }
-
     render() {
         return (
             <div>
                 <h1 className="ml-3">
                     All Teams
-                    <button className="btn btn-dark float-right mr-3 mt-1" onClick={this.redirectToTarget}>
+                    <button className="btn btn-dark float-right mr-3 mt-1" onClick={() => this.props.history.push("/team/create")}>
                         <i style={{ verticalAlign: 'middle', fontSize: '28px' }} className="material-icons">add_circle</i>
                     </button>
                 </h1>

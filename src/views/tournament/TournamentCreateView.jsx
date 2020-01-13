@@ -73,7 +73,7 @@ class TournamentCreate extends Component {
         value: tourNum
       }
     ])
-      .then(response => {
+      .then(() => {
         this.props.history.push({ pathname: "/tournaments" });
       })
       .catch(error => {
@@ -94,6 +94,14 @@ class TournamentCreate extends Component {
               onChange={this.handleNameChange}
             />
           </div>
+          <div className="from-group">
+            <label>Description</label>
+            <textarea
+              className="form-control"
+              rows="3"
+              onChange={this.handleDescriptionChange}
+            ></textarea>
+          </div>
           <div className="form-group">
             <label>Number of teams:</label>
             <select className="form-control" onChange={this.handleNumberChange}>
@@ -105,14 +113,6 @@ class TournamentCreate extends Component {
               <option>7</option>
               <option>8</option>
             </select>
-          </div>
-          <div className="from-group">
-            <label>Description</label>
-            <textarea
-              className="form-control"
-              rows="3"
-              onChange={this.handleDescriptionChange}
-            ></textarea>
           </div>
           <div className="form-group">
             <button

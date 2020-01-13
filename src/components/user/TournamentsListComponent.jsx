@@ -4,8 +4,7 @@ class MyTournamentsList extends Component {
 
   onClick() {
     this.props.history.push({
-      pathname: "/tournament",
-      id: this.props.object.id
+      pathname: "/tournament/" + this.props.object.id
     });
   }
 
@@ -17,7 +16,7 @@ class MyTournamentsList extends Component {
       start = ", Tournament started!"
     }
     return (
-        <tr onClick={() => this.onClick()}>
+        <tr onClick={this.props.history.push('/tournament/' + this.props.object.id)}>
           {this.props.object.name}, {this.props.object.teams.length}/{this.props.object.numberOfTeams}{start}
         </tr>
     )

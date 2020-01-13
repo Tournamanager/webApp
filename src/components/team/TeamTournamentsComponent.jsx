@@ -2,18 +2,11 @@ import React, { Component } from 'react';
 
 class TeamTournamentsComponent extends Component {
 
-    onClick(id) {
-        this.props.history.push({
-            pathname: "/tournament",
-            id: id
-        });
-    }
-
-    listItems = () => {
+    listItems = () => (
         this.props.tournaments.map((item) => {
-            return <li key={item.id} className="list-group-item" onClick={() => this.onClick(item.id)}>{item.name}</li>
+            return <li key={item.id} className="list-group-item" onClick={() => this.props.history.push("/tournament/" + item.id)}>{item.name}</li>
         })
-    }
+    )
 
     render() {
         return (

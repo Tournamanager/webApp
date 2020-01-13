@@ -2,16 +2,9 @@ import React, { Component } from "react";
 
 class TeamListComponent extends Component {
 
-    onClick() {
-        this.props.history.push({
-            pathname: "/team",
-            id: this.props.object.id
-        });
-    }
-
     render() {
         return (
-            <tr onClick={() => this.onClick()}>
+            <tr onClick={() => this.props.history.push('/team/' + this.props.object.id)}>
                 <td width="50%">
                     {this.props.object.name}
                 </td>
