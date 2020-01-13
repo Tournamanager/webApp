@@ -27,7 +27,9 @@ class CreateTeamView extends Component {
       type: "String",
       value: this.state.selectedName
     }])
-    .then(response => this.setState({team: response.data.data.team}))
+    .then(() => {
+      this.props.history.push({ pathname: "/teams" });
+    })
   }
 
   render() {

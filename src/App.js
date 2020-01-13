@@ -13,11 +13,11 @@ import AllTeamsView from "./views/team/AllTeamsView";
 import TeamDetailsView from "./views/team/TeamDetailsView";
 import TournamentDetailsView from "./views/tournament/TournamentDetailsView";
 import AccountUser from "./views/user/AccountUserView";
-import TournamentCreate from "./components/tournament/TournamentCreateComponent";
+import TournamentCreate from "./views/tournament/TournamentCreateView";
 import AddUserToTeamView from "./views/team/AddUserToTeamView";
 import MatchView from "./views/match/MatchView";
 import TournamentDelete from "./components/tournament/TournamentDeleteComponent";
-import TournamentEdit from "./components/tournament/TournamentEditComponent";
+import TournamentEdit from "./views/tournament/TournamentEditView";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
@@ -61,7 +61,7 @@ class App extends Component {
           <Route path="/user/account" component={AccountUser} />
           <Route path="/createTournament" component={TournamentCreate} />
           <Route path="/deleteTournament" component={TournamentDelete}/>
-          <Route path="/editTournament" component={TournamentEdit}/>
+          <Route path="/editTournament/:id" component={TournamentEdit}/>
         </Switch>
       </BrowserRouter>
     );

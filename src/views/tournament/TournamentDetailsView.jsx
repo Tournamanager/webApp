@@ -9,11 +9,11 @@ class TournamentDetailsView extends Component {
     this.state = {};
   }
 
-  getTournament(id) {
+  getTournament() {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
-      "name numberOfTeams description teams{name} matches{teamHome {name} teamAway {name} date}",
+      "id name numberOfTeams description teams{name} matches{teamHome {name} teamAway {name} date}",
       [
         {
           name: "id",
@@ -27,7 +27,7 @@ class TournamentDetailsView extends Component {
   }
 
   componentDidMount() {
-    this.getTournament(this.props.location.id);
+    this.getTournament();
   }
 
   getUpcomingMatches() {
@@ -65,7 +65,7 @@ class TournamentDetailsView extends Component {
       <div>
         <div className={"row"}>
           <h1 className={"col-sm-11"}>{this.state.tournament.name}</h1>
-          <button onClick={() => this.props.history.push("/editTournament")}>Edit</button>
+          <button onClick={() => this.props.history.push("/editTournament/" + this.state.tournament.id)}>Edit</button>
         </div>
         <div className={"row justify-content-md-center"}>
           <div className={"col-sm-4"}>
