@@ -40,6 +40,7 @@ class TeamDetailsView extends Component {
           <TeamMembersComponent
             members={this.state.team.users}
             teamId={this.state.team.id}
+            {...this.props}
           />
         </div>
         <div className="text-center">

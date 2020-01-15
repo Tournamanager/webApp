@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import FirebaseAuthView from "./views/firebase/FirebaseAuthView";
 import AllUsersView from "./views/user/AllUsersView";
-import ProfileView from "./views/user/ProfileUserView";
+import UserDetailsView from "./views/user/UserDetailsView";
 import HomeView from "./views/HomeView";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import firebase from "firebase";
@@ -53,7 +53,7 @@ class App extends Component {
           <Route path="/login" component={FirebaseAuthView} />
           <Route path="/users" component={AllUsersView} />
           <Route path="/tournaments" component={AllTournamentsView} />
-          <Route path="/user/profile" component={ProfileView} />
+          <Route path="/user/:id" component={UserDetailsView} />
           <Route path="/team/create" component={CreateTeamView} />
           <Route path="/teams" component={AllTeamsView} />
           <Route path="/match/:id" component={MatchView} />

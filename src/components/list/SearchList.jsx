@@ -80,7 +80,7 @@ class SearchList extends Component {
               ))
             ) : this.props.src === "users" ? (
               this.state.filteredObjects.map(object => (
-                <UserListComponent key={object.id} object={object} />
+                <UserListComponent key={object.id} object={object} {...this.props} />
               ))
             ) : this.props.src === "addUsers" ? (
                 this.state.filteredObjects.map(object => (

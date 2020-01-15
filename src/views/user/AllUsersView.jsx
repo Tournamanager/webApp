@@ -24,7 +24,7 @@ class AllUsersView extends Component {
                 firebase.firestore().collection('users').doc(user.uuid)
                     .get().then(doc => {
                   if (doc.exists) {
-                    users.push({id: user.id, name: doc.data().username})
+                    users.push({uuid: user.uuid, id: user.id, name: doc.data().username})
                     this.setState({users: users, isSet: true})
                   }
                 })
@@ -44,7 +44,7 @@ class AllUsersView extends Component {
     return (
       <div>
         <h1 className="ml-3">All Users</h1>
-        <SearchList objects={this.state.users} isSet={this.state.isSet} src="users"/>
+        <SearchList objects={this.state.users} isSet={this.state.isSet} src="users" {...this.props}/>
       </div>
     );
   }
