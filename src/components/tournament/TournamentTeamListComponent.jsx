@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 
 class TournamentTeamListComponent extends Component {
-
     render() {
         return (
             this.props.teams.length >= 1 ?

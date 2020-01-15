@@ -7,13 +7,15 @@ class TournamentDetailsView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.startTournament = this.startTournament.bind(this)
   }
 
   getTournament() {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
-      "id name numberOfTeams description teams{name} matches{teamHome {name} teamAway {name} date}",
+      "id name numberOfTeams description teams{name}",
       [
         {
           name: "id",
@@ -22,6 +24,7 @@ class TournamentDetailsView extends Component {
         }
       ]
     ).then(response =>
+      // console.log(response.data.data.tournament)
       this.setState({ tournament: response.data.data.tournament })
     );
   }
@@ -30,31 +33,26 @@ class TournamentDetailsView extends Component {
     this.getTournament();
   }
 
-  getUpcomingMatches() {
-    let upcomingMatches = [];
-    for (let match of this.state.tournament.matches) {
-      if (new Date(match.date) >= new Date()) {
-        upcomingMatches.push(match);
-      }
-    }
-    return upcomingMatches;
-  }
-
-  getPassedMatches() {
-    let passedMatches = [];
-    for (let match of this.state.tournament.matches) {
-      if (new Date(match.date) < new Date()) {
-        passedMatches.push(match);
-      }
-    }
-    return passedMatches;
-  }
-
   startTournament() {
-    ApiCommunication.graphQLRequest("mutation", "generateMatches", "id", [
-      { name: "id", type: "Int", value: this.state.tournament.id },
-      { name: "method", type: "String", value: "competition"}
-    ])
+    // ApiCommunication.graphQLRequest("mutation", "generateMatches", "id name numberOfTeams description teams{name} rounds{ matches{id}}", [
+    //   { name: "id", type: "Int", value: this.state.tournament.id },
+    //   { name: "method", type: "String", value: "competition" }
+
+    // ]).then(response =>
+    this.setState({
+      tournament: {
+        id: 1,
+        name: "Luuks Tournament",
+        numberOfTeams: 4,
+        description: "",
+        teams: [{ name: "Luuks Team" }, { name: "loydd" }, { name: "Test team styling" }, { name: "Test team" }],
+        rounds: [
+          [{ home: { name: "Luuks Team" }, away: { name: "Loydd" } }, { home: { name: "Test team styling" }, away: { name: "Test team" } }],
+          [{ home: { name: "loydd" }, away: { name: "Test team styling" } }]
+        ]
+      }
+    }, () => console.log(this.state))
+    // );
   }
 
   render() {
@@ -63,36 +61,30 @@ class TournamentDetailsView extends Component {
         <p> Tournament not found. Try a different tournament! </p>
       </div>
     ) : (
-      <div>
-        <div className={"row"}>
-          <h1 className={"col-sm-11"}>{this.state.tournament.name}</h1>
-          <button onClick={() => this.props.history.push("/editTournament/" + this.state.tournament.id)}>Edit</button>
-        </div>
-        <div className={"row justify-content-md-center"}>
-          <div className={"col-sm-4"}>
-            <TournamentTeamListComponent
-              teams={this.state.tournament.teams}
-              numberOfTeams={this.state.tournament.numberOfTeams}
-              class="col-sm"
-            />
+        <div>
+          <div className={"row"}>
+            <h1 className={"col-sm-11"}>{this.state.tournament.name}</h1>
+            <button onClick={() => this.props.history.push("/editTournament/" + this.state.tournament.id)}>Edit</button>
           </div>
-          <div className={"col-sm-8"}>
-            <div>
-              <h5>Matches</h5>
-              <TournamentMatchListComponent
-                matches={this.getUpcomingMatches()}
-                {...this.props}
+          <div className={"row justify-content-md-center"}>
+            <div className={"col-sm-4"}>
+              <TournamentTeamListComponent
+                teams={this.state.tournament.teams}
+                numberOfTeams={this.state.tournament.numberOfTeams}
+                class="col-sm"
               />
             </div>
             <div>
-              <h5>Match History</h5>
-              <TournamentMatchListComponent matches={this.getPassedMatches()} />
+              {
+                this.state.tournament.rounds.map(
+                  <p>test</p>
+                )
+              }
             </div>
           </div>
+          <button onClick={() => this.startTournament()}>Start Tournament</button>
         </div>
-        <button onClick={() => this.startTournament}>Start Tournament</button>
-      </div>
-    );
+      );
   }
 }
 
