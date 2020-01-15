@@ -40,8 +40,10 @@ class UserDetailsView extends Component {
                         .then(doc => {
                             if (doc.exists) {
                                 var user = response.data.data.user;
-                                user.email = doc.data().username;
-                                this.setState({user: user})
+                                if (user != null) {
+                                    user.email = doc.data().username;
+                                    this.setState({user: user})
+                                }
                             }
                         });
                 }
