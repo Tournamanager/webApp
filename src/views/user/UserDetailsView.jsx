@@ -51,12 +51,10 @@ class UserDetailsView extends Component {
 
         ApiCommunication.graphQLRequest("query", "matches", "id teamHome {name users {uuid}} teamAway {name users {uuid}} date")
             .then(response => {
-                console.log(response)
                 this.setState({matches: response.data.data.matches.filter(match => match.teamHome.users.includes(this.state.uuid) || match.teamAway.users.includes(this.state.uuid))})
-                console.log(this.state) //todo: make sure matches works
             });
 
-        ApiCommunication.graphQLRequest("query","tournaments","id name teams {id users {uuid}} numberOfTeams matches {id}")
+        ApiCommunication.graphQLRequest("query","tournaments","id name teams {id users {uuid}} numberOfTeams")
             .then(response => {
                 this.setState({tournaments: response.data.data.tournaments.filter(tournament => {return tournament.teams.some(team => {return team.users.some(user => { return user.uuid === this.state.uuid })})})})
             });
