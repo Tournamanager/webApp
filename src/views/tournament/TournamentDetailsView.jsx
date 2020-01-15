@@ -7,12 +7,9 @@ class TournamentDetailsView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    this.redirectEdit = this.redirectEdit.bind(this);
-    this.startTournament = this.startTournament.bind(this);
   }
 
-  getTournament(id) {
+  getTournament() {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
@@ -21,7 +18,7 @@ class TournamentDetailsView extends Component {
         {
           name: "id",
           type: "ID",
-          value: id
+          value: this.props.match.params.id
         }
       ]
     ).then(response =>
@@ -30,7 +27,7 @@ class TournamentDetailsView extends Component {
   }
 
   componentDidMount() {
-    this.getTournament(this.props.location.id);
+    this.getTournament();
   }
 
   getUpcomingMatches() {
@@ -60,13 +57,6 @@ class TournamentDetailsView extends Component {
     ])
   }
 
-  redirectEdit() {
-    this.props.history.push({
-      pathname: "/editTournament",
-      id: this.state.tournament.id
-    });
-  }
-
   render() {
     return this.state.tournament == null ? (
       <div className={"alert-warning"}>
@@ -76,7 +66,7 @@ class TournamentDetailsView extends Component {
       <div>
         <div className={"row"}>
           <h1 className={"col-sm-11"}>{this.state.tournament.name}</h1>
-          <button onClick={this.redirectEdit}>Edit</button>
+          <button onClick={() => this.props.history.push("/editTournament/" + this.state.tournament.id)}>Edit</button>
         </div>
         <div className={"row justify-content-md-center"}>
           <div className={"col-sm-4"}>
@@ -100,7 +90,7 @@ class TournamentDetailsView extends Component {
             </div>
           </div>
         </div>
-        <button onClick={this.startTournament}>Start Tournament</button>
+        <button onClick={() => this.startTournament}>Start Tournament</button>
       </div>
     );
   }

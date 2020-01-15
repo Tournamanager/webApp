@@ -55,21 +55,14 @@ class TeamMembersComponent extends Component {
       );
     });
   }
-
-  routeTo() {
-    this.props.history.push({
-      pathname: "/addUserToTeam",
-      id: this.state.id
-    });
-  }
-
+  
   render() {
     return (
       <div className="col-md-5" style={{ margin: "0 auto" }}>
         <div>
           <h2 style={{ display: "inline-block" }}>Members</h2>
           <button
-            onClick={() => this.routeTo()}
+            onClick={() => this.props.history.push("/addUserToTeam/" + this.state.id)}
             style={{ verticalAlign: "super", float: "right" }}
             type="button"
             className="btn btn-dark"
