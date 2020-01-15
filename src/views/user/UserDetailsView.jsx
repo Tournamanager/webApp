@@ -5,6 +5,11 @@ import TeamsList from "../../components/user/TeamsListComponent";
 import MatchesList from "../../components/user/MatchesListComponent";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import firebase from "firebase";
+import TeamDetailHeaderComponent from "../team/TeamDetailsView";
+import UserDetailHeaderComponent from "../../components/user/UserDetailHeaderComponent";
+import UserTournamentsComponent from "../../components/user/UserTournamentsComponent";
+import UserMatchesComponent from "../../components/user/UserMatchesComponent";
+import UserTeamsComponent from "../../components/user/UserTeamsComponent";
 
 class UserDetailsView extends Component {
 
@@ -53,33 +58,47 @@ class UserDetailsView extends Component {
 
     }
 
-    render() {
-        return (
-            <div>
-                <Row>
-                    <Col id="teamsCol" md="2">
-                        Teams:
-                        {this.state.teams.map(team => (
-                            -<TeamsList key={team.id} object={team} {...this.state}/>
-                        ))}
-                    </Col>
-                    <Col>
-                        <Row>
-                            Matches:
-                        </Row>
-                        {this.state.matches.map(match => (
-                            <Row>-<MatchesList key={match.id} object={match} {...this.state}/></Row>
-                        ))}
-                        <Row>
-                            Tournaments:
-                        </Row>
-                        {this.state.tournaments.map(tournament => (
-                            <Row>-<TournamentsList key={tournament.id} object={tournament} {...this.state}/></Row>
-                        ))}
-                    </Col>
-                </Row>
-            </div>
-        );
+     render() {
+         return this.state.user == null ? (
+             <div className={"alert-warning"}>
+                 <p> User not found. </p>
+             </div>
+         ) : (
+             <div>
+                 <UserDetailHeaderComponent name="USER" />
+                 <div className="row">
+                     <UserTournamentsComponent tournaments={this.state.tournaments} />
+                     <UserTeamsComponent teams={this.state.teams} />
+                     <UserMatchesComponent matches={this.state.matches} />
+                 </div>
+             </div>
+         );
+    //     return (
+    //         <div>
+    //             <Row>
+    //                 <Col id="teamsCol" md="2">
+    //                     Teams:
+    //                     {this.state.teams.map(team => (
+    //                         -<TeamsList key={"team" + team.id} object={team} {...this.state}/>
+    //                     ))}
+    //                 </Col>
+    //                 <Col>
+    //                     <Row>
+    //                         Matches:
+    //                     </Row>
+    //                     {this.state.matches.map(match => (
+    //                         <Row>-<MatchesList key={"match" + match.id} object={match} {...this.state}/></Row>
+    //                     ))}
+    //                     <Row>
+    //                         Tournaments:
+    //                     </Row>
+    //                     {this.state.tournaments.map(tournament => (
+    //                         <Row>-<TournamentsList key={"tournament" + tournament.id} object={tournament} {...this.state}/></Row>
+    //                     ))}
+    //                 </Col>
+    //             </Row>
+    //         </div>
+    //     );
     }
 }
 
