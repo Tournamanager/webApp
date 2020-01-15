@@ -8,54 +8,36 @@ class MatchEdit extends Component {
     super(props);
 
     this.state = {
-      matchId: 0,
-      tempMatchId: 0,
       changedDate: "",
-      winner: {}
+      winner: "0"
     };
 
-    this.handleIdSubmit = this.handleIdSubmit.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.location.id !== undefined) {
-      this.handleIdSubmit();
-    }
+    this.getMatch();
   }
 
-  handleIdSubmit() {
-    let id;
-    if (this.props.location.id !== undefined) {
-      id = this.props.location.id;
-    }
-    else {
-      id = this.state.tempMatchId;
-    }
-
-    this.setState({
-      matchId: id
-    });
-
+  getMatch() {
     ApiCommunication.graphQLRequest(
       "query",
       "match",
-      "date teamHome{id name} teamAway{id name} winner{id name} date",
+      "id teamHome{id name} teamAway{id name} winner{id name} date",
       [
         {
           name: "id",
           type: "ID",
-          value: id
+          value: this.props.match.params.id
         }
       ]
     ).then(response => {
           let oldDate = response.data.data.match.date; //YYYY-MM-DD
           response.data.data.match.date = oldDate.substr(8, 2) + "/" + oldDate.substr(5,2)+"/"+oldDate.substr(0, 4);//DD/MM/YYYY
-          this.setState({match: response.data.data.match, winner: response.data.data.match.winner})
+          this.setState({match: response.data.data.match, winner: response.data.data.match.winner.id, changedDate: response.data.data.match.date})
         }
     );
-
   }
 
   handleFormSubmit(event) {
@@ -73,7 +55,7 @@ class MatchEdit extends Component {
       {
         name: "winnerId",
         type: "Int",
-        value: this.state.winner.id
+        value: this.state.winner
       },
       { //todo remove
         name: "homeScore",
@@ -85,21 +67,16 @@ class MatchEdit extends Component {
         type: "Int",
         value: 0
       }
-    ]).then(response => console.log(response.data.data));
-    event.preventDefault();
+    ]).then(response => event.preventDefault())
   }
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
   }
 
-  changeSelectedTeam(team){
-    this.setState({winner: team});
-  }
-
   render() {
-    if (this.state.match !== undefined && this.state.match !== null) {
       return (
+        this.state.match ? (
         <div>
           <Row>
             <Col md={3}>
@@ -115,22 +92,12 @@ class MatchEdit extends Component {
                   onChange={this.handleChange}
                 />
                 <div className="list-group">
-                  <a
-                      href="#"
-                      className="list-group-item"
-                      onClick={() => this.changeSelectedTeam(this.state.match.teamHome)}
-                  >
-                    {this.state.match.teamHome.name}
-                  </a>
-                  <a
-                      href="#"
-                      className="list-group-item"
-                      onClick={() => this.changeSelectedTeam(this.state.match.teamAway)}
-                  >
-                    {this.state.match.teamAway.name}
-                  </a>
+                  <select name="winner" className="list-group-item" onChange={this.handleChange} value={this.state.winner}>
+                    <option disabled>select a team</option>
+                    <option value={this.state.match.teamHome.id}>{this.state.match.teamHome.name}</option>
+                    <option value={this.state.match.teamAway.id}>{this.state.match.teamAway.name}</option>
+                  </select>
                 </div>
-                Selected winner: {this.state.winner.name} <br/>
                 <Button
                   variant="primary"
                   type="submit"
@@ -142,32 +109,10 @@ class MatchEdit extends Component {
             </Col>
           </Row>
         </div>
-      );
-    } else {
-      return (
-        <div>
-          <Row style={{ marginLeft: "10px" }}>
-            <Col md={3}>
-              <h6>What Match would you like to edit?</h6>
-              <div className="input-group mb-3">
-                <input
-                  type="text"
-                  name="tempMatchId"
-                  className="form-control"
-                  placeholder="Match Id"
-                  aria-label="Match Id"
-                  aria-describedby="basic-addon1"
-                  onChange={this.handleChange}
-                />
-              </div>
-              <button className="btn btn-primary" onClick={this.handleIdSubmit}>
-                Submit
-              </button>
-            </Col>
-          </Row>
-        </div>
-      );
-    }
+      ): (
+        <div>No Match Found</div>
+      )
+    );
   }
 }
 

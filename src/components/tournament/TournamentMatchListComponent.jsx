@@ -2,19 +2,6 @@ import React, { Component } from "react";
 
 class TournamentMatchListComponent extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.redirectMatch = this.redirectMatch.bind(this);
-    }
-
-    redirectMatch(id) {
-        this.props.history.push({
-            pathname: "/match",
-            id: id
-        });
-    }
-
     render() {
         return (
             this.props.matches.length >= 1 ?
@@ -23,7 +10,7 @@ class TournamentMatchListComponent extends Component {
                         {
                             this.props.matches.map(
                                 match =>
-                                    <div className={"border-bottom  align-self-center"} onClick={() => this.redirectMatch(match.id)}>
+                                    <div className={"border-bottom  align-self-center"} onClick={() => this.props.history.push("/match/" + match.id)}>
                                         <p className={"text-center"}>{match.teamHome.name} VS {match.teamAway.name} {match.date}</p>
                                     </div>
                             )

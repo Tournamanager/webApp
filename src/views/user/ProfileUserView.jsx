@@ -25,16 +25,23 @@ class ProfileUserView extends Component {
         .then(response => {
           this.setState({teams: response.data.data.teams.filter(team => team.users.includes(this.state.uuid))})
         });
+
     ApiCommunication.graphQLRequest("query","matches","id teamHome {name users {uuid}} teamAway {name users {uuid}} date")
         .then(response => {
           this.setState({matches: response.data.data.matches.filter(match => match.teamHome.users.includes(this.state.uuid) || match.teamAway.users.includes(this.state.uuid))})
         });
+
     ApiCommunication.graphQLRequest("query","tournaments","id name teams {id users {uuid}} numberOfTeams matches {id}")
         .then(response => {
           this.setState({tournaments: response.data.data.tournaments.filter(tournament => {
               if (tournament.teams.length > 0)
                 {
-                    return tournament.teams.users.includes(this.state.uuid);
+                    if (tournament.teams.users !== undefined) {
+                        return tournament.teams.users.includes(this.state.uuid);
+                    }
+                    else {
+                        return false;
+                    }
                 }
               else {
                   return false;
@@ -54,7 +61,6 @@ class ProfileUserView extends Component {
                 ))}
           </Col>
           <Col>
-            {/*page should be split horizontally in 2 even parts*/}
             <Row>
               Matches:
             </Row>
