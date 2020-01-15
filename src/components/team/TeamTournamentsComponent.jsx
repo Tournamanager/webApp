@@ -31,7 +31,7 @@ class TeamTournamentsComponent extends Component {
                         onClick={() => this.props.history.push("/joinTournament/" + this.state.id)}
                         style={{ verticalAlign: "super", float: "right" }}
                         type="button"
-                        className="btn btn-dark"
+                        className="btn btn-primary ml-3 mb-1"
                     >
                         <i
                             style={{ verticalAlign: "middle", fontSize: "28px" }}
@@ -45,13 +45,26 @@ class TeamTournamentsComponent extends Component {
                 <ul className="list-group">
                     {this.state.tournaments.map(item => (
                         <li onClick={() => this.props.history.push("/tournament/" + item.id)} key={item.id} className="list-group-item">
-                            {item.name}
-                            <button
-                                className="btn-danger"
-                                onClick={() => this.leaveTournament(item.id)}
-                            >
-                                x
-                            </button>
+                            <div style={{ textAlign: 'left', display: 'inline-block', width: '75%' }}>
+                                {item.name}
+                            </div>
+
+                            <div style={{ textAlign: 'right', display: 'inline-block', width: '25%' }}>
+                                <button
+                                    className="btn ml-3 mb-1"
+                                    onClick={() => this.leaveTournament(item.id)}
+                                    style={{
+                                        padding: '4px',
+                                        color: '#dc3545',
+                                        backgroundColor: '#fff',
+                                        borderColor: '#fff'
+                                    }}
+                                >
+                                    <i style={{ verticalAlign: 'middle' }} class="material-icons">
+                                        clear</i>
+                                </button>
+                            </div>
+
                         </li>
                     ))}
                 </ul>
