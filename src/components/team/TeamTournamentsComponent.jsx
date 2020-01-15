@@ -43,11 +43,8 @@ class TeamTournamentsComponent extends Component {
                 </div>
 
                 <ul className="list-group">
-                    {this.props.tournaments.map((item) => {
-                        return <li key={item.id} className="list-group-item" onClick={() => this.props.history.push("/tournament/" + item.id)}>{item.name}</li>
-                    })}
                     {this.state.tournaments.map(item => (
-                        <li key={item.id} className="list-group-item">
+                        <li onClick={() => this.props.history.push("/tournament/" + item.id)} key={item.id} className="list-group-item">
                             {item.name}
                             <button
                                 className="btn-danger"
