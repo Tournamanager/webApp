@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import SearchList from "../../components/list/SearchList";
-import firebase from "firebase";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
 
