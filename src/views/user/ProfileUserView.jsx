@@ -36,7 +36,12 @@ class ProfileUserView extends Component {
           this.setState({tournaments: response.data.data.tournaments.filter(tournament => {
               if (tournament.teams.length > 0)
                 {
-                    return tournament.teams.users.includes(this.state.uuid);
+                    if (tournament.teams.users !== undefined) {
+                        return tournament.teams.users.includes(this.state.uuid);
+                    }
+                    else {
+                        return false;
+                    }
                 }
               else {
                   return false;

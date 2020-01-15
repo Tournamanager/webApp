@@ -4,45 +4,57 @@ import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import { StyledFirebaseAuth } from "react-firebaseui";
 
 class FirebaseAuthView extends Component {
-    uiConfig = {
-        signInFlow: "popup",
-        signInOptions: [
-            firebase.auth.EmailAuthProvider.PROVIDER_ID
-        ],
-        credentialHelper: 'none',
-        callbacks: {
-            signInSuccessWithAuthResult : () => false
-        }
-    };
+  state = {
+    user: null
+  };
 
-    async saveUserInfo(user) {
-        const ref = firebase.firestore().collection("users").doc(user.uid)
-        ref.get().then(
-            doc => {
-                if (!doc.exists) {
-                    ref.set({uuid: user.uid,username: user.email})
-                }
-            }
-        )
+  uiConfig = {
+    signInFlow: "popup",
+    signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
+    credentialHelper: "none",
+    callbacks: {
+      signInSuccessWithAuthResult: () => false
     }
+  };
 
-    componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            if (user != null) {
-                ApiCommunication.graphQLRequest("mutation", "createUser", "id", [{name:"uuid", type:"String", value: user.uid}]);
-                this.saveUserInfo(user)
-            }
-        })
-    };
+  async saveUserInfo(user) {
+    const ref = firebase
+      .firestore()
+      .collection("users")
+      .doc(user.uid);
+    ref.get().then(doc => {
+      if (!doc.exists) {
+        ref.set({ uuid: user.uid, username: user.email });
+      }
+    });
+  }
 
-    render() {
-        return (
-            <StyledFirebaseAuth
-                uiConfig={this.uiConfig}
-                firebaseAuth={firebase.auth()}
-            />
-        )
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user != null) {
+        ApiCommunication.graphQLRequest("mutation", "createUser", "id", [
+          { name: "uuid", type: "String", value: user.uid }
+        ]);
+        this.saveUserInfo(user);
+        this.setState({ user: user });
+      }
+    });
+  }
+
+  render() {
+    if (this.state.user != null) {
+      this.props.history.push({ pathname: "/", uid: this.state.user.uid });
+      return <div></div>;
     }
+    return (
+      <div>
+        <StyledFirebaseAuth
+          uiConfig={this.uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
+      </div>
+    );
+  }
 }
 
 export default FirebaseAuthView;
