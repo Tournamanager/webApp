@@ -32,7 +32,18 @@ class UserDetailsView extends Component {
             [{name: "uuid", type: "String", value: this.state.uuid}])
             .then(response => {
                 if (response != null) {
-                    this.setState({user: response.data.data.user})
+                    firebase
+                        .firestore()
+                        .collection("users")
+                        .doc(this.state.uuid)
+                        .get()
+                        .then(doc => {
+                            if (doc.exists) {
+                                var user = response.data.data.user;
+                                user.email = doc.data().username;
+                                this.setState({user: user})
+                            }
+                        });
                 }
             });
 
@@ -52,7 +63,6 @@ class UserDetailsView extends Component {
             .then(response => {
                 this.setState({tournaments: response.data.data.tournaments.filter(tournament => {return tournament.teams.some(team => {return team.users.some(user => { return user.uuid === this.state.uuid })})})})
             });
-
     }
 
      render() {
@@ -62,7 +72,7 @@ class UserDetailsView extends Component {
              </div>
          ) : (
              <div>
-                 <UserDetailHeaderComponent name="USER" />
+                 <UserDetailHeaderComponent name={this.state.user.email} />
                  <div className="row">
                      <UserTournamentsComponent tournaments={this.state.tournaments} {...this.props} />
                      <UserTeamsComponent teams={this.state.teams} {...this.props}/>

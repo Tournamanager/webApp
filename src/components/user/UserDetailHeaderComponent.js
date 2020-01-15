@@ -6,7 +6,7 @@ class UserDetailHeaderComponent extends Component {
     render() {
         return (
             <div>
-                <h1 className="jumbotron text-center">Welcome, {this.props.name}</h1>
+                <h1 className="jumbotron text-center">{this.props.name}'s profile</h1>
 
             </div>
         )
