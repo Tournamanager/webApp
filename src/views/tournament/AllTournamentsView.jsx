@@ -9,6 +9,7 @@ class AllTournamentsView extends Component {
       tournaments: [],
       isSet: false
     };
+    this.redirectToTarget = this.redirectToTarget.bind(this)
   }
 
   componentDidMount() {
@@ -30,6 +31,10 @@ class AllTournamentsView extends Component {
 
   setActiveTournament(tournament) {
     alert(tournament.name);
+  }
+
+  redirectToTarget() {
+    this.props.history.push({ pathname: "/createTournament" })
   }
 
   render() {
