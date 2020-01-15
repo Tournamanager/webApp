@@ -35,7 +35,7 @@ class UserDetailsView extends Component {
         ApiCommunication.graphQLRequest("query", "teams", "id name users {uuid}")
             .then(response => {
                 console.log(response)
-                this.setState({teams: response.data.data.teams.filter(team => team.users.includes(this.state.uuid))})
+                this.setState({teams: response.data.data.teams.filter(team => {return team.users.some(user => { return user.uuid === this.state.uuid })})})
             });
 
         ApiCommunication.graphQLRequest("query", "matches", "id teamHome {name users {uuid}} teamAway {name users {uuid}} date")
@@ -44,23 +44,31 @@ class UserDetailsView extends Component {
                 this.setState({matches: response.data.data.matches.filter(match => match.teamHome.users.includes(this.state.uuid) || match.teamAway.users.includes(this.state.uuid))})
             });
 
-        ApiCommunication.graphQLRequest("query", "tournaments", "id name teams {id users {uuid}} numberOfTeams matches {id}")
+        ApiCommunication.graphQLRequest("query","tournaments","id name teams {id users {uuid}} numberOfTeams matches {id}")
             .then(response => {
                 console.log(response)
-                this.setState({
-                    tournaments: response.data.data.tournaments.filter(tournament => {
-                        if (tournament.teams.length > 0) {
-                            if (tournament.teams.users !== undefined) {
-                                return tournament.teams.users.includes(this.state.uuid);
-                            } else {
-                                return false;
-                            }
-                        } else {
-                            return false;
-                        }
-                    })
-                })
+                this.setState({tournaments: response.data.data.tournaments.filter(tournament => {return tournament.teams.some(team => {return team.users.some(user => { return user.uuid === this.state.uuid })})})})
+                console.log(this.state)
             });
+
+        // ApiCommunication.graphQLRequest("query", "tournaments", "id name teams {id users {uuid}} numberOfTeams matches {id}")
+        //     .then(response => {
+        //         console.log(response)
+        //         this.setState({
+        //             tournaments: response.data.data.tournaments.filter(tournament => {
+        //                 if (tournament.teams.length > 0) {
+        //                     if (tournament.teams.users !== undefined) {
+        //                         return tournament.teams.users.includes(this.state.uuid);
+        //                     } else {
+        //                         return false;
+        //                     }
+        //                 } else {
+        //                     return false;
+        //                 }
+        //             })
+        //         })
+        //     });
+
     }
 
     render() {
