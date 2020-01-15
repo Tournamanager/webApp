@@ -11,7 +11,7 @@ class TournamentListComponent extends Component {
   render() {
     return (
       <tr style={{ 'cursor': 'default' }}>
-        <div className="card text-center" style={{ 'margin': '15px auto', 'max-width': '1200px' }}>
+        <div className="card text-center" style={{ margin: '15px auto', maxWidth: '1200px' }}>
           <div className="card-header">
             <h5 className="card-title">{this.props.object.name}</h5>
           </div>
