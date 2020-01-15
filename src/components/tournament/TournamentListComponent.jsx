@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 
 class TournamentListComponent extends Component {
-  redirectToTarget = () => {
-    this.props.history.push({
-      pathname: "/tournament",
-      id: this.props.object.id
-    });
-  };
-
+  
   render() {
     return (
-
       <tr style={{ 'cursor': 'default' }}>
         <div className="card text-center" style={{ 'margin': '15px auto', 'max-width': '1200px' }}>
           <div className="card-header">

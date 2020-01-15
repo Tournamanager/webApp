@@ -13,11 +13,12 @@ import AllTeamsView from "./views/team/AllTeamsView";
 import TeamDetailsView from "./views/team/TeamDetailsView";
 import TournamentDetailsView from "./views/tournament/TournamentDetailsView";
 import AccountUser from "./views/user/AccountUserView";
-import TournamentCreate from "./components/tournament/TournamentCreateComponent";
+import TournamentCreate from "./views/tournament/TournamentCreateView";
 import AddUserToTeamView from "./views/team/AddUserToTeamView";
 import MatchView from "./views/match/MatchView";
 import TournamentDelete from "./components/tournament/TournamentDeleteComponent";
-import TournamentEdit from "./components/tournament/TournamentEditComponent";
+import TournamentEdit from "./views/tournament/TournamentEditView";
+import MatchEdit from "./components/match/MatchEditComponent";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
@@ -54,14 +55,15 @@ class App extends Component {
           <Route path="/user/profile" component={ProfileView} />
           <Route path="/team/create" component={CreateTeamView} />
           <Route path="/teams" component={AllTeamsView} />
-          <Route path="/match" component={MatchView} />
-          <Route path="/team" component={TeamDetailsView} />
-          <Route path="/addUserToTeam" component={AddUserToTeamView} />
-          <Route path="/tournament" component={TournamentDetailsView} />
+          <Route path="/match/:id" component={MatchView} />
+          <Route path="/match-edit/:id" component={MatchEdit}/>
+          <Route path="/team/:id" component={TeamDetailsView} />
+          <Route path="/addUserToTeam/:id" component={AddUserToTeamView} />
+          <Route path="/tournament/:id" component={TournamentDetailsView} />
           <Route path="/user/account" component={AccountUser} />
           <Route path="/createTournament" component={TournamentCreate} />
           <Route path="/deleteTournament" component={TournamentDelete}/>
-          <Route path="/editTournament" component={TournamentEdit}/>
+          <Route path="/editTournament/:id" component={TournamentEdit}/>
         </Switch>
       </BrowserRouter>
     );

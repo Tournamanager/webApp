@@ -23,7 +23,7 @@ class MatchView extends Component {
             [{
                 name: "id",
                 type: "ID",
-                value: this.props.location.id
+                value: this.props.match.params.id
             }]
         ).then(response => this.setState({match: response.data.data.match}));
     }
