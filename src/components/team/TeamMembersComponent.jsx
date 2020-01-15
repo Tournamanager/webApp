@@ -12,6 +12,7 @@ class TeamMembersComponent extends Component {
     };
     this.getAllUsers();
   }
+
   getAllUsers() {
     let users = [];
 
@@ -34,15 +35,6 @@ class TeamMembersComponent extends Component {
       }
     });
   }
-
-  listItems = () =>
-    this.props.members.map(item => {
-      return (
-        <li key={item.id} className="list-group-item">
-          {item.name}
-        </li>
-      );
-    });
 
   unjoin(id) {
     ApiCommunication.graphQLRequest("mutation", "removeUserFromTeam", null, [

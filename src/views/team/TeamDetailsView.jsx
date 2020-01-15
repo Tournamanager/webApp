@@ -17,6 +17,7 @@ class TeamDetailsView extends Component {
       "id name users{id uuid} tournaments {id name}",
       [{name:"id", type:"ID", value: this.props.match.params.id}])
       .then(response => {
+          console.log(response);
         if (response != null) {
           this.setState({ team: response.data.data.team })
         }
@@ -32,7 +33,10 @@ class TeamDetailsView extends Component {
       <div>
         <TeamDetailHeaderComponent name={this.state.team.name} />
         <div className="row">
-          <TeamTournamentsComponent tournaments={this.state.team.tournaments} {...this.props} />
+          <TeamTournamentsComponent {...this.props}
+              tournaments={this.state.team.tournaments}
+              teamId={this.state.team.id}
+          />
           <TeamMembersComponent
             members={this.state.team.users}
             teamId={this.state.team.id}
