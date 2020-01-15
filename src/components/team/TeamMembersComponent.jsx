@@ -69,7 +69,7 @@ class TeamMembersComponent extends Component {
         </div>
         <ul className="list-group">
           {this.state.users.map(item => (
-            <li onClick={() => this.props.history.push('/user/' + item.uuid)} key={item.id} className="list-group-item">
+            <li key={item.id} className="list-group-item">
               <div style={{ textAlign: 'left', display: 'inline-block', width: '75%' }}>
                 {item.name}
               </div>

@@ -45,7 +45,7 @@ class TeamTournamentsComponent extends Component {
                 <ul className="list-group">
                     {this.state.tournaments.map(item => (
                         <li onClick={() => this.props.history.push("/tournament/" + item.id)} key={item.id} className="list-group-item">
-                            <div style={{ textAlign: 'left', display: 'inline-block', width: '75%' }}>
+                            <div style={{ textAlign: 'left', display: 'inline-block', width: '75%', cursor: 'pointer', fontWeight: '400' }}>
                                 {item.name}
                             </div>
 
