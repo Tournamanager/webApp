@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import firebase from "firebase";
-import { StyledFirebaseAuth } from "react-firebaseui";
 
 class HomeView extends Component {
   state = {};
