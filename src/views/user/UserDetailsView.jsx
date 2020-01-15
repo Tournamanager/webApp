@@ -51,24 +51,6 @@ class UserDetailsView extends Component {
                 console.log(this.state)
             });
 
-        // ApiCommunication.graphQLRequest("query", "tournaments", "id name teams {id users {uuid}} numberOfTeams matches {id}")
-        //     .then(response => {
-        //         console.log(response)
-        //         this.setState({
-        //             tournaments: response.data.data.tournaments.filter(tournament => {
-        //                 if (tournament.teams.length > 0) {
-        //                     if (tournament.teams.users !== undefined) {
-        //                         return tournament.teams.users.includes(this.state.uuid);
-        //                     } else {
-        //                         return false;
-        //                     }
-        //                 } else {
-        //                     return false;
-        //                 }
-        //             })
-        //         })
-        //     });
-
     }
 
     render() {
