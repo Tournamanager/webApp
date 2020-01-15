@@ -17,7 +17,7 @@ class TournamentTeamListComponent extends Component {
                     <div className={"border"}>
                         {
                             this.props.teams.map(team => <div className={"border-bottom  align-self-center"}><p
-                                className={"text-center"}>{team.name}</p></div>)
+                                className={"text-center"} onClick={() => this.props.history.push('/team/' + team.id)}>{team.name}</p></div>)
                         }
                     </div>
                 </div> :

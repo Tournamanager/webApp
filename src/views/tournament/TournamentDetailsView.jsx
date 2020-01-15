@@ -13,7 +13,7 @@ class TournamentDetailsView extends Component {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
-      "id name numberOfTeams description teams{name} matches{teamHome {name} teamAway {name} date}",
+      "id name numberOfTeams description teams{id name} matches{teamHome {name} teamAway {name} date}",
       [
         {
           name: "id",
@@ -74,6 +74,7 @@ class TournamentDetailsView extends Component {
               teams={this.state.tournament.teams}
               numberOfTeams={this.state.tournament.numberOfTeams}
               class="col-sm"
+              {...this.props}
             />
           </div>
           <div className={"col-sm-8"}>

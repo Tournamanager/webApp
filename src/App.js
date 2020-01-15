@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import FirebaseAuthView from "./views/firebase/FirebaseAuthView";
 import AllUsersView from "./views/user/AllUsersView";
-import ProfileView from "./views/user/ProfileUserView";
+import UserDetailsView from "./views/user/UserDetailsView";
 import HomeView from "./views/HomeView";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import firebase from "firebase";
@@ -19,6 +19,7 @@ import MatchView from "./views/match/MatchView";
 import TournamentDelete from "./components/tournament/TournamentDeleteComponent";
 import TournamentEdit from "./views/tournament/TournamentEditView";
 import MatchEdit from "./components/match/MatchEditComponent";
+import JoinTournamentView from "./views/team/JoinTournamentView";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDaQdxs3hQ-nDVInjpdhgLbaleRIeIHn-Y",
@@ -52,13 +53,14 @@ class App extends Component {
           <Route path="/login" component={FirebaseAuthView} />
           <Route path="/users" component={AllUsersView} />
           <Route path="/tournaments" component={AllTournamentsView} />
-          <Route path="/user/profile" component={ProfileView} />
+          <Route path="/user/:id" component={UserDetailsView} />
           <Route path="/team/create" component={CreateTeamView} />
           <Route path="/teams" component={AllTeamsView} />
           <Route path="/match/:id" component={MatchView} />
           <Route path="/match-edit/:id" component={MatchEdit}/>
           <Route path="/team/:id" component={TeamDetailsView} />
           <Route path="/addUserToTeam/:id" component={AddUserToTeamView} />
+          <Route path="/joinTournament/:id" component={JoinTournamentView} />
           <Route path="/tournament/:id" component={TournamentDetailsView} />
           <Route path="/user/account" component={AccountUser} />
           <Route path="/createTournament" component={TournamentCreate} />
