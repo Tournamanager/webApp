@@ -32,14 +32,12 @@ class UserDetailsView extends Component {
             [{name: "uuid", type: "String", value: this.state.uuid}])
             .then(response => {
                 if (response != null) {
-                    console.log(response)
                     this.setState({user: response.data.data.user})
                 }
             });
 
         ApiCommunication.graphQLRequest("query", "teams", "id name users {uuid}")
             .then(response => {
-                console.log(response)
                 this.setState({teams: response.data.data.teams.filter(team => {return team.users.some(user => { return user.uuid === this.state.uuid })})})
             });
 
@@ -47,13 +45,12 @@ class UserDetailsView extends Component {
             .then(response => {
                 console.log(response)
                 this.setState({matches: response.data.data.matches.filter(match => match.teamHome.users.includes(this.state.uuid) || match.teamAway.users.includes(this.state.uuid))})
+                console.log(this.state) //todo: make sure matches works
             });
 
         ApiCommunication.graphQLRequest("query","tournaments","id name teams {id users {uuid}} numberOfTeams matches {id}")
             .then(response => {
-                console.log(response)
                 this.setState({tournaments: response.data.data.tournaments.filter(tournament => {return tournament.teams.some(team => {return team.users.some(user => { return user.uuid === this.state.uuid })})})})
-                console.log(this.state)
             });
 
     }
@@ -67,38 +64,12 @@ class UserDetailsView extends Component {
              <div>
                  <UserDetailHeaderComponent name="USER" />
                  <div className="row">
-                     <UserTournamentsComponent tournaments={this.state.tournaments} />
-                     <UserTeamsComponent teams={this.state.teams} />
-                     <UserMatchesComponent matches={this.state.matches} />
+                     <UserTournamentsComponent tournaments={this.state.tournaments} {...this.props} />
+                     <UserTeamsComponent teams={this.state.teams} {...this.props}/>
+                     <UserMatchesComponent matches={this.state.matches} {...this.props}/>
                  </div>
              </div>
          );
-    //     return (
-    //         <div>
-    //             <Row>
-    //                 <Col id="teamsCol" md="2">
-    //                     Teams:
-    //                     {this.state.teams.map(team => (
-    //                         -<TeamsList key={"team" + team.id} object={team} {...this.state}/>
-    //                     ))}
-    //                 </Col>
-    //                 <Col>
-    //                     <Row>
-    //                         Matches:
-    //                     </Row>
-    //                     {this.state.matches.map(match => (
-    //                         <Row>-<MatchesList key={"match" + match.id} object={match} {...this.state}/></Row>
-    //                     ))}
-    //                     <Row>
-    //                         Tournaments:
-    //                     </Row>
-    //                     {this.state.tournaments.map(tournament => (
-    //                         <Row>-<TournamentsList key={"tournament" + tournament.id} object={tournament} {...this.state}/></Row>
-    //                     ))}
-    //                 </Col>
-    //             </Row>
-    //         </div>
-    //     );
     }
 }
 
