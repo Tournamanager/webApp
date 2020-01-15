@@ -33,9 +33,9 @@ class CreateTeamView extends Component {
 
   render() {
     return (
-      <div className="container contact-form" style={{ backgroundColor: '#fbfbfb', border: '1px solid #eeeeee', borderRadius: '30px' }}>
-        <div className="contact-image">
-          <img src={logo} alt="rocket_contact" style={{ borderRadius: '50%', overflow: 'hidden', width: '200px', height: '200px' }} />
+      <div class="container contact-form" style={{ backgroundColor: '#fbfbfb', border: '1px solid #eeeeee', borderRadius: '30px' }}>
+        <div class="contact-image">
+          <img src={logo} alt="rocket_contact" style={{ borderRadius: '50%', overflow: 'hidden' }} />
         </div>
         <form method="post" onSubmit={this.handleSubmit}>
           <h3>Create team</h3>
@@ -44,9 +44,12 @@ class CreateTeamView extends Component {
               <div className="form-group">
                 <input type="text" name="txtName" className="form-control" placeholder="Team name *" onChange={this.handleNameChange} />
               </div>
-              <div className="form-group">
-                <input type="submit" name="btnSubmit" className="btnContact" value="Create" onClick={this.submitTeam} />
+              <div class="col-md-6" style={{ paddingLeft: '0' }}>
+                <div class="form-group">
+                  <input type="submit" name="btnSubmit" class="btnContact" value="Create" onClick={this.submitTeam} />
+                </div>
               </div>
+
             </div>
 
           </div>
