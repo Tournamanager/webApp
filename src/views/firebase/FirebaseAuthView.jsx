@@ -7,6 +7,7 @@ class FirebaseAuthView extends Component {
   state = {
     user: null
   };
+
   uiConfig = {
     signInFlow: "popup",
     signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
@@ -42,7 +43,7 @@ class FirebaseAuthView extends Component {
 
   render() {
     if (this.state.user != null) {
-      this.props.history.push({ pathname: "/" });
+      this.props.history.push({ pathname: "/", uid: this.state.user.uid });
       return <div></div>;
     }
     return (
