@@ -22,17 +22,6 @@ class TeamTournamentsComponent extends Component {
         });
     }
 
-    componentDidMount() {
-        this.getAllTournamentsThisTeamIn();
-    }
-
-    getAllTournamentsThisTeamIn() {
-        ApiCommunication.graphQLRequest("query","tournaments","id name teams {id users {uuid}} numberOfTeams matches {id}")
-            .then(response => {
-                this.setState({tournaments: response.data.data.tournaments.filter(tournament => {return tournament.teams.some(team => { return team.id === this.props.teamId})})})
-            });
-    }
-
     render() {
         return (
             <div className="col-md-5" style={{ margin: '0 auto' }}>
