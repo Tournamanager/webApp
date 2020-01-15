@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import TournamentTeamListComponent from "../../components/tournament/TournamentTeamListComponent";
-import TournamentMatchListComponent from "../../components/tournament/TournamentMatchListComponent";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
 class TournamentDetailsView extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {}
 
     this.startTournament = this.startTournament.bind(this)
   }
@@ -23,9 +22,11 @@ class TournamentDetailsView extends Component {
           value: this.props.match.params.id
         }
       ]
-    ).then(response =>
+    ).then(response => {
       // console.log(response.data.data.tournament)
-      this.setState({ tournament: response.data.data.tournament })
+      let tournament = response.data.data.tournament;
+      tournament.rounds =  [];
+      this.setState({ tournament: tournament })}
     );
   }
 
@@ -39,10 +40,11 @@ class TournamentDetailsView extends Component {
     //   { name: "method", type: "String", value: "competition" }
 
     // ]).then(response =>
+
     this.setState({
       tournament: {
         id: 1,
-        name: "Luuks Tournament",
+        name: "Luuks  Tournament",
         numberOfTeams: 4,
         description: "",
         teams: [{ name: "Luuks Team" }, { name: "loydd" }, { name: "Test team styling" }, { name: "Test team" }],
@@ -51,7 +53,8 @@ class TournamentDetailsView extends Component {
           [{ home: { name: "loydd" }, away: { name: "Test team styling" } }]
         ]
       }
-    }, () => console.log(this.state))
+    }, () => {console.log(this.state, 'state')})
+
     // );
   }
 
@@ -72,13 +75,13 @@ class TournamentDetailsView extends Component {
                 teams={this.state.tournament.teams}
                 numberOfTeams={this.state.tournament.numberOfTeams}
                 class="col-sm"
+                {...this.props}
               />
             </div>
             <div>
               {
-                this.state.tournament.rounds.map(
-                  <p>test</p>
-                )
+                this.state.tournament.rounds.map(round =>
+                round.map(match => <p className={"text-center"}>{match.home.name} VS {match.away.name}</p>))
               }
             </div>
           </div>
