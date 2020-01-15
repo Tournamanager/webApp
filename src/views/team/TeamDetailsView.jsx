@@ -5,25 +5,22 @@ import TeamMembersComponent from "../../components/team/TeamMembersComponent";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
 class TeamDetailsView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: this.props.location.id
-    };
-  }
-
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
 
   componentDidMount() {
     ApiCommunication.graphQLRequest(
       "query",
       "team",
-      "name users{id uuid} tournaments {id name}",
-      [{ name: "id", type: "ID", value: this.state.id }]
-    ).then(response => {
-      if (response != null) {
-        this.setState({ team: response.data.data.team });
-      }
-    });
+      "id name users{id uuid} tournaments {id name}",
+      [{name:"id", type:"ID", value: this.props.match.params.id}])
+      .then(response => {
+        if (response != null) {
+          this.setState({ team: response.data.data.team })
+        }
+    })
   }
 
   render() {
@@ -38,17 +35,17 @@ class TeamDetailsView extends Component {
           <TeamTournamentsComponent teamId={this.state.id} />
           <TeamMembersComponent
             members={this.state.team.users}
-            teamId={this.state.id}
+            teamId={this.state.team.id}
           />
         </div>
         <div className="text-center">
-                        <button
-                            className="btn-danger"
-                            style={{ width: "60%" }}
-                            onClick={() => this.deleteThis(this.state.id)}>
-                            <h2>delete team</h2>
-                        </button>
-         </div>
+          <button
+            className="btn-danger"
+            style={{ width: "60%" }}
+            onClick={() => this.deleteThis(this.state.id)}>
+            <h2>delete team</h2>
+          </button>
+        </div>
       </div>
     );
   }

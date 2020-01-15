@@ -13,6 +13,12 @@ class TeamTournamentsComponent extends Component {
     selectTournament(id) {
         alert(id);
     }
+    
+    listItems = () => (
+        this.props.tournaments.map((item) => {
+            return <li key={item.id} className="list-group-item" onClick={() => this.props.history.push("/tournament/" + item.id)}>{item.name}</li>
+        })
+    )
 
     componentDidMount() {
         this.getAllTournamentsThisTeamIn();
