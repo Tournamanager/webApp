@@ -35,7 +35,7 @@ class CreateTeamView extends Component {
     return (
       <div className="container contact-form" style={{ backgroundColor: '#fbfbfb', border: '1px solid #eeeeee', borderRadius: '30px' }}>
         <div className="contact-image">
-          <img src={logo} alt="rocket_contact" style={{ borderRadius: '50%', overflow: 'hidden', width: '150px', height: '150px' }} />
+          <img src={logo} alt="rocket_contact" style={{ borderRadius: '50%', overflow: 'hidden', width: '200px', height: '200px' }} />
         </div>
         <form method="post" onSubmit={this.handleSubmit}>
           <h3>Create team</h3>
