@@ -4,7 +4,7 @@ class UsersListComponent extends Component {
 
     render() {
         return (
-            <tr>
+            <tr onClick={() => this.props.history.push('/user/' + this.props.object.uuid)}>
                 <td width="50%">
                     {this.props.object.name}
                 </td>

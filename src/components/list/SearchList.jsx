@@ -3,6 +3,7 @@ import TournamentListComponent from "../tournament/TournamentListComponent";
 import TeamsListComponent from "../team/TeamListComponent";
 import UserListComponent from "../user/UsersListComponent";
 import AddUserListComponent from "../user/AddUserListComponent";
+import JoinTeamListComponent from "../team/JoinTeamListComponent";
 
 class SearchList extends Component {
   constructor(props) {
@@ -79,13 +80,17 @@ class SearchList extends Component {
               ))
             ) : this.props.src === "users" ? (
               this.state.filteredObjects.map(object => (
-                <UserListComponent key={object.id} object={object} />
+                <UserListComponent key={object.id} object={object} {...this.props} />
               ))
             ) : this.props.src === "addUsers" ? (
+                this.state.filteredObjects.map(object => (
+                    <AddUserListComponent key={object.id} object={object} {...this.props} />
+                ))
+            ) : this.props.src === "joinTournament" ? (
               this.state.filteredObjects.map(object => (
-                <AddUserListComponent key={object.id} object={object} {...this.props} />
+                  <JoinTeamListComponent key={object.id} object={object} {...this.props} />
               ))
-            ) : (
+          ) : (
               <tr>
                 <td>No data to display</td>
               </tr>

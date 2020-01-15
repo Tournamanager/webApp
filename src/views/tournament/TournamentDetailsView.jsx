@@ -15,7 +15,7 @@ class TournamentDetailsView extends Component {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
-      "id name numberOfTeams description teams{name}",
+      "id name numberOfTeams description teams{id name}",
       [
         {
           name: "id",

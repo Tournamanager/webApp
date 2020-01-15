@@ -59,7 +59,7 @@ const NavigationComponent = props => {
                 <DropdownItem>
                   <Link
                     style={{ textDecoration: "inherit", color: "inherit" }}
-                    to="/user/profile"
+                    to={"/user/" + firebase.auth().currentUser.uid}
                   >
                     Profile
                   </Link>
