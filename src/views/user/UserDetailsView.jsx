@@ -75,9 +75,9 @@ class UserDetailsView extends Component {
          ) : (
              <div>
                  <UserDetailHeaderComponent name={this.state.user.email} />
-                 <div className="row">
-                     <UserTournamentsComponent tournaments={this.state.tournaments} {...this.props} />
+                 <div className="row justify-content-center">
                      <UserTeamsComponent teams={this.state.teams} {...this.props}/>
+                     <UserTournamentsComponent tournaments={this.state.tournaments} {...this.props} />
                      <UserMatchesComponent matches={this.state.matches} {...this.props}/>
                  </div>
              </div>
