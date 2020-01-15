@@ -1,15 +1,28 @@
 import React, { Component } from "react";
 
 class TournamentListComponent extends Component {
-  
+  redirectToTarget = () => {
+    this.props.history.push({
+      pathname: "/tournament/" + this.props.object.id
+    });
+  };
+
+
   render() {
     return (
-      <tr onClick={() => this.props.history.push("/tournament/" + this.props.object.id)}>
-        <td width="50%">{this.props.object.name}</td>
-        <td width="50%">
-          Teams: {this.props.object.teams.length}/
-          {this.props.object.numberOfTeams}
-        </td>
+      <tr style={{ 'cursor': 'default' }}>
+        <div className="card text-center" style={{ 'margin': '15px auto', 'max-width': '1200px' }}>
+          <div className="card-header">
+            <h5 className="card-title">{this.props.object.name}</h5>
+          </div>
+          <div className="card-body">
+            <p className="card-text">{this.props.object.description}</p>
+            <a href="#" className="btn btn-primary" onClick={() => this.redirectToTarget()}>Details</a>
+          </div>
+          <div className="card-footer text-muted">
+            Teams: {this.props.object.teams.length}/{this.props.object.numberOfTeams}
+          </div>
+        </div>
       </tr>
     );
   }
