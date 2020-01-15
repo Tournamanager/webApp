@@ -10,6 +10,15 @@ class TeamDetailsView extends Component {
     this.state = {};
   }
 
+    deleteThis() {
+        ApiCommunication.graphQLRequest(
+            "mutation",
+            "deleteTeam",
+            null,
+            [{ name: "id", type: "Int", value: this.state.team.id }])
+            .then(this.props.history.push({ pathname: "/teams" }))
+    }
+
   componentDidMount() {
     ApiCommunication.graphQLRequest(
       "query",

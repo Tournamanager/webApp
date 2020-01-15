@@ -1,11 +1,6 @@
 import React, {Component} from "react";
-import {Row, Col} from "react-bootstrap";
-import TournamentsList from "../../components/user/TournamentsListComponent";
-import TeamsList from "../../components/user/TeamsListComponent";
-import MatchesList from "../../components/user/MatchesListComponent";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import firebase from "firebase";
-import TeamDetailHeaderComponent from "../team/TeamDetailsView";
 import UserDetailHeaderComponent from "../../components/user/UserDetailHeaderComponent";
 import UserTournamentsComponent from "../../components/user/UserTournamentsComponent";
 import UserMatchesComponent from "../../components/user/UserMatchesComponent";
