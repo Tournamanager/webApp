@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 
 class TournamentListComponent extends Component {
-    redirectToTarget = () => {
+  redirectToTarget = () => {
     this.props.history.push({
-      pathname: "/tournament",
-      id: this.props.object.id
+      pathname: "/tournament/" + this.props.object.id
     });
   };
 
-  
+
   render() {
     return (
       <tr style={{ 'cursor': 'default' }}>
