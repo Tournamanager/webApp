@@ -1,6 +1,19 @@
 import React, { Component } from "react";
 
+import firebase from "firebase";
+import { StyledFirebaseAuth } from "react-firebaseui";
+
 class HomeView extends Component {
+  state = {};
+
+  checkForUser() {
+    if (firebase.auth().currentUser !== null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     return (
       <div style={{ width: "80%", margin: "2% auto" }}>
@@ -27,9 +40,15 @@ class HomeView extends Component {
             Tournamanager you will be able to easily keep track of the match
             dates, match history and participating teams.
           </p>
-          <p style={{ textAlign: "center" }}>
-            <a href="/Login">Join now</a>
-          </p>
+          {this.checkForUser() ? (
+            <p style={{ textAlign: "center" }}>
+              <a href="/user/profile">View Profile</a>
+            </p>
+          ) : (
+            <p style={{ textAlign: "center" }}>
+              <a href="/Login">Join now</a>
+            </p>
+          )}
         </div>
       </div>
     );
