@@ -24,7 +24,7 @@ class TeamMembersComponent extends Component {
           .get()
           .then(doc => {
             if (doc.exists) {
-              users.push({ id: user.id, name: doc.data().username });
+              users.push({ uuid: user.uuid, id: user.id, name: doc.data().username });
               this.setState({ users: users });
             }
           });
@@ -77,7 +77,7 @@ class TeamMembersComponent extends Component {
         </div>
         <ul className="list-group">
           {this.state.users.map(item => (
-            <li key={item.id} className="list-group-item">
+            <li onClick={() => this.props.history.push('/user/' + item.uuid)} key={item.id} className="list-group-item">
               {item.name}
               <button
                 className="btn-danger"

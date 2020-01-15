@@ -32,10 +32,11 @@ class TeamDetailsView extends Component {
       <div>
         <TeamDetailHeaderComponent name={this.state.team.name} />
         <div className="row">
-          <TeamTournamentsComponent tournaments={this.state.team.tournaments} />
+          <TeamTournamentsComponent tournaments={this.state.team.tournaments} {...this.props} />
           <TeamMembersComponent
             members={this.state.team.users}
             teamId={this.state.team.id}
+            {...this.props}
           />
         </div>
         <div className="text-center">
