@@ -86,7 +86,7 @@ class TournamentCreate extends Component {
     return (
       <div class="container contact-form" style={{ backgroundColor: '#fbfbfb', border: '1px solid #eeeeee', borderRadius: '30px' }}>
         <div class="contact-image">
-          <img src={logo} alt="rocket_contact" style={{ borderRadius: '50%', overflow: 'hidden', width: '200px', height: '200px' }} />
+          <img src={logo} alt="rocket_contact" style={{ borderRadius: '50%', overflow: 'hidden' }} />
         </div>
         <form method="post" onSubmit={this.handleSubmit}>
           <h3>Create tournament</h3>

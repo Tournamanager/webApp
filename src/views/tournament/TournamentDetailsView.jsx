@@ -53,7 +53,7 @@ class TournamentDetailsView extends Component {
   startTournament() {
     ApiCommunication.graphQLRequest("mutation", "generateMatches", "id", [
       { name: "id", type: "Int", value: this.state.tournament.id },
-      { name: "method", type: "String", value: "competition"}
+      { name: "method", type: "String", value: "competition" }
     ])
   }
 
@@ -63,37 +63,43 @@ class TournamentDetailsView extends Component {
         <p> Tournament not found. Try a different tournament! </p>
       </div>
     ) : (
-      <div>
-        <div className={"row"}>
-          <h1 className={"col-sm-11"}>{this.state.tournament.name}</h1>
-          <button onClick={() => this.props.history.push("/editTournament/" + this.state.tournament.id)}>Edit</button>
-        </div>
-        <div className={"row justify-content-md-center"}>
-          <div className={"col-sm-4"}>
-            <TournamentTeamListComponent
-              teams={this.state.tournament.teams}
-              numberOfTeams={this.state.tournament.numberOfTeams}
-              class="col-sm"
-              {...this.props}
-            />
+        <div>
+          <div>
+            <h1 className="ml-3 text-center">{this.state.tournament.name}
+              <button className="btn btn-primary ml-3 mb-1" onClick={() => this.props.history.push("/editTournament/" + this.state.tournament.id)}>
+                <i style={{ verticalAlign: 'middle', fontSize: '28px' }} class="material-icons">edit</i></button></h1>
+            <hr />
+
           </div>
-          <div className={"col-sm-8"}>
-            <div>
-              <h5>Matches</h5>
-              <TournamentMatchListComponent
-                matches={this.getUpcomingMatches()}
+          <div className={"row justify-content-md-center"} style={{ maxWidth: '1400px', margin: '0 auto' }}>
+            <div className={"col-sm-4"}>
+              <TournamentTeamListComponent
+                teams={this.state.tournament.teams}
+                numberOfTeams={this.state.tournament.numberOfTeams}
+                class="col-sm"
                 {...this.props}
               />
             </div>
-            <div>
-              <h5>Match History</h5>
-              <TournamentMatchListComponent matches={this.getPassedMatches()} />
+            <div className={"col-sm-8"}>
+              <div>
+                <h5>Matches</h5>
+                <TournamentMatchListComponent
+                  matches={this.getUpcomingMatches()}
+                  {...this.props}
+                />
+              </div>
+              <div>
+                <h5>Match History</h5>
+                <TournamentMatchListComponent matches={this.getPassedMatches()} />
+              </div>
             </div>
           </div>
+          <div style={{ textAlign: 'center', padding: '20px 0' }}>
+            <button className="btn btn-primary ml-3 mb-1" onClick={() => this.startTournament}>Start Tournament</button>
+          </div>
+
         </div>
-        <button onClick={() => this.startTournament}>Start Tournament</button>
-      </div>
-    );
+      );
   }
 }
 

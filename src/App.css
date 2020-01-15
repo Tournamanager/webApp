@@ -96,6 +96,7 @@
   border-radius: 6rem;
   width: 11%;
   margin-top: -3%;
+  border: 1px solid #dfdfdf;
   /* transform: rotate(29deg); */
 }
 .contact-form form {
