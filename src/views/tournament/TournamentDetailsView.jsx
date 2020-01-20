@@ -52,23 +52,29 @@ class TournamentDetailsView extends Component {
     ) : (
         <div>
           <div className={"row"}>
-            <h1 className={"col-sm-11"}>{this.state.tournament.name}</h1>
-            <button onClick={() => this.props.history.push("/editTournament/" + this.state.tournament.id)}>Edit</button>
+            <div style={{ width: '100%' }}>
+              <h1 className="ml-3 text-center">{this.state.tournament.name}
+                <button className="btn btn-primary ml-3 mb-1" onClick={() => this.props.history.push("/editTournament/" + this.state.tournament.id)}>
+                  <i style={{ verticalAlign: 'middle', fontSize: '28px' }} className="material-icons">edit</i></button></h1>
+              <hr />
+            </div>
           </div>
+
           <div className={"row justify-content-md-center"}>
             <div className={"col-sm-4"}>
               <TournamentTeamListComponent
                 teams={this.state.tournament.teams}
                 numberOfTeams={this.state.tournament.numberOfTeams}
-                class="col-sm"
+                className="col-sm"
                 {...this.props}
               />
             </div>
           </div>
-          <div className={"row justify-content-md-center"}>
+
+          <div className={"row justify-content-md-center"} style={{ margin: "20px 0px" }}>
             <h4>matches</h4>
             {this.state.tournament.rounds == null ? (
-              <div className={"row justify-content-md-center"}>
+              <div className={"row justify-content-md-center"} style={{ width: '100%', textAlign: 'center' }}>
                 {this.state.tournament.rounds.map(round => (
                   <div className="col">
                     {round.map(match => (
@@ -77,10 +83,14 @@ class TournamentDetailsView extends Component {
                   </div>
                 ))}
               </div>) : (
-                <div className={"row justify-content-md-center"}>No matches have been generated yet</div>
+                <div style={{ width: '100%', textAlign: 'center' }} className={"row justify-content-md-center"}>No matches have been generated yet</div>
               )}
           </div>
-          <button onClick={() => this.startTournament()}>Start Tournament</button>
+
+          <div style={{ textAlign: 'center', padding: '20px 0' }}>
+            <button className="btn btn-primary ml-3 mb-1" onClick={() => this.startTournament}>Start Tournament</button>
+          </div>
+
         </div>
       );
   }

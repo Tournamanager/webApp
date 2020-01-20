@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 class TournamentTeamListComponent extends Component {
     render() {
@@ -15,8 +15,11 @@ class TournamentTeamListComponent extends Component {
                     </div>
                     <div className={"border"}>
                         {
-                            this.props.teams.map(team => <div className={"border-bottom  align-self-center"}><p
-                                className={"text-center"} onClick={() => this.props.history.push('/team/' + team.id)}>{team.name}</p></div>)
+                            this.props.teams.map(team =>
+                                <div style={{ padding: '6px' }} className={"text-center border-bottom  align-self-center"}>
+                                    <span style={{ cursor: 'pointer', fontSize: '20px', padding: '5px', color: '#007BFF', fontWeight: 'bold' }} onClick={() => this.props.history.push('/team/' + team.id)}>{team.name}
+                                    </span>
+                                </div>)
                         }
                     </div>
                 </div> :

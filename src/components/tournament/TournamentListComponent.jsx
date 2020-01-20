@@ -17,7 +17,7 @@ class TournamentListComponent extends Component {
           </div>
           <div className="card-body">
             <p className="card-text">{this.props.object.description}</p>
-            <a href="#" className="btn btn-primary" onClick={() => this.redirectToTarget()}>Details</a>
+            <button className="btn btn-primary" onClick={() => this.redirectToTarget()}>Details</button>
           </div>
           <div className="card-footer text-muted">
             Teams: {this.props.object.teams.length}/{this.props.object.numberOfTeams}
