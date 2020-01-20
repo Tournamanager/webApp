@@ -23,10 +23,10 @@ class TournamentDetailsView extends Component {
         }
       ]
     ).then(response => {
-      // console.log(response.data.data.tournament)
       let tournament = response.data.data.tournament;
-      tournament.rounds =  [];
-      this.setState({ tournament: tournament })}
+      tournament.rounds = [];
+      this.setState({ tournament: tournament })
+    }
     );
   }
 
@@ -35,27 +35,13 @@ class TournamentDetailsView extends Component {
   }
 
   startTournament() {
-    // ApiCommunication.graphQLRequest("mutation", "generateMatches", "id name numberOfTeams description teams{name} rounds{ matches{id}}", [
-    //   { name: "id", type: "Int", value: this.state.tournament.id },
-    //   { name: "method", type: "String", value: "competition" }
+    ApiCommunication.graphQLRequest("mutation", "startTournament", "rounds{ matches{id}}", [
+      { name: "id", type: "Int", value: this.state.tournament.id },
+      { name: "method", type: "String", value: "competition" }
 
-    // ]).then(response =>
-
-    this.setState({
-      tournament: {
-        id: 1,
-        name: "Luuks  Tournament",
-        numberOfTeams: 4,
-        description: "",
-        teams: [{ name: "Luuks Team" }, { name: "loydd" }, { name: "Test team styling" }, { name: "Test team" }],
-        rounds: [
-          [{ home: { name: "Luuks Team" }, away: { name: "Loydd" } }, { home: { name: "Test team styling" }, away: { name: "Test team" } }],
-          [{ home: { name: "loydd" }, away: { name: "Test team styling" } }]
-        ]
-      }
-    }, () => {console.log(this.state, 'state')})
-
-    // );
+    ]).then(response =>
+      this.setState({ tournament: { ...this.state.tournament, rounds: response.data.data.startTournament } })
+    )
   }
 
   render() {
@@ -78,12 +64,21 @@ class TournamentDetailsView extends Component {
                 {...this.props}
               />
             </div>
-            <div>
-              {
-                this.state.tournament.rounds.map(round =>
-                round.map(match => <p className={"text-center"}>{match.home.name} VS {match.away.name}</p>))
-              }
-            </div>
+          </div>
+          <div className={"row justify-content-md-center"}>
+            <h4>matches</h4>
+            {this.state.tournament.rounds == null ? (
+              <div className={"row justify-content-md-center"}>
+                {this.state.tournament.rounds.map(round => (
+                  <div className="col">
+                    {round.map(match => (
+                      <p className={"text-center"}>{match.home.name} VS {match.away.name}</p>
+                    ))}
+                  </div>
+                ))}
+              </div>) : (
+                <div className={"row justify-content-md-center"}>No matches have been generated yet</div>
+              )}
           </div>
           <button onClick={() => this.startTournament()}>Start Tournament</button>
         </div>
