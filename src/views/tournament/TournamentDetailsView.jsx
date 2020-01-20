@@ -14,7 +14,7 @@ class TournamentDetailsView extends Component {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
-      "id name numberOfTeams description teams{id name} rounds{ matches{ id teamHome{ name } teamAway{ name } } date}",
+      "id name numberOfTeams description teams{id name} rounds{ matches{ id teamHome{ name } teamAway{ name } }}",
       [
         {
           name: "id",
@@ -63,7 +63,7 @@ class TournamentDetailsView extends Component {
           </div>
 
           <div className={"row justify-content-md-center"}>
-            <div className={"col-sm-4"}>
+            <div className={"col-sm-8"}>
               <TournamentTeamListComponent
                 teams={this.state.tournament.teams}
                 numberOfTeams={this.state.tournament.numberOfTeams}
@@ -80,7 +80,7 @@ class TournamentDetailsView extends Component {
                 {this.state.tournament.rounds.map(round => (
                   <div className="col-sm-2">
                     {round.matches.map(match => (
-                      <div className={"text-center border"}>
+                      <div className={"text-center border"} style={{ margin: '10px 0px' }}>
                         <span style={{ color: '#007BFF', fontWeight: 'bold', margin: '5px', fontSize: '24px' }}>{match.teamHome.name} </span>
                         VS
                          <span style={{ color: '#007BFF', fontWeight: 'bold', margin: '5px', fontSize: '24px' }}>{match.teamAway.name} </span>
@@ -94,10 +94,6 @@ class TournamentDetailsView extends Component {
           </div>
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
             <button className="btn btn-primary ml-3 mb-1" onClick={() => this.startTournament()}>Start Tournament</button>
-
-          </div>
-          <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <button className="btn btn-primary ml-3 mb-1" onClick={() => this.startTournament}>Start Tournament</button>
           </div>
 
         </div>
