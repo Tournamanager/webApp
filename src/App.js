@@ -53,6 +53,7 @@ class App extends Component {
           <Route path="/login" component={FirebaseAuthView} />
           <Route path="/users" component={AllUsersView} />
           <Route path="/tournaments" component={AllTournamentsView} />
+          <Route path="/user/account" component={AccountUser} />
           <Route path="/user/:id" component={UserDetailsView} />
           <Route path="/team/create" component={CreateTeamView} />
           <Route path="/teams" component={AllTeamsView} />
@@ -62,7 +63,6 @@ class App extends Component {
           <Route path="/addUserToTeam/:id" component={AddUserToTeamView} />
           <Route path="/joinTournament/:id" component={JoinTournamentView} />
           <Route path="/tournament/:id" component={TournamentDetailsView} />
-          <Route path="/user/account" component={AccountUser} />
           <Route path="/createTournament" component={TournamentCreate} />
           <Route path="/deleteTournament" component={TournamentDelete}/>
           <Route path="/editTournament/:id" component={TournamentEdit}/>

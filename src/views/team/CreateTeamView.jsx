@@ -39,10 +39,10 @@ class CreateTeamView extends Component {
         </div>
         <form method="post" onSubmit={this.handleSubmit}>
           <h3>Create team</h3>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <input type="text" name="txtName" class="form-control" placeholder="Team name *" onChange={this.handleNameChange} />
+          <div className="row">
+            <div className="col-md-12">
+              <div className="form-group">
+                <input type="text" name="txtName" className="form-control" placeholder="Team name *" onChange={this.handleNameChange} />
               </div>
               <div class="col-md-6" style={{ paddingLeft: '0' }}>
                 <div class="form-group">
@@ -55,29 +55,6 @@ class CreateTeamView extends Component {
           </div>
         </form>
       </div>
-
-      // <div>
-      //   <Form>
-      //     <Col md="2">
-      //       <Row style={{ marginLeft: "0px" }}>
-      //         <h6>Enter team name:</h6>
-      //         <FormControl
-      //           class="mr-sm-2"
-      //           type="text"
-      //           placeholder="Team name"
-      //           onChange={this.handleNameChange}
-      //         />
-      //       </Row>
-      //       <Button
-      //         onClick={this.submitTeam}
-      //         style={{ marginTop: "10px" }}
-      //         class="btn btn-primary"
-      //       >
-      //         Submit
-      //       </Button>
-      //     </Col>
-      //   </Form>
-      // </div>
     );
   }
 }
