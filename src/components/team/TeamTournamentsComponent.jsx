@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 
 class TeamTournamentsComponent extends Component {
@@ -13,28 +13,28 @@ class TeamTournamentsComponent extends Component {
 
     leaveTournament(id) {
         ApiCommunication.graphQLRequest("mutation", "removeTeamFromTournament", null, [
-            { name: "tournamentId", type: "Int", value: id },
-            { name: "teamId", type: "Int", value: this.state.id }
+            {name: "tournamentId", type: "Int", value: id},
+            {name: "teamId", type: "Int", value: this.state.id}
         ]).then(() => {
             this.setState(
-                { tournaments: this.state.tournaments.filter(tournament => tournament.id !== id) }
+                {tournaments: this.state.tournaments.filter(tournament => tournament.id !== id)}
             );
         });
     }
 
     render() {
         return (
-            <div className="col-md-5" style={{ margin: '0 auto' }}>
+            <div className="col-md-5" style={{margin: '0 auto'}}>
                 <div>
-                    <h2 style={{ display: 'inline-block' }}>Tournaments</h2>
+                    <h2 style={{display: 'inline-block'}}>Tournaments</h2>
                     <button
                         onClick={() => this.props.history.push("/joinTournament/" + this.state.id)}
-                        style={{ verticalAlign: "super", float: "right" }}
+                        style={{verticalAlign: "super", float: "right"}}
                         type="button"
                         className="btn btn-primary ml-3 mb-1"
                     >
                         <i
-                            style={{ verticalAlign: "middle", fontSize: "28px" }}
+                            style={{verticalAlign: "middle", fontSize: "28px"}}
                             className="material-icons"
                         >
                             add_circle
@@ -49,10 +49,14 @@ class TeamTournamentsComponent extends Component {
                                 {item.name}
                             </div>
 
-                            <div style={{ textAlign: 'right', display: 'inline-block', width: '25%' }}>
+                            <div style={{textAlign: 'right', display: 'inline-block', width: '25%'}}>
                                 <button
                                     className="btn ml-3 mb-1"
-                                    onClick={() => this.leaveTournament(item.id)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        this.leaveTournament(item.id);
+                                        window.location.reload();
+                                    }}
                                     style={{
                                         padding: '4px',
                                         color: '#dc3545',
@@ -60,7 +64,7 @@ class TeamTournamentsComponent extends Component {
                                         borderColor: '#fff'
                                     }}
                                 >
-                                    <i style={{ verticalAlign: 'middle' }} class="material-icons">
+                                    <i style={{verticalAlign: 'middle'}} class="material-icons">
                                         clear</i>
                                 </button>
                             </div>

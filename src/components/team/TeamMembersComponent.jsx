@@ -76,7 +76,10 @@ class TeamMembersComponent extends Component {
               <div style={{ textAlign: 'right', display: 'inline-block', width: '25%' }}>
                 <button
                   className="btn ml-3 mb-1"
-                  onClick={() => this.unjoin(item.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    this.unjoin(item.id)
+                  }}
                   style={{
                     padding: '4px',
                     color: '#dc3545',
