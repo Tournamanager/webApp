@@ -80,9 +80,9 @@ class TournamentDetailsView extends Component {
                   <div className="col-sm-2">
                     {round.matches.map(match => (
                       <div className={"text-center border"} style={{ margin: '10px 0px' }}>
-                        <span style={{ color: '#007BFF', fontWeight: 'bold', margin: '5px', fontSize: '24px' }}>{match.teamHome.name} </span>
+                        <span style={{ color: '#007BFF', fontWeight: 'bold', margin: '5px', fontSize: '24px' }}>{match.teamHome !== null && (match.teamHome.name)} </span>
                         VS
-                         <span style={{ color: '#007BFF', fontWeight: 'bold', margin: '5px', fontSize: '24px' }}>{match.teamAway.name} </span>
+                         <span style={{ color: '#007BFF', fontWeight: 'bold', margin: '5px', fontSize: '24px' }}>{match.teamAway !== null && (match.teamAway.name)} </span>
                       </div>
                     ))}
                   </div>
