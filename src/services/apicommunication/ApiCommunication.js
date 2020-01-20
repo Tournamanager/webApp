@@ -17,10 +17,6 @@ class ApiCommunication {
         view.setState({ [target]: response.data.data }
         );
       })
-      .catch(error => {
-        //console.log(error); //DON'T LOG FOR PRODUCTION
-        //console.log(error.response);
-      });
   }
 
   /**
