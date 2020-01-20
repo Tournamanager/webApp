@@ -64,7 +64,6 @@ class TeamDetailsView extends Component {
             <button
               className="btn btn-secondary"
               style={{
-                width: "150px",
                 width: '200px',
                 fontSize: '16px',
                 padding: '4px'

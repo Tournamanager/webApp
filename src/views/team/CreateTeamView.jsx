@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import { Button, Form, Col, Row, FormControl } from "react-bootstrap";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import logo from '../../images/team.png';
 
