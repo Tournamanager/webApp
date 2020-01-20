@@ -68,7 +68,7 @@ class TeamMembersComponent extends Component {
         </div>
         <ul className="list-group">
           {this.state.users.map(item => (
-            <li key={item.id} className="list-group-item">
+            <li onClick={() => this.props.history.push("/user/" + item.uuid)} key={item.id} className="list-group-item">
               <div style={{ textAlign: 'left', display: 'inline-block', width: '75%' }}>
                 {item.name}
               </div>
@@ -76,7 +76,10 @@ class TeamMembersComponent extends Component {
               <div style={{ textAlign: 'right', display: 'inline-block', width: '25%' }}>
                 <button
                   className="btn ml-3 mb-1"
-                  onClick={() => this.unjoin(item.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    this.unjoin(item.id)
+                  }}
                   style={{
                     padding: '4px',
                     color: '#dc3545',
