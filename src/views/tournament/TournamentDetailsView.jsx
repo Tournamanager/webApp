@@ -88,7 +88,7 @@ class TournamentDetailsView extends Component {
           </div>
 
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <button className="btn btn-primary ml-3 mb-1" onClick={() => this.startTournament}>Start Tournament</button>
+            <button className="btn btn-primary ml-3 mb-1" onClick={() => this.startTournament()}>Start Tournament</button>
           </div>
 
         </div>
