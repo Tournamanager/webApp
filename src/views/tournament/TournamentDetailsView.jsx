@@ -63,7 +63,7 @@ class TournamentDetailsView extends Component {
           </div>
 
           <div className={"row justify-content-md-center"}>
-            <div className={"col-sm-8"}>
+            <div className={"col-sm-7"}>
               <TournamentTeamListComponent
                 teams={this.state.tournament.teams}
                 numberOfTeams={this.state.tournament.numberOfTeams}

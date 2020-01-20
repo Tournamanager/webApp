@@ -16,7 +16,7 @@ class TournamentTeamListComponent extends Component {
                     <div className={"border"}>
                         {
                             this.props.teams.map(team =>
-                                <div className="col-sm-6 border glowBg" style={{ display: 'inline-block', color: '#fff' }}>
+                                <div className="col-sm-6 border" style={{ display: 'inline-block', color: '#007BFF', background: '#fff' }}>
                                     <div style={{ padding: '6px' }} className={"text-center  align-self-center"}>
                                         <span style={{ cursor: 'pointer', fontSize: '20px', padding: '5px', fontWeight: 'bold' }} onClick={() => this.props.history.push('/team/' + team.id)}>{team.name}
                                         </span>
