@@ -64,14 +64,6 @@ const NavigationComponent = props => {
                     Profile
                   </Link>
                 </DropdownItem>
-                <DropdownItem>
-                  <Link
-                    style={{ textDecoration: "inherit", color: "inherit" }}
-                    to="/user/account"
-                  >
-                    Account
-                  </Link>
-                </DropdownItem>
                 <div className="dropdown-divider" />
                 <Link
                   className="dropdown-item"
