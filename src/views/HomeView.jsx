@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import firebase from "firebase";
 
@@ -41,11 +42,11 @@ class HomeView extends Component {
           </p>
           {this.checkForUser() ? (
             <p style={{ textAlign: "center" }}>
-              <a href={"/user/" + firebase.auth().currentUser.uid}>View Profile</a>
+              <Link to={"/user/" + firebase.auth().currentUser.uid}>View Profile</Link>
             </p>
           ) : (
               <p style={{ textAlign: "center" }}>
-                <a href="/Login">Join now</a>
+                <Link to="/Login">Join now</Link>
               </p>
             )}
         </div>
