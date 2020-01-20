@@ -78,9 +78,13 @@ class TournamentDetailsView extends Component {
             {this.state.tournament.rounds.length != 0 ? (
               <div className={"row justify-content-md-center"} style={{ width: '100%', textAlign: 'center' }}>
                 {this.state.tournament.rounds.map(round => (
-                  <div className="col">
+                  <div className="col-sm-2">
                     {round.matches.map(match => (
-                      <p className={"text-center"}>{match.teamHome.name} VS {match.teamAway.name}</p>
+                      <div className={"text-center border"}>
+                        <span style={{ color: '#007BFF', fontWeight: 'bold', margin: '5px', fontSize: '24px' }}>{match.teamHome.name} </span>
+                        VS
+                         <span style={{ color: '#007BFF', fontWeight: 'bold', margin: '5px', fontSize: '24px' }}>{match.teamAway.name} </span>
+                      </div>
                     ))}
                   </div>
                 ))}
