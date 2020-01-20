@@ -41,7 +41,7 @@ class HomeView extends Component {
           </p>
           {this.checkForUser() ? (
             <p style={{ textAlign: "center" }}>
-              <a href="/user/profile">View Profile</a>
+              <a href={"/user/" + firebase.auth().currentUser.uid}>View Profile</a>
             </p>
           ) : (
               <p style={{ textAlign: "center" }}>
