@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import firebase from "firebase";
-import { StyledFirebaseAuth } from "react-firebaseui";
 
 class HomeView extends Component {
   state = {};
@@ -16,15 +16,15 @@ class HomeView extends Component {
 
   render() {
     return (
-      <div style={{ width: "80%", margin: "2% auto" }}>
+      <div style={{ minWidth: '400px', width: "80%", margin: "100px auto", textAlign: 'center' }}>
         <img
-          style={{ marginLeft: "380px" }}
+          style={{ margin: "0 auto", minWidth: '400px', width: '50%' }}
           src="https://i.imgur.com/ExjLfdD.png"
           alt="logo"
         />
         <br />
         <br />
-        <div style={{ width: "50%", marginLeft: "400px" }}>
+        <div style={{ margin: "0 auto", minWidth: '400px', width: '50%' }}>
           <h3 style={{ textAlign: "center" }}>Welkom to Tournamanager!!</h3>
           <p style={{ textAlign: "center" }}>
             Managing a tournament usually is quite tedious. As a tournament
@@ -42,13 +42,13 @@ class HomeView extends Component {
           </p>
           {this.checkForUser() ? (
             <p style={{ textAlign: "center" }}>
-              <a href="/user/profile">View Profile</a>
+              <Link to={"/user/" + firebase.auth().currentUser.uid}>View Profile</Link>
             </p>
           ) : (
-            <p style={{ textAlign: "center" }}>
-              <a href="/Login">Join now</a>
-            </p>
-          )}
+              <p style={{ textAlign: "center" }}>
+                <Link to="/Login">Join now</Link>
+              </p>
+            )}
         </div>
       </div>
     );

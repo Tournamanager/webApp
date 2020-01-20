@@ -42,12 +42,11 @@ class TeamMembersComponent extends Component {
       { name: "teamId", type: "Int", value: this.state.id }
     ]).then(() => {
       this.setState(
-        { users: this.state.users.filter(user => user.id !== id) },
-        () => console.log(this.state.users)
+        { users: this.state.users.filter(user => user.id !== id) }
       );
     });
   }
-  
+
   render() {
     return (
       <div className="col-md-5" style={{ margin: "0 auto" }}>
@@ -57,7 +56,7 @@ class TeamMembersComponent extends Component {
             onClick={() => this.props.history.push("/addUserToTeam/" + this.state.id)}
             style={{ verticalAlign: "super", float: "right" }}
             type="button"
-            className="btn btn-dark"
+            className="btn btn-primary ml-3 mb-1"
           >
             <i
               style={{ verticalAlign: "middle", fontSize: "28px" }}
@@ -69,14 +68,27 @@ class TeamMembersComponent extends Component {
         </div>
         <ul className="list-group">
           {this.state.users.map(item => (
-            <li onClick={() => this.props.history.push('/user/' + item.uuid)} key={item.id} className="list-group-item">
-              {item.name}
-              <button
-                className="btn-danger"
-                onClick={() => this.unjoin(item.id)}
-              >
-                x
-              </button>
+            <li key={item.id} className="list-group-item">
+              <div style={{ textAlign: 'left', display: 'inline-block', width: '75%' }}>
+                {item.name}
+              </div>
+
+              <div style={{ textAlign: 'right', display: 'inline-block', width: '25%' }}>
+                <button
+                  className="btn ml-3 mb-1"
+                  onClick={() => this.unjoin(item.id)}
+                  style={{
+                    padding: '4px',
+                    color: '#dc3545',
+                    backgroundColor: '#fff',
+                    borderColor: '#fff'
+                  }}
+                >
+                  <i style={{ verticalAlign: 'middle' }} class="material-icons">
+                    clear</i>
+                </button>
+              </div>
+
             </li>
           ))}
         </ul>
