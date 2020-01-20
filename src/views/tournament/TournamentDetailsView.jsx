@@ -13,7 +13,7 @@ class TournamentDetailsView extends Component {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
-      "id name numberOfTeams description teams{id name} matches{teamHome {name} teamAway {name} date}",
+      "id name numberOfTeams description teams{id name} rounds{matches{teamHome {name} teamAway {name} date}}",
       [
         {
           name: "id",
@@ -32,9 +32,11 @@ class TournamentDetailsView extends Component {
 
   getUpcomingMatches() {
     let upcomingMatches = [];
-    for (let match of this.state.tournament.matches) {
-      if (new Date(match.date) >= new Date()) {
-        upcomingMatches.push(match);
+    for (let round of this.state.tournament.rounds) {
+      for (let match of round) {
+        if (new Date(match.date) >= new Date()) {
+          upcomingMatches.push(match);
+        }
       }
     }
     return upcomingMatches;
@@ -42,9 +44,11 @@ class TournamentDetailsView extends Component {
 
   getPassedMatches() {
     let passedMatches = [];
-    for (let match of this.state.tournament.matches) {
-      if (new Date(match.date) < new Date()) {
-        passedMatches.push(match);
+    for (let round of this.state.tournament.rounds) {
+      for (let match of round) {
+        if (new Date(match.date) < new Date()) {
+          passedMatches.push(match);
+        }
       }
     }
     return passedMatches;
