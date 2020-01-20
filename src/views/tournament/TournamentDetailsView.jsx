@@ -41,7 +41,7 @@ class TournamentDetailsView extends Component {
       ]).then(response => {
         let tournament = this.state.tournament
         tournament.rounds = response.data.data.startTournament.rounds
-        this.setState({ tournament: tournament }, () => console.log(this.state.tournament))
+        this.setState({ tournament: tournament })
       }
       )
   }
@@ -75,7 +75,7 @@ class TournamentDetailsView extends Component {
 
           <div className={"row justify-content-md-center"} style={{ margin: "20px 0px" }}>
             <h4>matches</h4>
-            {this.state.tournament.rounds.length != 0 ? (
+            {this.state.tournament.rounds.length !== 0 ? (
               <div className={"row justify-content-md-center"} style={{ width: '100%', textAlign: 'center' }}>
                 {this.state.tournament.rounds.map(round => (
                   <div className="col-sm-2">
