@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import firebase from "firebase";
+import logo from '../../images/tournamentIcon.png';
 
 class TournamentCreate extends Component {
   constructor(props) {
@@ -83,49 +84,44 @@ class TournamentCreate extends Component {
 
   render() {
     return (
-      <div style={{ width: "400px", allign: "center" }} className="col-md-2">
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label>Tournament name:</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Tournament name..."
-              onChange={this.handleNameChange}
-            />
-          </div>
-          <div className="from-group">
-            <label>Description</label>
-            <textarea
-              className="form-control"
-              rows="3"
-              onChange={this.handleDescriptionChange}
-            ></textarea>
-          </div>
-          <div className="form-group">
-            <label>Number of teams:</label>
-            <select className="form-control" onChange={this.handleNumberChange}>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <button
-              type="submit"
-              className="btn btn-primary"
-              style={{ marginTop: "20px" }}
-            >
-              Create
-            </button>
+      <div class="container contact-form" style={{ backgroundColor: '#fbfbfb', border: '1px solid #eeeeee', borderRadius: '30px' }}>
+        <div class="contact-image">
+          <img src={logo} alt="rocket_contact" style={{ borderRadius: '50%', overflow: 'hidden', width: '200px', height: '200px' }} />
+        </div>
+        <form method="post" onSubmit={this.handleSubmit}>
+          <h3>Create tournament</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <input type="text" name="txtName" class="form-control" placeholder="Tournament name *" onChange={this.handleNameChange} />
+              </div>
+              <div class="form-group">
+                <label color="primary">Number of teams:</label>
+                <select className="form-control" onChange={this.handleNumberChange} placeholder="">
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                </select>
+
+              </div>
+              <div class="form-group">
+                <input type="submit" name="btnSubmit" class="btnContact" value="Create" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <textarea name="txtMsg" class="form-control" placeholder="Description *" onChange={this.handleDescriptionChange} style={{ width: '100%', height: '125px' }}></textarea>
+              </div>
+            </div>
           </div>
         </form>
       </div>
     );
+
   }
 }
 

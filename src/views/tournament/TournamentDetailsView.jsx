@@ -14,7 +14,7 @@ class TournamentDetailsView extends Component {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
-      "id name numberOfTeams description teams{id name} rounds{ matches{ id teamHome{ name } teamAway{ name } }}",
+      "id name numberOfTeams description teams{id name} rounds{ matches{ id teamHome{ name } teamAway{ name } } date}",
       [
         {
           name: "id",
@@ -90,7 +90,12 @@ class TournamentDetailsView extends Component {
           </div>
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
             <button className="btn btn-primary ml-3 mb-1" onClick={() => this.startTournament()}>Start Tournament</button>
+
           </div>
+          <div style={{ textAlign: 'center', padding: '20px 0' }}>
+            <button className="btn btn-primary ml-3 mb-1" onClick={() => this.startTournament}>Start Tournament</button>
+          </div>
+
         </div>
       );
   }

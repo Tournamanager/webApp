@@ -1,11 +1,6 @@
 import React, {Component} from "react";
-import {Row, Col} from "react-bootstrap";
-import TournamentsList from "../../components/user/TournamentsListComponent";
-import TeamsList from "../../components/user/TeamsListComponent";
-import MatchesList from "../../components/user/MatchesListComponent";
 import ApiCommunication from "../../services/apicommunication/ApiCommunication";
 import firebase from "firebase";
-import TeamDetailHeaderComponent from "../team/TeamDetailsView";
 import UserDetailHeaderComponent from "../../components/user/UserDetailHeaderComponent";
 import UserTournamentsComponent from "../../components/user/UserTournamentsComponent";
 import UserMatchesComponent from "../../components/user/UserMatchesComponent";
@@ -56,12 +51,10 @@ class UserDetailsView extends Component {
 
         ApiCommunication.graphQLRequest("query", "matches", "id teamHome {name users {uuid}} teamAway {name users {uuid}} date")
             .then(response => {
-                console.log(response)
                 this.setState({matches: response.data.data.matches.filter(match => match.teamHome.users.includes(this.state.uuid) || match.teamAway.users.includes(this.state.uuid))})
-                console.log(this.state) //todo: make sure matches works
             });
 
-        ApiCommunication.graphQLRequest("query","tournaments","id name teams {id users {uuid}} numberOfTeams matches {id}")
+        ApiCommunication.graphQLRequest("query","tournaments","id name teams {id users {uuid}} numberOfTeams")
             .then(response => {
                 this.setState({tournaments: response.data.data.tournaments.filter(tournament => {return tournament.teams.some(team => {return team.users.some(user => { return user.uuid === this.state.uuid })})})})
             });

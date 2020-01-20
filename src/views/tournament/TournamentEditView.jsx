@@ -71,7 +71,7 @@ class TournamentEdit extends Component {
   handleChange(event) {
     this.setState({
       tournament: {...this.state.tournament, [event.target.name]: event.target.value}
-    }, console.log(this.state.tournament));
+    });
   }
 
   render() {
