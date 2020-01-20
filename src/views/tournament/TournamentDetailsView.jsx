@@ -14,7 +14,7 @@ class TournamentDetailsView extends Component {
     ApiCommunication.graphQLRequest(
       "query",
       "tournament",
-      "id name numberOfTeams description teams{id name}",
+      "id name numberOfTeams description teams{id name} rounds{ matches{ id teamHome{ name } teamAway{ name } }}",
       [
         {
           name: "id",
@@ -24,10 +24,9 @@ class TournamentDetailsView extends Component {
       ]
     ).then(response => {
       let tournament = response.data.data.tournament;
-      tournament.rounds = [];
       this.setState({ tournament: tournament })
     }
-    );
+    )
   }
 
   componentDidMount() {
@@ -35,13 +34,16 @@ class TournamentDetailsView extends Component {
   }
 
   startTournament() {
-    ApiCommunication.graphQLRequest("mutation", "startTournament", "rounds{ matches{id}}", [
-      { name: "id", type: "Int", value: this.state.tournament.id },
-      { name: "method", type: "String", value: "competition" }
-
-    ]).then(response =>
-      this.setState({ tournament: { ...this.state.tournament, rounds: response.data.data.startTournament } })
-    )
+    ApiCommunication.graphQLRequest("mutation", "startTournament", "rounds{ matches{ id teamHome{ name } teamAway{ name } }}",
+      [
+        { name: "id", type: "Int", value: this.state.tournament.id },
+        { name: "method", type: "String", value: "competition" }
+      ]).then(response => {
+        let tournament = this.state.tournament
+        tournament.rounds = response.data.data.startTournament.rounds
+        this.setState({ tournament: tournament }, () => console.log(this.state.tournament))
+      }
+      )
   }
 
   render() {
@@ -73,12 +75,12 @@ class TournamentDetailsView extends Component {
 
           <div className={"row justify-content-md-center"} style={{ margin: "20px 0px" }}>
             <h4>matches</h4>
-            {this.state.tournament.rounds == null ? (
+            {this.state.tournament.rounds.length != 0 ? (
               <div className={"row justify-content-md-center"} style={{ width: '100%', textAlign: 'center' }}>
                 {this.state.tournament.rounds.map(round => (
                   <div className="col">
-                    {round.map(match => (
-                      <p className={"text-center"}>{match.home.name} VS {match.away.name}</p>
+                    {round.matches.map(match => (
+                      <p className={"text-center"}>{match.teamHome.name} VS {match.teamAway.name}</p>
                     ))}
                   </div>
                 ))}
@@ -86,11 +88,9 @@ class TournamentDetailsView extends Component {
                 <div style={{ width: '100%', textAlign: 'center' }} className={"row justify-content-md-center"}>No matches have been generated yet</div>
               )}
           </div>
-
           <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <button className="btn btn-primary ml-3 mb-1" onClick={() => this.startTournament}>Start Tournament</button>
+            <button className="btn btn-primary ml-3 mb-1" onClick={() => this.startTournament()}>Start Tournament</button>
           </div>
-
         </div>
       );
   }
