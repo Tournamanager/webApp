@@ -42,8 +42,7 @@ class TeamMembersComponent extends Component {
       { name: "teamId", type: "Int", value: this.state.id }
     ]).then(() => {
       this.setState(
-        { users: this.state.users.filter(user => user.id !== id) },
-        () => console.log(this.state.users)
+        { users: this.state.users.filter(user => user.id !== id) }
       );
     });
   }

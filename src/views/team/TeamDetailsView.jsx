@@ -26,7 +26,6 @@ class TeamDetailsView extends Component {
       "id name users{id uuid} tournaments {id name}",
       [{ name: "id", type: "ID", value: this.props.match.params.id }])
       .then(response => {
-        console.log(response);
         if (response != null) {
           this.setState({ team: response.data.data.team })
         }
