@@ -14,13 +14,12 @@ class ApiCommunication {
         headers: { "Content-type": "application/json" }
       })
       .then(response => {
-        view.setState({ [target]: response.data.data }, () =>
-          console.log(response)
+        view.setState({ [target]: response.data.data }
         );
       })
       .catch(error => {
-        console.log(error);
-        console.log(error.response);
+        //console.log(error); //DON'T LOG FOR PRODUCTION
+        //console.log(error.response);
       });
   }
 
