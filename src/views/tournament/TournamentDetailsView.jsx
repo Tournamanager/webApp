@@ -36,8 +36,7 @@ class TournamentDetailsView extends Component {
   startTournament() {
     ApiCommunication.graphQLRequest("mutation", "startTournament", "rounds{ matches{ id teamHome{ name } teamAway{ name } }}",
       [
-        { name: "id", type: "Int", value: this.state.tournament.id },
-        { name: "method", type: "String", value: "competition" }
+        { name: "id", type: "Int", value: this.state.tournament.id }
       ]).then(response => {
         let tournament = this.state.tournament
         tournament.rounds = response.data.data.startTournament.rounds
